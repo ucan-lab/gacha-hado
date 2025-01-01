@@ -38,21 +38,21 @@
   <title>HADO Randomizer</title>
 </svelte:head>
 
-<div class="relative flex flex-col items-center p-4">
+<div class="relative flex flex-col items-center py-4">
   <Spinner isVisible={$isBlackout} />
 
   <ParameterList {colors} {parameters} />
 
-  <div class="mt-4 flex w-full max-w-lg gap-4">
+  <div class="grid w-full max-w-lg grid-cols-2 gap-4 px-4">
     <button
-      class="flex-1 rounded bg-green-500 px-6 py-3 font-bold text-white hover:bg-green-600"
+      class="rounded bg-green-500 px-6 py-3 font-bold text-white hover:bg-green-600"
       on:click={handleRandomize}
       disabled={isDrawing}
     >
       Randomize
     </button>
     <button
-      class="flex-1 rounded bg-red-500 px-6 py-3 font-bold text-white hover:bg-red-600"
+      class="rounded bg-red-500 px-6 py-3 font-bold text-white hover:bg-red-600"
       on:click={() =>
         parameters.set({ bulletSpeed: 1, bulletScale: 1, chargeSpeed: 1, shieldStrength: 1 })}
       disabled={isDrawing}

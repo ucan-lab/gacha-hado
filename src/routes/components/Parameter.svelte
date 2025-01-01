@@ -5,7 +5,7 @@
 </script>
 
 <div
-  class="relative flex flex-1 flex-col items-center rounded bg-zinc-900 px-4 pb-2 pt-4 shadow-lg"
+  class="relative flex flex-col items-center rounded bg-zinc-900 p-2 shadow-lg w-20 sm:w-28"
 >
   <div class="relative mb-1 flex w-full flex-col-reverse gap-1">
     {#each Array(5).fill(0) as _, index}
