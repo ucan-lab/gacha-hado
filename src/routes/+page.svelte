@@ -34,6 +34,10 @@
   }
 </script>
 
+<svelte:head>
+  <title>HADO Randomizer</title>
+</svelte:head>
+
 <div class="relative flex flex-col items-center p-4">
   <Spinner isVisible={$isBlackout} />
 
