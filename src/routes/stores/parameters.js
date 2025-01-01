@@ -17,6 +17,7 @@ function getRandomCombination() {
 
 export function generateRandomParameters() {
   const randomCombination = getRandomCombination();
+  console.info(randomCombination);
   parameters.set({
     bulletSpeed: parseInt(randomCombination[0], 10),
     bulletScale: parseInt(randomCombination[1], 10),
