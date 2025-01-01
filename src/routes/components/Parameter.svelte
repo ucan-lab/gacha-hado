@@ -4,7 +4,7 @@
   export let color;
 </script>
 
-<div class="relative flex flex-1 flex-col items-center rounded bg-black px-4 pb-2 pt-4 shadow-lg">
+<div class="relative flex flex-1 flex-col items-center rounded bg-zinc-900 px-4 pb-2 pt-4 shadow-lg">
   <div class="relative mb-1 flex w-full flex-col-reverse gap-1">
     {#each Array(5).fill(0) as _, index}
       <div class="h-7 rounded" style="background-color: {index < value ? color : '#2D2D2D'}"></div>
