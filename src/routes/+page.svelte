@@ -17,18 +17,11 @@
   async function handleRandomize() {
     isDrawing = true;
     isBlackout.set(true);
-    const interval = setInterval(() => {
-      parameters.set({
-        bulletSpeed: Math.floor(Math.random() * 5) + 1,
-        bulletScale: Math.floor(Math.random() * 5) + 1,
-        chargeSpeed: Math.floor(Math.random() * 5) + 1,
-        shieldStrength: Math.floor(Math.random() * 5) + 1
-      });
-    }, 85);
-
-    await new Promise((resolve) => setTimeout(resolve, 3000));
+    const interval = setInterval(() => generateRandomParameters(), 100);
+    await new Promise((resolve) => setTimeout(resolve, 1500));
     clearInterval(interval);
-    generateRandomParameters();
+    let parameters = generateRandomParameters();
+    console.info(parameters);
     isBlackout.set(false);
     isDrawing = false;
   }
