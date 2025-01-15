@@ -4,10 +4,9 @@
   export let color;
 </script>
 
-<div
-  class="relative flex flex-col items-center rounded bg-zinc-900 p-2 shadow-lg w-20 sm:w-28"
->
+<div class="relative flex w-20 flex-col items-center rounded bg-zinc-900 p-2 shadow-lg sm:w-28">
   <div class="relative mb-1 flex w-full flex-col-reverse gap-1">
+    <!-- eslint-disable-next-line @typescript-eslint/no-unused-vars -->
     {#each Array(5).fill(0) as _, index}
       <div class="h-7 rounded" style="background-color: {index < value ? color : '#2D2D2D'}"></div>
     {/each}

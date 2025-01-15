@@ -18,14 +18,16 @@ function getRandomCombination() {
 export function generateRandomParameters() {
   const randomCombination = getRandomCombination();
 
-  parameters.set({
+  const parameter = {
     bulletSpeed: parseInt(randomCombination[0], 10),
     bulletScale: parseInt(randomCombination[1], 10),
     chargeSpeed: parseInt(randomCombination[2], 10),
     shieldStrength: parseInt(randomCombination[3], 10)
-  });
+  };
 
-  return randomCombination;
+  parameters.set(parameter);
+
+  return parameter;
 }
 
 export function resetParameters() {
