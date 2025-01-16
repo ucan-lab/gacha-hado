@@ -1,7 +1,7 @@
 {
   "name": "hado-randomizer",
   "private": true,
-  "version": "0.0.1",
+  "version": "v0.2.1",
   "type": "module",
   "scripts": {
     "dev": "vite dev",
