@@ -13,10 +13,10 @@
     position: absolute;
   }
   .inset-0 {
-    top: 0;
+    top: 42%;
     left: 0;
     right: 0;
-    bottom: 0;
+    bottom: 68%;
   }
   .z-10 {
     z-index: 10;
