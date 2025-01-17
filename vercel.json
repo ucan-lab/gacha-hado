@@ -1,0 +1,8 @@
+{
+  "build": {
+    "env": {
+      "VERCEL_GIT_FETCH_SUBMODULES": "true",
+      "VERCEL_GIT_LFS": "true"
+    }
+  }
+}
