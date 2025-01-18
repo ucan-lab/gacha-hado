@@ -77,6 +77,26 @@
       </svg>
       <span>Trio</span>
     </a>
+    <a
+      href="/probability-table"
+      class="flex items-center gap-2 rounded bg-purple-500 px-6 py-3 font-semibold hover:bg-purple-600"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke-width="1.5"
+        stroke="currentColor"
+        class="size-6"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M8.25 4.5h7.5m-7.5 6h7.5m-7.5 6h7.5M3.75 5.25v13.5M20.25 5.25v13.5"
+        />
+      </svg>
+      <span>Probability Table</span>
+    </a>
   </div>
 </div>
 

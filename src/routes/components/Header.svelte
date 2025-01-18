@@ -28,6 +28,8 @@
     <a href="/solo" class="hover:underline">Solo</a>
     <a href="/duo" class="hover:underline">Duo</a>
     <a href="/trio" class="hover:underline">Trio</a>
+    <span class="h-6 border-l border-gray-600"></span>
+    <a href="/probability-table" class="hover:underline">Probability</a>
   </div>
 
   {#if menuOpen}
@@ -37,6 +39,10 @@
       <a href="/solo" class="block rounded px-4 py-2 hover:bg-gray-700">Solo</a>
       <a href="/duo" class="block rounded px-4 py-2 hover:bg-gray-700">Duo</a>
       <a href="/trio" class="block rounded px-4 py-2 hover:bg-gray-700">Trio</a>
+      <hr class="my-2 border-gray-600" />
+      <a href="/probability-table" class="block rounded px-4 py-2 hover:bg-gray-700"
+        >Probability Table</a
+      >
     </div>
   {/if}
 </nav>

@@ -4,6 +4,11 @@
 
   export let releaseNotes = [
     {
+      version: 'v0.3.4',
+      date: '2025-01-19',
+      notes: ['🛠️ パラメータ抽選確率テーブルページを実装']
+    },
+    {
       version: 'v0.3.3',
       date: '2025-01-19',
       notes: ['🛠️ リリースノートページを実装']
