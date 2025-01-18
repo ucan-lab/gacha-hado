@@ -23,7 +23,6 @@ version-resolver:
     labels:
       - 'minor'
   default: patch
-publish: true
 template: |
   $CHANGES
 footer: |
