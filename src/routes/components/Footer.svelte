@@ -5,7 +5,7 @@
 
 <footer class="mt-auto bg-gray-800 py-4 text-center text-white">
   <p>
-    {appVersion} - {appDeployDate}
+    <a href="/release-note" class="hover:underline">{appVersion} - {appDeployDate}</a>
   </p>
 </footer>
 
