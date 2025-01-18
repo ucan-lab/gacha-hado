@@ -85,7 +85,7 @@
 </svelte:head>
 
 <div class="flex min-h-screen flex-col">
-  <Header title="HADO Randomizer" />
+  <Header />
 
   <main class="flex-grow">
     <div class="relative flex flex-col items-center py-4">
