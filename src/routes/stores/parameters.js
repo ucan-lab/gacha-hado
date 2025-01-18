@@ -1,5 +1,5 @@
 import { writable } from 'svelte/store';
-import { validCombinations } from '$lib/validCombinations';
+import { parameterPatterns } from '$lib/parameterPatterns';
 
 export const parameters = writable({
   bulletSpeed: 1,
@@ -8,21 +8,32 @@ export const parameters = writable({
   shieldStrength: 1
 });
 
-function getRandomCombination() {
-  if (validCombinations.length === 0) {
-    throw new Error('No valid combinations available');
+function getWeightedRandomSelectionParameter() {
+  if (parameterPatterns.length === 0) {
+    throw new Error('No valid patterns available');
   }
-  return validCombinations[Math.floor(Math.random() * validCombinations.length)];
+
+  const totalWeight = parameterPatterns.reduce((sum, item) => sum + item.weight, 0);
+  let randomWeight = Math.random() * totalWeight;
+
+  for (const item of parameterPatterns) {
+    randomWeight -= item.weight;
+    if (randomWeight <= 0) {
+      return item.parameter;
+    }
+  }
+
+  throw new Error('Failed to select a valid pattern');
 }
 
 export function generateRandomParameters() {
-  const randomCombination = getRandomCombination();
+  const randomParameter = getWeightedRandomSelectionParameter();
 
   const parameter = {
-    bulletSpeed: parseInt(randomCombination[0], 10),
-    bulletScale: parseInt(randomCombination[1], 10),
-    chargeSpeed: parseInt(randomCombination[2], 10),
-    shieldStrength: parseInt(randomCombination[3], 10)
+    bulletSpeed: parseInt(randomParameter[0], 10),
+    bulletScale: parseInt(randomParameter[1], 10),
+    chargeSpeed: parseInt(randomParameter[2], 10),
+    shieldStrength: parseInt(randomParameter[3], 10)
   };
 
   parameters.set(parameter);
