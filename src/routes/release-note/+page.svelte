@@ -4,6 +4,11 @@
 
   export let releaseNotes = [
     {
+      version: 'v0.3.9',
+      date: '2025-01-19',
+      notes: ['🛠️ パラメータの重み付けを変更 → <a class="hover:underline" href="https://docs.google.com/spreadsheets/d/1zf-2dh_cq37Ict_rj9w9Xm8RIsoB1s4AQMleUT6YzVY/edit?usp=sharing">パラメータシート</a>',]
+    },
+    {
       version: 'v0.3.8',
       date: '2025-01-19',
       notes: ['🛠️ スマホサイズに収まるように余白デザイン調整']
@@ -21,7 +26,7 @@
     {
       version: 'v0.3.5',
       date: '2025-01-19',
-      notes: ['🛠️ パラメータの重み付けを変更']
+      notes: ['🛠️ パラメータの重み付けを変更 → <a class="hover:underline" href="https://docs.google.com/spreadsheets/d/1zf-2dh_cq37Ict_rj9w9Xm8RIsoB1s4AQMleUT6YzVY/edit?usp=sharing">パラメータシート</a>',]
     },
     {
       version: 'v0.3.4',
@@ -88,7 +93,7 @@
         </h2>
         <ul class="mt-2 list-disc space-y-1 pl-6">
           {#each release.notes as note}
-            <li><span class="text-gray-800">{note}</span></li>
+            <li><span class="text-gray-800">{@html note}</span></li>
           {/each}
         </ul>
       </div>
