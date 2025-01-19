@@ -1,6 +1,6 @@
 <script>
   import { generateRandomParameters } from '../stores/parameters';
-  import ParameterList from '../components/ParameterList.svelte';
+  import Player from '../components/Player.svelte';
   import Spinner from '../components/Spinner.svelte';
   import Header from '../components/Header.svelte';
   import Footer from '../components/Footer.svelte';
@@ -18,7 +18,7 @@
   let isDrawing = false;
   let isBlackout = writable(false);
 
-  const parameters = Array.from({ length: playerCount }, () =>
+  const players = Array.from({ length: playerCount }, () =>
     writable({
       bulletSpeed: 1,
       bulletScale: 1,
@@ -32,16 +32,16 @@
     isBlackout.set(true);
 
     const interval = setInterval(() => {
-      parameters.forEach((param) => param.set(generateRandomParameters()));
+      players.forEach((player) => player.set(generateRandomParameters()));
     }, 100);
 
     await new Promise((resolve) => setTimeout(resolve, 1200));
     clearInterval(interval);
 
-    parameters.forEach((param) => param.set(generateRandomParameters()));
+    players.forEach((player) => player.set(generateRandomParameters()));
 
-    parameters.forEach((param, index) => {
-      const values = get(param);
+    players.forEach((player, index) => {
+      const values = get(player);
       console.info(
         [
           `player${index + 1}: `,
@@ -58,8 +58,8 @@
   }
 
   function handleReset() {
-    parameters.forEach((param) =>
-      param.set({ bulletSpeed: 1, bulletScale: 1, chargeSpeed: 1, shieldStrength: 1 })
+    players.forEach(
+      (player) => player.set({ bulletSpeed: 1, bulletScale: 1, chargeSpeed: 1, shieldStrength: 1 })
     );
   }
 </script>
@@ -76,8 +76,8 @@
       <Spinner isVisible={$isBlackout} />
 
       <div class="flex flex-col">
-        {#each parameters as param, index}
-          <ParameterList {colors} parameters={param} />
+        {#each players as parameters, index}
+          <Player {colors} {parameters} />
         {/each}
       </div>
 
