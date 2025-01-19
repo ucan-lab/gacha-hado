@@ -14,7 +14,7 @@
     Please select the number of players.
   </p>
 
-  <div class="flex flex-row gap-4 mb-4">
+  <div class="mb-4 flex flex-row gap-4">
     <a
       href="/solo"
       class="flex items-center gap-2 rounded bg-blue-500 px-6 py-3 font-semibold hover:bg-blue-600"

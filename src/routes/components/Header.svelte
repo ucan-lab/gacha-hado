@@ -1,19 +1,41 @@
-<script>
-  export let title = 'HADO Randomizer';
+<script lang="ts">
+  import { onMount, onDestroy } from 'svelte';
+  import { browser } from '$app/environment';
+
   let menuOpen = false;
 
   const toggleMenu = () => {
     menuOpen = !menuOpen;
   };
+
+  // ハンバーガーメニュー以外をクリックしたら閉じる
+  const closeMenu = (event: MouseEvent) => {
+    const target = event.target as HTMLElement | null;
+    if (menuOpen && target && !target.closest('.menu-container') && !target.closest('button')) {
+      menuOpen = false;
+    }
+  };
+
+  const handleLinkClick = () => {
+    menuOpen = false;
+  };
+
+  if (browser) {
+    onMount(() => {
+      document.addEventListener('click', closeMenu);
+    });
+
+    onDestroy(() => {
+      document.removeEventListener('click', closeMenu);
+    });
+  }
 </script>
 
-<nav class="flex items-center justify-between bg-gray-900 p-4 text-white shadow-md">
-  <a href="/" class="text-xl font-bold hover:underline">
-    {title}
-  </a>
+<nav class="flex items-center justify-between bg-gray-900 px-2 py-1 text-white shadow-md">
+  <a href="/" class="text-xl font-bold hover:underline"> HADO Randomizer </a>
 
   <button
-    class="flex items-center rounded border border-gray-400 px-3 py-2 text-white hover:border-gray-300 hover:text-gray-300 md:hidden"
+    class="flex items-center rounded border border-gray-400 px-2 py-1 text-white hover:border-gray-300 hover:text-gray-300 md:hidden"
     on:click={toggleMenu}
   >
     <svg class="h-4 w-4 fill-current" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -33,16 +55,46 @@
   </div>
 
   {#if menuOpen}
-    <div class="absolute right-4 top-14 z-10 rounded bg-gray-800 p-4 shadow-lg md:hidden">
-      <a href="/" class="block rounded px-4 py-2 hover:bg-gray-700">Top</a>
-      <hr class="my-2 border-gray-600" />
-      <a href="/solo" class="block rounded px-4 py-2 hover:bg-gray-700">Solo</a>
-      <a href="/duo" class="block rounded px-4 py-2 hover:bg-gray-700">Duo</a>
-      <a href="/trio" class="block rounded px-4 py-2 hover:bg-gray-700">Trio</a>
-      <hr class="my-2 border-gray-600" />
-      <a href="/probability-table" class="block rounded px-4 py-2 hover:bg-gray-700"
-        >Probability Table</a
+    <div
+      class="menu-container absolute right-4 top-14 z-10 rounded bg-gray-800 p-4 shadow-lg md:hidden"
+    >
+      <a
+        href="/"
+        class="block rounded px-4 py-2 hover:bg-gray-700"
+        on:click={handleLinkClick}
       >
+        Top
+      </a>
+      <hr class="my-2 border-gray-600" />
+      <a
+        href="/solo"
+        class="block rounded px-4 py-2 hover:bg-gray-700"
+        on:click={handleLinkClick}
+      >
+        Solo
+      </a>
+      <a
+        href="/duo"
+        class="block rounded px-4 py-2 hover:bg-gray-700"
+        on:click={handleLinkClick}
+      >
+        Duo
+      </a>
+      <a
+        href="/trio"
+        class="block rounded px-4 py-2 hover:bg-gray-700"
+        on:click={handleLinkClick}
+      >
+        Trio
+      </a>
+      <hr class="my-2 border-gray-600" />
+      <a
+        href="/probability-table"
+        class="block rounded px-4 py-2 hover:bg-gray-700"
+        on:click={handleLinkClick}
+      >
+        Probability Table
+      </a>
     </div>
   {/if}
 </nav>

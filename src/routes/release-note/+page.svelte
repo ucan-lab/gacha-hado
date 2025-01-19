@@ -4,6 +4,11 @@
 
   export let releaseNotes = [
     {
+      version: 'v0.3.8',
+      date: '2025-01-19',
+      notes: ['🛠️ スマホサイズに収まるように余白デザイン調整']
+    },
+    {
       version: 'v0.3.7',
       date: '2025-01-19',
       notes: ['🛠️ トップページのレイアウト調整']

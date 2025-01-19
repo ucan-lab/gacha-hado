@@ -52,7 +52,7 @@
   <Header />
 
   <main class="flex-grow">
-    <div class="relative flex flex-col items-center py-4">
+    <div class="relative flex flex-col items-center py-2">
       <Spinner isVisible={$isBlackout} />
 
       <ParameterList {colors} {parameters} />

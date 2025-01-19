@@ -4,7 +4,7 @@
   export let colors;
 </script>
 
-<div class="mb-4 flex w-full max-w-lg flex-wrap justify-center gap-2 sm:gap-4">
+<div class="mb-2 flex w-full max-w-lg flex-wrap justify-center gap-2 sm:gap-4">
   <Parameter name="SPEED" bind:value={$parameters.bulletSpeed} color={colors.bulletSpeed} />
   <Parameter name="SCALE" bind:value={$parameters.bulletScale} color={colors.bulletScale} />
   <Parameter name="CHARGE" bind:value={$parameters.chargeSpeed} color={colors.chargeSpeed} />
