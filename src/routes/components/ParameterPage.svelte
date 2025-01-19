@@ -1,0 +1,104 @@
+<script>
+  import { generateRandomParameters } from '../stores/parameters';
+  import ParameterList from '../components/ParameterList.svelte';
+  import Spinner from '../components/Spinner.svelte';
+  import Header from '../components/Header.svelte';
+  import Footer from '../components/Footer.svelte';
+  import { writable, get } from 'svelte/store';
+
+  export let playerCount = 1;
+
+  const colors = {
+    bulletSpeed: '#ED9E38',
+    bulletScale: '#74F74B',
+    chargeSpeed: '#DD32F6',
+    shieldStrength: '#6FEEF9'
+  };
+
+  let isDrawing = false;
+  let isBlackout = writable(false);
+
+  const parameters = Array.from({ length: playerCount }, () =>
+    writable({
+      bulletSpeed: 1,
+      bulletScale: 1,
+      chargeSpeed: 1,
+      shieldStrength: 1
+    })
+  );
+
+  async function handleRandomize() {
+    isDrawing = true;
+    isBlackout.set(true);
+
+    const interval = setInterval(() => {
+      parameters.forEach((param) => param.set(generateRandomParameters()));
+    }, 100);
+
+    await new Promise((resolve) => setTimeout(resolve, 1200));
+    clearInterval(interval);
+
+    parameters.forEach((param) => param.set(generateRandomParameters()));
+
+    parameters.forEach((param, index) => {
+      const values = get(param);
+      console.info(
+        [
+          `player${index + 1}: `,
+          values.bulletSpeed,
+          values.bulletScale,
+          values.chargeSpeed,
+          values.shieldStrength
+        ].join('')
+      );
+    });
+
+    isBlackout.set(false);
+    isDrawing = false;
+  }
+
+  function handleReset() {
+    parameters.forEach((param) =>
+      param.set({ bulletSpeed: 1, bulletScale: 1, chargeSpeed: 1, shieldStrength: 1 })
+    );
+  }
+</script>
+
+<svelte:head>
+  <title>HADO Randomizer</title>
+</svelte:head>
+
+<div class="flex min-h-screen flex-col">
+  <Header />
+
+  <main class="flex-grow">
+    <div class="relative flex flex-col items-center py-2">
+      <Spinner isVisible={$isBlackout} />
+
+      <div class="flex flex-col">
+        {#each parameters as param, index}
+          <ParameterList {colors} parameters={param} />
+        {/each}
+      </div>
+
+      <div class="grid w-full max-w-lg grid-cols-2 gap-4 px-4">
+        <button
+          class="rounded bg-green-500 px-6 py-3 font-bold text-white hover:bg-green-600"
+          on:click={handleRandomize}
+          disabled={isDrawing}
+        >
+          Randomize
+        </button>
+        <button
+          class="rounded bg-red-500 px-6 py-3 font-bold text-white hover:bg-red-600"
+          on:click={handleReset}
+          disabled={isDrawing}
+        >
+          Reset
+        </button>
+      </div>
+    </div>
+  </main>
+</div>
+
+<Footer />
