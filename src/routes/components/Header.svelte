@@ -1,5 +1,4 @@
 <script>
-  export let title = 'HADO Randomizer';
   let menuOpen = false;
 
   const toggleMenu = () => {
@@ -7,13 +6,11 @@
   };
 </script>
 
-<nav class="flex items-center justify-between bg-gray-900 p-4 text-white shadow-md">
-  <a href="/" class="text-xl font-bold hover:underline">
-    {title}
-  </a>
+<nav class="flex items-center justify-between bg-gray-900 px-2 py-1 text-white shadow-md">
+  <a href="/" class="text-xl font-bold hover:underline"> HADO Randomizer </a>
 
   <button
-    class="flex items-center rounded border border-gray-400 px-3 py-2 text-white hover:border-gray-300 hover:text-gray-300 md:hidden"
+    class="flex items-center rounded border border-gray-400 px-2 py-1 text-white hover:border-gray-300 hover:text-gray-300 md:hidden"
     on:click={toggleMenu}
   >
     <svg class="h-4 w-4 fill-current" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">

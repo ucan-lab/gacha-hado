@@ -98,7 +98,7 @@
 <div class="flex min-h-screen flex-col">
   <Header />
   <main class="flex-grow">
-    <div class="relative flex flex-col items-center py-4">
+    <div class="relative flex flex-col items-center py-2">
       <Spinner isVisible={$isBlackout} />
 
       <div class="flex flex-col">
@@ -107,7 +107,7 @@
         <ParameterList {colors} parameters={parameters3} />
       </div>
 
-      <div class="mt-4 grid w-full max-w-lg grid-cols-2 gap-4 px-4">
+      <div class="grid w-full max-w-lg grid-cols-2 gap-4 px-4">
         <button
           class="rounded bg-green-500 px-6 py-3 font-bold text-white hover:bg-green-600"
           on:click={handleRandomize}
