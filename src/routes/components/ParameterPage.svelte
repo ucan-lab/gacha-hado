@@ -8,13 +8,6 @@
 
   export let playerCount = 1;
 
-  const colors = {
-    bulletSpeed: '#ED9E38',
-    bulletScale: '#74F74B',
-    chargeSpeed: '#DD32F6',
-    shieldStrength: '#6FEEF9'
-  };
-
   let isDrawing = false;
   let isBlackout = writable(false);
 
@@ -77,7 +70,7 @@
 
       <div class="flex flex-col">
         {#each players as parameters, index}
-          <Player {colors} {parameters} />
+          <Player {parameters} />
         {/each}
       </div>
 

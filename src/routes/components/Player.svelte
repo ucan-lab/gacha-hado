@@ -1,7 +1,13 @@
 <script>
   import Parameter from './Parameter.svelte';
   export let parameters;
-  export let colors;
+
+  const colors = {
+    bulletSpeed: '#ED9E38',
+    bulletScale: '#74F74B',
+    chargeSpeed: '#DD32F6',
+    shieldStrength: '#6FEEF9'
+  };
 </script>
 
 <div class="mb-2 flex w-full max-w-lg flex-wrap justify-center gap-2 sm:gap-4">
