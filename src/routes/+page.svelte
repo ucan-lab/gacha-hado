@@ -1,5 +1,21 @@
 <script>
   import Footer from './components/Footer.svelte';
+  import QrCode from '$lib/assets/qr-code.jpg';
+
+  let copied = false;
+  let showModal = false;
+
+  function copyLink() {
+    const link = "https://hado-randomizer.vercel.app";
+    navigator.clipboard.writeText(link).then(() => {
+      copied = true;
+      setTimeout(() => copied = false, 2000);
+    });
+  }
+
+  function toggleModal() {
+    showModal = !showModal;
+  }
 </script>
 
 <svelte:head>
@@ -78,28 +94,39 @@
       <span>Trio</span>
     </a>
   </div>
-  <div class="flex flex-row gap-4">
-    <a
-      href="/probability-table"
-      class="flex items-center gap-2 rounded bg-purple-500 px-6 py-3 font-semibold hover:bg-purple-600"
+
+  <h2 class="text-3xl font-bold mb-4">Share</h2>
+
+  <div class="flex flex-col items-center">
+    <button
+      on:click={toggleModal}
+      class="rounded bg-orange-500 px-6 py-3 font-semibold hover:bg-orange-600 mb-4"
     >
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        fill="none"
-        viewBox="0 0 24 24"
-        stroke-width="1.5"
-        stroke="currentColor"
-        class="size-6"
-      >
-        <path
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          d="M8.25 4.5h7.5m-7.5 6h7.5m-7.5 6h7.5M3.75 5.25v13.5M20.25 5.25v13.5"
-        />
-      </svg>
-      <span>Probability Table</span>
-    </a>
+      Show QR Code
+    </button>
+    <button
+      on:click={copyLink}
+      class="rounded bg-yellow-500 px-6 py-3 font-semibold hover:bg-yellow-600"
+    >
+      {#if copied}
+        Link Copied!
+      {:else}
+        Copy Link to Clipboard
+      {/if}
+    </button>
   </div>
 </div>
+
+{#if showModal}
+  <div class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-10">
+    <div class="bg-white p-6 rounded-lg">
+      <h3 class="text-xl font-bold mb-4">QR Code</h3>
+      <img src={QrCode} alt="QR Code" class="w-64 h-64 mb-4" />
+      <button on:click={toggleModal} class="mt-4 px-6 py-2 bg-red-500 text-white rounded hover:bg-red-600">
+        Close
+      </button>
+    </div>
+  </div>
+{/if}
 
 <Footer />
