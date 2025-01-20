@@ -4,6 +4,11 @@
 
   export let releaseNotes = [
     {
+      version: 'v0.4.0',
+      date: '2025-01-21',
+      notes: ['🚀 シェアしやすいようにQRコード表示とクリップボードにコピーするボタンをトップページに実装',]
+    },
+    {
       version: 'v0.3.9',
       date: '2025-01-19',
       notes: ['🛠️ パラメータの重み付けを変更 → <a class="hover:underline" href="https://docs.google.com/spreadsheets/d/1zf-2dh_cq37Ict_rj9w9Xm8RIsoB1s4AQMleUT6YzVY/edit?usp=sharing">パラメータシート</a>',]
