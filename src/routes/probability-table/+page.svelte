@@ -2,6 +2,7 @@
   import { parameterPatterns } from '$lib/parameterPatterns';
   import Header from '../components/Header.svelte';
   import Footer from '../components/Footer.svelte';
+  import * as m from '$lib/paraglide/messages';
 
   type TableRow = {
     parameter: string;
@@ -41,7 +42,7 @@
 <Header />
 
 <div class="container mx-auto mt-8 p-4 text-center text-white">
-  <h1 class="mb-6 text-2xl font-bold">Parameter Probability Table</h1>
+  <h1 class="mb-6 text-2xl font-bold">{m.probabilityTable()}</h1>
 
   <table class="w-full table-auto border-collapse border border-gray-700 text-sm">
     <thead>
@@ -50,7 +51,7 @@
           class="cursor-pointer border border-gray-700 px-4 py-2 hover:bg-gray-700"
           on:click={() => sortTable('parameter')}
         >
-          Parameter
+          {m.parameter()}
           {#if sortKey === 'parameter'}
             {sortDirection === 'asc' ? ' ↑' : ' ↓'}
           {/if}
@@ -59,7 +60,7 @@
           class="weight cursor-pointer border border-gray-700 px-4 py-2 hover:bg-gray-700"
           on:click={() => sortTable('weight')}
         >
-          Weight
+          {m.weight()}
           {#if sortKey === 'weight'}
             {sortDirection === 'asc' ? ' ↑' : ' ↓'}
           {/if}
@@ -68,7 +69,7 @@
           class="cursor-pointer border border-gray-700 px-4 py-2 hover:bg-gray-700"
           on:click={() => sortTable('probability')}
         >
-          Probability
+          {m.probability()}
           {#if sortKey === 'probability'}
             {sortDirection === 'asc' ? ' ↑' : ' ↓'}
           {/if}

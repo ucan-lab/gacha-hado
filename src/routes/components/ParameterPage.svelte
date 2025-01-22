@@ -5,6 +5,7 @@
   import Header from '../components/Header.svelte';
   import Footer from '../components/Footer.svelte';
   import { writable, get } from 'svelte/store';
+  import * as m from '$lib/paraglide/messages';
 
   export let playerCount = 1;
 
@@ -51,8 +52,8 @@
   }
 
   function handleReset() {
-    players.forEach(
-      (player) => player.set({ bulletSpeed: 1, bulletScale: 1, chargeSpeed: 1, shieldStrength: 1 })
+    players.forEach((player) =>
+      player.set({ bulletSpeed: 1, bulletScale: 1, chargeSpeed: 1, shieldStrength: 1 })
     );
   }
 </script>
@@ -76,14 +77,14 @@
           on:click={handleRandomize}
           disabled={isDrawing}
         >
-          Randomize
+          {m.randomize()}
         </button>
         <button
           class="rounded bg-red-500 px-6 py-3 font-bold text-white hover:bg-red-600"
           on:click={handleReset}
           disabled={isDrawing}
         >
-          Reset
+          {m.reset()}
         </button>
       </div>
     </div>

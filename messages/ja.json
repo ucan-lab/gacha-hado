@@ -1,4 +1,20 @@
 {
   "$schema": "https://inlang.com/schema/inlang-message-format",
-  "hello_world": "Hello, {name} from ja!"
+  "welcome": "HADO Randomizer へようこそ！<br />プレイヤー数を選択してください。",
+  "solo": "ソロ",
+  "duo": "デュオ",
+  "trio": "トリオ",
+  "showQrCode": "QRコードを表示",
+  "linkCopied": "リンクをコピーしました！",
+  "copyLinkToClipboard": "クリップボードへリンクをコピー",
+  "QrCode": "QRコード",
+  "share": "共有",
+  "menu": "メニュー",
+  "top": "トップ",
+  "randomize": "ランダム！",
+  "reset": "リセット",
+  "probability": "排出率",
+  "probabilityTable": "排出率テーブル",
+  "parameter": "パラメーター",
+  "weight": "重み"
 }

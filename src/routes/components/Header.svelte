@@ -1,6 +1,7 @@
 <script lang="ts">
   import { onMount, onDestroy } from 'svelte';
   import { browser } from '$app/environment';
+  import * as m from '$lib/paraglide/messages';
 
   let menuOpen = false;
 
@@ -32,60 +33,44 @@
 </script>
 
 <nav class="flex items-center justify-between bg-gray-900 px-2 py-1 text-white shadow-md">
-  <a href="/" class="text-xl font-bold hover:underline"> HADO Randomizer </a>
+  <a href="/" class="text-xl font-bold hover:underline">HADO Randomizer</a>
 
   <button
     class="flex items-center rounded border border-gray-400 px-2 py-1 text-white hover:border-gray-300 hover:text-gray-300 md:hidden"
     on:click={toggleMenu}
   >
     <svg class="h-4 w-4 fill-current" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-      <title>Menu</title>
+      <title>{m.menu()}</title>
       <path d="M0 3h20v2H0zM0 9h20v2H0zM0 15h20v2H0z" />
     </svg>
   </button>
 
   <div class="hidden space-x-4 md:flex">
-    <a href="/" class="hover:underline">Top</a>
+    <a href="/" class="hover:underline">{m.top()}</a>
     <span class="h-6 border-l border-gray-600"></span>
-    <a href="/solo" class="hover:underline">Solo</a>
-    <a href="/duo" class="hover:underline">Duo</a>
-    <a href="/trio" class="hover:underline">Trio</a>
+    <a href="/solo" class="hover:underline">{m.solo()}</a>
+    <a href="/duo" class="hover:underline">{m.duo()}</a>
+    <a href="/trio" class="hover:underline">{m.trio()}</a>
     <span class="h-6 border-l border-gray-600"></span>
-    <a href="/probability-table" class="hover:underline">Probability</a>
+    <a href="/probability-table" class="hover:underline">{m.probability()}</a>
   </div>
 
   {#if menuOpen}
     <div
       class="menu-container absolute right-4 top-14 z-10 rounded bg-gray-800 p-4 shadow-lg md:hidden"
     >
-      <a
-        href="/"
-        class="block rounded px-4 py-2 hover:bg-gray-700"
-        on:click={handleLinkClick}
-      >
-        Top
+      <a href="/" class="block rounded px-4 py-2 hover:bg-gray-700" on:click={handleLinkClick}>
+        {m.top()}
       </a>
       <hr class="my-2 border-gray-600" />
-      <a
-        href="/solo"
-        class="block rounded px-4 py-2 hover:bg-gray-700"
-        on:click={handleLinkClick}
-      >
-        Solo
+      <a href="/solo" class="block rounded px-4 py-2 hover:bg-gray-700" on:click={handleLinkClick}>
+        {m.solo()}
       </a>
-      <a
-        href="/duo"
-        class="block rounded px-4 py-2 hover:bg-gray-700"
-        on:click={handleLinkClick}
-      >
-        Duo
+      <a href="/duo" class="block rounded px-4 py-2 hover:bg-gray-700" on:click={handleLinkClick}>
+        {m.duo()}
       </a>
-      <a
-        href="/trio"
-        class="block rounded px-4 py-2 hover:bg-gray-700"
-        on:click={handleLinkClick}
-      >
-        Trio
+      <a href="/trio" class="block rounded px-4 py-2 hover:bg-gray-700" on:click={handleLinkClick}>
+        {m.trio()}
       </a>
       <hr class="my-2 border-gray-600" />
       <a
@@ -93,7 +78,7 @@
         class="block rounded px-4 py-2 hover:bg-gray-700"
         on:click={handleLinkClick}
       >
-        Probability Table
+        {m.probability()}
       </a>
     </div>
   {/if}
