@@ -57,10 +57,6 @@
   }
 </script>
 
-<svelte:head>
-  <title>HADO Randomizer</title>
-</svelte:head>
-
 <div class="flex min-h-screen flex-col">
   <Header />
 

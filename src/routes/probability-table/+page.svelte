@@ -38,10 +38,6 @@
   }
 </script>
 
-<svelte:head>
-  <title>Parameter Probability Table</title>
-</svelte:head>
-
 <Header />
 
 <div class="container mx-auto mt-8 p-4 text-center text-white">
