@@ -4,6 +4,14 @@
 
   export let releaseNotes = [
     {
+      version: 'v0.4.1',
+      date: '2025-01-23',
+      notes: [
+        '🛠️ コードのリファクタを行いました。',
+        '🚀 表示言語の切り替え機能を実装しました。'
+      ]
+    },
+    {
       version: 'v0.4.0',
       date: '2025-01-21',
       notes: [
