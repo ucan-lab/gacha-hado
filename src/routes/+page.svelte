@@ -91,7 +91,7 @@
     </a>
   </div>
 
-  <h2 class="mb-4 text-3xl font-bold">{m.share()}</h2>
+  <h2 class="my-4 text-2xl font-bold">{m.share()}</h2>
 
   <div class="flex flex-col items-center">
     <button
