@@ -1,6 +1,6 @@
 {
   "$schema": "https://inlang.com/schema/inlang-message-format",
-  "welcome": "Welcome to HADO Randomizer !<br />Please select the number of players.",
+  "welcome": "Please select the number of players.",
   "solo": "Solo",
   "duo": "Duo",
   "trio": "Trio",
@@ -13,8 +13,8 @@
   "top": "Top",
   "randomize": "Randomize",
   "reset": "Reset",
-  "probability": "Probability",
-  "probabilityTable": "Probability table",
+  "dropRate": "Drop rate",
+  "dropRateTable": "Drop rate table",
   "parameter": "Parameter",
   "weight": "Weight"
 }

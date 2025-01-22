@@ -7,15 +7,15 @@
   type TableRow = {
     parameter: string;
     weight: number;
-    probability: number;
+    dropRate: number;
   };
 
   const totalWeight = parameterPatterns.reduce((sum, item) => sum + item.weight, 0);
 
-  let probabilityTable: TableRow[] = parameterPatterns.map((item) => ({
+  let dropRateTable: TableRow[] = parameterPatterns.map((item) => ({
     parameter: item.parameter,
     weight: item.weight,
-    probability: parseFloat(((item.weight / totalWeight) * 100).toFixed(2))
+    dropRate: parseFloat(((item.weight / totalWeight) * 100).toFixed(2))
   }));
 
   let sortKey: keyof TableRow = 'parameter';
@@ -29,7 +29,7 @@
       sortDirection = 'asc';
     }
 
-    probabilityTable = probabilityTable.sort((a, b) => {
+    dropRateTable = dropRateTable.sort((a, b) => {
       if (sortDirection === 'asc') {
         return a[key] > b[key] ? 1 : -1;
       } else {
@@ -42,7 +42,7 @@
 <Header />
 
 <div class="container mx-auto mt-8 p-4 text-center text-white">
-  <h1 class="mb-6 text-2xl font-bold">{m.probabilityTable()}</h1>
+  <h1 class="mb-6 text-2xl font-bold">{m.dropRateTable()}</h1>
 
   <table class="w-full table-auto border-collapse border border-gray-700 text-sm">
     <thead>
@@ -67,21 +67,21 @@
         </th>
         <th
           class="cursor-pointer border border-gray-700 px-4 py-2 hover:bg-gray-700"
-          on:click={() => sortTable('probability')}
+          on:click={() => sortTable('dropRate')}
         >
-          {m.probability()}
-          {#if sortKey === 'probability'}
+          {m.dropRate()}
+          {#if sortKey === 'dropRate'}
             {sortDirection === 'asc' ? ' ↑' : ' ↓'}
           {/if}
         </th>
       </tr>
     </thead>
     <tbody>
-      {#each probabilityTable as row}
+      {#each dropRateTable as row}
         <tr class="odd:bg-gray-900 even:bg-gray-800">
           <td class="border border-gray-700 px-4 py-2">{row.parameter}</td>
           <td class="border border-gray-700 px-4 py-2">{row.weight}</td>
-          <td class="border border-gray-700 px-4 py-2">{row.probability}%</td>
+          <td class="border border-gray-700 px-4 py-2">{row.dropRate}%</td>
         </tr>
       {/each}
     </tbody>

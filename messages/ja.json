@@ -1,6 +1,6 @@
 {
   "$schema": "https://inlang.com/schema/inlang-message-format",
-  "welcome": "HADO Randomizer へようこそ！<br />プレイヤー数を選択してください。",
+  "welcome": "プレイヤー数を選択してください。",
   "solo": "ソロ",
   "duo": "デュオ",
   "trio": "トリオ",
@@ -13,8 +13,8 @@
   "top": "トップ",
   "randomize": "ランダム！",
   "reset": "リセット",
-  "probability": "排出率",
-  "probabilityTable": "排出率テーブル",
+  "dropRate": "排出率",
+  "dropRateTable": "排出率テーブル",
   "parameter": "パラメーター",
   "weight": "重み"
 }

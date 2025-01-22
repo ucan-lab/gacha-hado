@@ -52,7 +52,7 @@
     <a href="/duo" class="hover:underline">{m.duo()}</a>
     <a href="/trio" class="hover:underline">{m.trio()}</a>
     <span class="h-6 border-l border-gray-600"></span>
-    <a href="/probability-table" class="hover:underline">{m.probability()}</a>
+    <a href="/drop-rate" class="hover:underline">{m.dropRateTable()}</a>
   </div>
 
   {#if menuOpen}
@@ -74,11 +74,11 @@
       </a>
       <hr class="my-2 border-gray-600" />
       <a
-        href="/probability-table"
+        href="/drop-rate"
         class="block rounded px-4 py-2 hover:bg-gray-700"
         on:click={handleLinkClick}
       >
-        {m.probability()}
+        {m.dropRateTable()}
       </a>
     </div>
   {/if}
