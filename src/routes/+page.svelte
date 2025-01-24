@@ -32,7 +32,7 @@
 <TopHeader />
 
 <div class="flex min-h-screen flex-col items-center justify-center bg-gray-900 px-4 text-white">
-  <h1 class="mb-6 text-center text-3xl font-bold sm:text-4xl">HADO Randomizer</h1>
+  <h1 class="mb-6 text-center text-3xl font-bold sm:text-4xl">{m.appName()}</h1>
 
   <p class="mb-8 max-w-md text-center">
     {m.welcome()}

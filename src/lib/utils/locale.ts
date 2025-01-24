@@ -19,7 +19,7 @@ export const initializeLocale = () => {
       const browserLocale = navigator.language.split('-')[0]; // "en-US" -> "en"
       const fallbackLocale = 'en';
       const resolvedLocale = availableLanguageTags.includes(browserLocale as AvailableLanguageTag)
-        ? browserLocale as AvailableLanguageTag
+        ? (browserLocale as AvailableLanguageTag)
         : fallbackLocale;
 
       locale.set(resolvedLocale);

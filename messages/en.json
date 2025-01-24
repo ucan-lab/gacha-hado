@@ -1,5 +1,6 @@
 {
   "$schema": "https://inlang.com/schema/inlang-message-format",
+  "appName": "HADO Gacha",
   "welcome": "Please select the number of players.",
   "solo": "Solo",
   "duo": "Duo",
@@ -11,7 +12,7 @@
   "share": "Share",
   "menu": "Menu",
   "top": "Top",
-  "randomize": "Randomize",
+  "roll": "Roll the gacha",
   "reset": "Reset",
   "dropRate": "Drop rate",
   "dropRateTable": "Drop rate table",
