@@ -1,38 +1,8 @@
 <script lang="ts">
-  import { setLanguageTag, type AvailableLanguageTag, availableLanguageTags } from '$lib/paraglide/runtime';
+  import { initializeLocale, changeLocale } from '$lib/utils/locale';
   import { onMount, onDestroy } from 'svelte';
   import { browser } from '$app/environment';
   import * as m from '$lib/paraglide/messages';
-
-  const LOCALE_KEY = 'locale';
-
-  const initializeLocale = () => {
-    if (typeof window !== 'undefined') {
-      const storedLocale = localStorage.getItem(LOCALE_KEY);
-
-      if (storedLocale && availableLanguageTags.includes(storedLocale as AvailableLanguageTag)) {
-        setLanguageTag(storedLocale as AvailableLanguageTag);
-      } else {
-        const browserLocale = navigator.language.split('-')[0]; // "en-US" -> "en"
-        const fallbackLocale = 'en';
-        setLanguageTag(
-          availableLanguageTags.includes(browserLocale as AvailableLanguageTag)
-            ? (browserLocale as AvailableLanguageTag)
-            : fallbackLocale
-        );
-      }
-    }
-  };
-
-  const changeLocale = (newLocale: string) => {
-    menuOpen = false;
-
-    if (availableLanguageTags.includes(newLocale as AvailableLanguageTag)) {
-      setLanguageTag(newLocale as AvailableLanguageTag);
-      localStorage.setItem(LOCALE_KEY, newLocale);
-      window.location.reload();
-    }
-  };
 
   initializeLocale();
 
