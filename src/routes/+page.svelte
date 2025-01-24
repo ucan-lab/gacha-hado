@@ -1,4 +1,5 @@
 <script>
+  import TopHeader from './components/TopHeader.svelte';
   import Footer from './components/Footer.svelte';
   import QrCode from '$lib/assets/qr-code.jpg';
   import * as m from '$lib/paraglide/messages';
@@ -18,6 +19,8 @@
     showModal = !showModal;
   }
 </script>
+
+<TopHeader />
 
 <div class="flex min-h-screen flex-col items-center justify-center bg-gray-900 px-4 text-white">
   <h1 class="mb-6 text-center text-3xl font-bold sm:text-4xl">HADO Randomizer</h1>
