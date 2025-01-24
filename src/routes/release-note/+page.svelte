@@ -4,6 +4,11 @@
 
   export let releaseNotes = [
     {
+      version: 'v0.6.0',
+      date: '2025-01-25',
+      notes: ['🚀 HADO RandomizerからHADOガチャにアプリ名を変更しました。']
+    },
+    {
       version: 'v0.5.0',
       date: '2025-01-25',
       notes: [
