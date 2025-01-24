@@ -26,7 +26,7 @@
   <h1 class="mb-6 text-center text-3xl font-bold sm:text-4xl">HADO Randomizer</h1>
 
   <p class="mb-8 max-w-md text-center">
-    {@html m.welcome()}
+    {m.welcome()}
   </p>
 
   <div class="mb-4 flex flex-row gap-4">

@@ -86,6 +86,13 @@
     >
       English
     </button>
+    <span class="h-6 border-l border-gray-600"></span>
+    <button
+      class="cursor-pointer hover:underline bg-transparent border-none p-0 m-0"
+      on:click={() => changeLocale('zh')}
+    >
+      中文
+    </button>
   </div>
 
   {#if menuOpen}
@@ -104,6 +111,13 @@
         on:click={() => changeLocale('en')}
       >
         English
+      </button>
+      <hr class="my-2 border-gray-600" />
+      <button
+        class="cursor-pointer hover:underline bg-transparent border-none p-0 m-0"
+        on:click={() => changeLocale('zh')}
+      >
+        中文
       </button>
     </div>
   {/if}
