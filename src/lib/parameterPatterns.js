@@ -66,5 +66,5 @@ export const parameterPatterns = [
   { parameter: '5131', weight: 12 },
   { parameter: '5212', weight: 5 },
   { parameter: '5221', weight: 3 },
-  { parameter: '5311', weight: 2 },
+  { parameter: '5311', weight: 2 }
 ];
