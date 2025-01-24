@@ -1,5 +1,6 @@
 {
   "$schema": "https://inlang.com/schema/inlang-message-format",
+  "appName": "HADOガチャ",
   "welcome": "プレイヤー数を選択してください。",
   "solo": "ソロ",
   "duo": "デュオ",
@@ -11,7 +12,7 @@
   "share": "共有",
   "menu": "メニュー",
   "top": "トップ",
-  "randomize": "ランダム！",
+  "roll": "ガチャを回す",
   "reset": "リセット",
   "dropRate": "排出率",
   "dropRateTable": "排出率テーブル",

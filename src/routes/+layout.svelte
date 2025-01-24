@@ -2,6 +2,7 @@
   import { i18n } from '$lib/i18n';
   import { ParaglideJS } from '@inlang/paraglide-sveltekit';
   import '../app.css';
+  import * as m from '$lib/paraglide/messages';
   let { children } = $props();
 </script>
 
@@ -10,5 +11,5 @@
 </ParaglideJS>
 
 <svelte:head>
-  <title>HADO Randomizer</title>
+  <title>{m.appName()}</title>
 </svelte:head>

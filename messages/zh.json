@@ -1,5 +1,6 @@
 {
   "$schema": "https://inlang.com/schema/inlang-message-format",
+  "appName": "HADO扭蛋",
   "welcome": "请选择玩家数量",
   "solo": "单人",
   "duo": "双人",
@@ -11,7 +12,7 @@
   "share": "分享",
   "menu": "菜单",
   "top": "顶部",
-  "randomize": "随机",
+  "roll": "抽扭蛋",
   "reset": "重置",
   "dropRate": "掉落率",
   "dropRateTable": "掉落率表",
