@@ -38,10 +38,10 @@
     {m.welcome()}
   </p>
 
-  <div class="mb-4 flex flex-row gap-4">
+  <div class="mb-4 flex flex-row gap-2">
     <a
       href="/solo"
-      class="flex items-center gap-1 rounded bg-blue-500 px-6 py-3 font-semibold hover:bg-blue-600"
+      class="flex items-center gap-1 rounded bg-blue-500 px-6 py-3 font-semibold hover:bg-blue-600  whitespace-nowrap"
     >
       <IconUser />
       <span>{m.solo()}</span>
@@ -49,7 +49,7 @@
 
     <a
       href="/duo"
-      class="flex items-center gap-1 rounded bg-green-500 px-6 py-3 font-semibold hover:bg-green-600"
+      class="flex items-center gap-1 rounded bg-green-500 px-6 py-3 font-semibold hover:bg-green-600 whitespace-nowrap"
     >
       <IconUsers />
       <span>{m.duo()}</span>
@@ -57,7 +57,7 @@
 
     <a
       href="/trio"
-      class="flex items-center gap-1 rounded bg-red-500 px-6 py-3 font-semibold hover:bg-red-600"
+      class="flex items-center gap-1 rounded bg-red-500 px-6 py-3 font-semibold hover:bg-red-600 whitespace-nowrap"
     >
       <IconUsersGroup />
       <span>{m.trio()}</span>
