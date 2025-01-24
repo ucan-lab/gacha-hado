@@ -31,7 +31,7 @@
   }
 </script>
 
-<nav class="pr-2 flex items-center justify-end bg-gray-900 px-2 py-1 text-white shadow-md">
+<nav class="flex items-center justify-end bg-gray-900 px-2 py-1 pr-2 text-white shadow-md">
   <button
     class="flex items-center rounded border border-gray-400 px-2 py-1 text-white hover:border-gray-300 hover:text-gray-300 md:hidden"
     on:click={toggleMenu}
@@ -42,23 +42,23 @@
     </svg>
   </button>
 
-  <div class="hidden mr-4 space-x-4 md:flex">
+  <div class="mr-4 hidden space-x-4 md:flex">
     <button
-      class="cursor-pointer hover:underline bg-transparent border-none p-0 m-0"
+      class="m-0 cursor-pointer border-none bg-transparent p-0 hover:underline"
       on:click={() => changeLocale('ja')}
     >
       日本語
     </button>
     <span class="h-6 border-l border-gray-600"></span>
     <button
-      class="cursor-pointer hover:underline bg-transparent border-none p-0 m-0"
+      class="m-0 cursor-pointer border-none bg-transparent p-0 hover:underline"
       on:click={() => changeLocale('en')}
     >
       English
     </button>
     <span class="h-6 border-l border-gray-600"></span>
     <button
-      class="cursor-pointer hover:underline bg-transparent border-none p-0 m-0"
+      class="m-0 cursor-pointer border-none bg-transparent p-0 hover:underline"
       on:click={() => changeLocale('zh')}
     >
       中文
@@ -70,21 +70,21 @@
       class="menu-container absolute right-4 top-14 z-10 rounded bg-gray-800 p-4 shadow-lg md:hidden"
     >
       <button
-        class="cursor-pointer hover:underline bg-transparent border-none p-0 m-0"
+        class="m-0 cursor-pointer border-none bg-transparent p-0 hover:underline"
         on:click={() => changeLocale('ja')}
       >
         日本語
       </button>
       <hr class="my-2 border-gray-600" />
       <button
-        class="cursor-pointer hover:underline bg-transparent border-none p-0 m-0"
+        class="m-0 cursor-pointer border-none bg-transparent p-0 hover:underline"
         on:click={() => changeLocale('en')}
       >
         English
       </button>
       <hr class="my-2 border-gray-600" />
       <button
-        class="cursor-pointer hover:underline bg-transparent border-none p-0 m-0"
+        class="m-0 cursor-pointer border-none bg-transparent p-0 hover:underline"
         on:click={() => changeLocale('zh')}
       >
         中文
