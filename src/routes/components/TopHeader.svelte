@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { initializeLocale, changeLocale } from '$lib/utils/locale';
+  import { initializeLocale, changeLocale, getCurrentLocale } from '$lib/utils/locale';
   import { onMount, onDestroy } from 'svelte';
   import { browser } from '$app/environment';
   import * as m from '$lib/paraglide/messages';
@@ -7,6 +7,11 @@
   initializeLocale();
 
   let menuOpen = false;
+  let currentLocale: string | null = null;
+
+  if (browser) {
+    currentLocale = getCurrentLocale();
+  }
 
   const toggleMenu = () => {
     menuOpen = !menuOpen;
@@ -43,52 +48,62 @@
   </button>
 
   <div class="mr-4 hidden space-x-4 md:flex">
-    <button
-      class="m-0 cursor-pointer border-none bg-transparent p-0 hover:underline"
-      on:click={() => changeLocale('ja')}
-    >
-      日本語
-    </button>
-    <span class="h-6 border-l border-gray-600"></span>
-    <button
-      class="m-0 cursor-pointer border-none bg-transparent p-0 hover:underline"
-      on:click={() => changeLocale('en')}
-    >
-      English
-    </button>
-    <span class="h-6 border-l border-gray-600"></span>
-    <button
-      class="m-0 cursor-pointer border-none bg-transparent p-0 hover:underline"
-      on:click={() => changeLocale('zh')}
-    >
-      中文
-    </button>
+    {#if currentLocale !== null}
+      {#if currentLocale !== 'ja'}
+        <button
+          class="m-0 cursor-pointer border-none bg-transparent p-0 hover:underline"
+          on:click={() => changeLocale('ja')}
+        >
+          日本語
+        </button>
+      {/if}
+      {#if currentLocale !== 'en'}
+        <button
+          class="m-0 cursor-pointer border-none bg-transparent p-0 hover:underline"
+          on:click={() => changeLocale('en')}
+        >
+          English
+        </button>
+      {/if}
+      {#if currentLocale !== 'zh'}
+        <button
+          class="m-0 cursor-pointer border-none bg-transparent p-0 hover:underline"
+          on:click={() => changeLocale('zh')}
+        >
+          中文
+        </button>
+      {/if}
+    {/if}
   </div>
 
   {#if menuOpen}
     <div
       class="menu-container absolute right-4 top-14 z-10 rounded bg-gray-800 p-4 shadow-lg md:hidden"
     >
-      <button
-        class="m-0 cursor-pointer border-none bg-transparent p-0 hover:underline"
-        on:click={() => changeLocale('ja')}
-      >
-        日本語
-      </button>
-      <hr class="my-2 border-gray-600" />
-      <button
-        class="m-0 cursor-pointer border-none bg-transparent p-0 hover:underline"
-        on:click={() => changeLocale('en')}
-      >
-        English
-      </button>
-      <hr class="my-2 border-gray-600" />
-      <button
-        class="m-0 cursor-pointer border-none bg-transparent p-0 hover:underline"
-        on:click={() => changeLocale('zh')}
-      >
-        中文
-      </button>
+      {#if currentLocale !== 'ja'}
+        <button
+          class="block w-full rounded px-4 py-2 hover:bg-gray-700"
+          on:click={() => changeLocale('ja')}
+        >
+          日本語
+        </button>
+      {/if}
+      {#if currentLocale !== 'en'}
+        <button
+          class="block w-full rounded px-4 py-2 hover:bg-gray-700"
+          on:click={() => changeLocale('en')}
+        >
+          English
+        </button>
+      {/if}
+      {#if currentLocale !== 'zh'}
+        <button
+          class="block w-full rounded px-4 py-2 hover:bg-gray-700"
+          on:click={() => changeLocale('zh')}
+        >
+          中文
+        </button>
+      {/if}
     </div>
   {/if}
 </nav>

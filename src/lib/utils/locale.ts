@@ -31,3 +31,13 @@ export const changeLocale = (newLocale: string) => {
     window.location.reload();
   }
 };
+
+export const getCurrentLocale = (): AvailableLanguageTag | null => {
+  if (typeof window !== 'undefined') {
+    const storedLocale = localStorage.getItem(LOCALE_KEY);
+    if (storedLocale && availableLanguageTags.includes(storedLocale as AvailableLanguageTag)) {
+      return storedLocale as AvailableLanguageTag;
+    }
+  }
+  return null;
+};
