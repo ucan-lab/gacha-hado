@@ -1,9 +1,9 @@
 <script>
-  import { generateRandomParameters } from '../stores/parameters';
-  import Player from '../components/Player.svelte';
-  import Spinner from '../components/Spinner.svelte';
-  import Header from '../components/Header.svelte';
-  import Footer from '../components/Footer.svelte';
+  import { generateRandomParameters } from '$lib/stores/parameters';
+  import Player from '$lib/components/Player.svelte';
+  import Spinner from '$lib/components/Spinner.svelte';
+  import Header from '$lib/components/Header.svelte';
+  import Footer from '$lib/components/Footer.svelte';
   import { writable, get } from 'svelte/store';
   import * as m from '$lib/paraglide/messages';
 
@@ -73,14 +73,14 @@
 
       <div class="grid w-full max-w-lg grid-cols-2 gap-4 px-4">
         <button
-          class="rounded bg-green-500 px-6 py-3 font-bold text-white hover:bg-green-600"
+          class="cursor-pointer rounded bg-green-500 px-6 py-3 font-bold text-white hover:bg-green-600"
           on:click={roll}
           disabled={isDrawing}
         >
           {m.roll()}
         </button>
         <button
-          class="rounded bg-red-500 px-6 py-3 font-bold text-white hover:bg-red-600"
+          class="cursor-pointer rounded bg-red-500 px-6 py-3 font-bold text-white hover:bg-red-600"
           on:click={handleReset}
           disabled={isDrawing}
         >

@@ -1,5 +1,5 @@
 import { writable } from 'svelte/store';
-import { parameterPatterns } from '$lib/parameterPatterns';
+import { parameterPatterns } from '$lib/utils/parameterPatterns';
 
 export const parameters = writable({
   bulletSpeed: 1,

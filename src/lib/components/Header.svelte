@@ -1,6 +1,7 @@
 <script lang="ts">
   import { onMount, onDestroy } from 'svelte';
   import { browser } from '$app/environment';
+  import { IconMenu2 } from '@tabler/icons-svelte';
   import * as m from '$lib/paraglide/messages';
 
   let menuOpen = false;
@@ -36,13 +37,10 @@
   <a href="/" class="text-xl font-bold hover:underline">{m.appName()}</a>
 
   <button
-    class="flex items-center rounded border border-gray-400 px-2 py-1 text-white hover:border-gray-300 hover:text-gray-300 md:hidden"
+    class="flex cursor-pointer items-center rounded border border-gray-400 px-2 py-1 text-white hover:border-gray-300 hover:text-gray-300 md:hidden"
     on:click={toggleMenu}
   >
-    <svg class="h-4 w-4 fill-current" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-      <title>{m.menu()}</title>
-      <path d="M0 3h20v2H0zM0 9h20v2H0zM0 15h20v2H0z" />
-    </svg>
+    <IconMenu2 />
   </button>
 
   <div class="hidden gap-4 md:flex">
