@@ -1,6 +1,6 @@
 <script>
-  import TopHeader from './components/TopHeader.svelte';
-  import Footer from './components/Footer.svelte';
+  import TopHeader from '$components/TopHeader.svelte';
+  import Footer from '$components/Footer.svelte';
   import {
     IconUser,
     IconUsers,
@@ -57,6 +57,34 @@
 
     <a
       href="/trio"
+      class="flex items-center gap-1 rounded bg-red-500 px-6 py-3 font-semibold whitespace-nowrap hover:bg-red-600"
+    >
+      <IconUsersGroup />
+      <span>{m.trio()}</span>
+    </a>
+  </div>
+
+  <h2 class="my-4 text-2xl font-bold">ガチガチャ</h2>
+
+  <div class="mb-4 flex flex-row gap-2">
+    <a
+      href="/gachi/solo"
+      class="flex items-center gap-1 rounded bg-blue-500 px-6 py-3 font-semibold whitespace-nowrap hover:bg-blue-600"
+    >
+      <IconUser />
+      <span>{m.solo()}</span>
+    </a>
+
+    <a
+      href="/gachi/duo"
+      class="flex items-center gap-1 rounded bg-green-500 px-6 py-3 font-semibold whitespace-nowrap hover:bg-green-600"
+    >
+      <IconUsers />
+      <span>{m.duo()}</span>
+    </a>
+
+    <a
+      href="/gachi/trio"
       class="flex items-center gap-1 rounded bg-red-500 px-6 py-3 font-semibold whitespace-nowrap hover:bg-red-600"
     >
       <IconUsersGroup />

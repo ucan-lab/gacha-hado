@@ -1,5 +1,5 @@
 <script>
-  import ParameterPage from '../components/ParameterPage.svelte';
+  import ParameterPage from '$components/ParameterPage.svelte';
 </script>
 
 <ParameterPage playerCount={3} />
