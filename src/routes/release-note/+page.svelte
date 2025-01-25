@@ -4,6 +4,11 @@
 
   export let releaseNotes = [
     {
+      version: 'v0.7.0',
+      date: '2025-01-25',
+      notes: ['🚀 hado-randomizer.vercel.app から hado-gacha.vercel.app へドメインを変更しました。']
+    },
+    {
       version: 'v0.6.0',
       date: '2025-01-25',
       notes: ['🚀 HADO RandomizerからHADOガチャにアプリ名を変更しました。']

@@ -17,7 +17,7 @@
   let showModal = false;
 
   function copyLink() {
-    const link = 'https://hado-randomizer.vercel.app';
+    const link = 'https://hado-gacha.vercel.app';
     navigator.clipboard.writeText(link).then(() => {
       copied = true;
       setTimeout(() => (copied = false), 2000);
