@@ -12,6 +12,11 @@
     menuOpen = !menuOpen;
   };
 
+  const changeLocaleWithMenuToggle = (locale: string) => {
+    toggleMenu();
+    changeLocale(locale);
+  };
+
   // ハンバーガーメニュー以外をクリックしたら閉じる
   const closeMenu = (event: MouseEvent) => {
     const target = event.target as HTMLElement | null;
@@ -78,7 +83,7 @@
       {#if $locale !== 'ja'}
         <button
           class="block w-full rounded px-4 py-2 hover:bg-gray-700"
-          on:click={() => changeLocale('ja')}
+          on:click={() => changeLocaleWithMenuToggle('ja')}
         >
           日本語
         </button>
@@ -86,7 +91,7 @@
       {#if $locale !== 'en'}
         <button
           class="block w-full rounded px-4 py-2 hover:bg-gray-700"
-          on:click={() => changeLocale('en')}
+          on:click={() => changeLocaleWithMenuToggle('en')}
         >
           English
         </button>
@@ -94,7 +99,7 @@
       {#if $locale !== 'zh'}
         <button
           class="block w-full rounded px-4 py-2 hover:bg-gray-700"
-          on:click={() => changeLocale('zh')}
+          on:click={() => changeLocaleWithMenuToggle('zh')}
         >
           中文
         </button>
