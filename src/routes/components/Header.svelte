@@ -45,7 +45,7 @@
     </svg>
   </button>
 
-  <div class="hidden space-x-4 md:flex">
+  <div class="hidden gap-4 md:flex">
     <a href="/" class="hover:underline">{m.top()}</a>
     <span class="h-6 border-l border-gray-600"></span>
     <a href="/solo" class="hover:underline">{m.solo()}</a>

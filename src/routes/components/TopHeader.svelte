@@ -42,11 +42,11 @@
     </svg>
   </button>
 
-  <div class="mr-4 hidden space-x-4 md:flex">
+  <div class="mr-4 hidden gap-4 md:flex">
     {#if $locale !== null}
       {#if $locale !== 'ja'}
         <button
-          class="m-0 cursor-pointer border-none bg-transparent p-0 hover:underline"
+          class="cursor-pointer bg-transparent hover:underline p-0"
           on:click={() => changeLocale('ja')}
         >
           日本語
@@ -54,7 +54,7 @@
       {/if}
       {#if $locale !== 'en'}
         <button
-          class="m-0 cursor-pointer border-none bg-transparent p-0 hover:underline"
+          class="cursor-pointer bg-transparent hover:underline p-0"
           on:click={() => changeLocale('en')}
         >
           English
@@ -62,7 +62,7 @@
       {/if}
       {#if $locale !== 'zh'}
         <button
-          class="m-0 cursor-pointer border-none bg-transparent p-0 hover:underline"
+          class="cursor-pointer bg-transparent hover:underline p-0"
           on:click={() => changeLocale('zh')}
         >
           中文
