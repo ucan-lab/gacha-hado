@@ -108,7 +108,7 @@
         on:click={toggleModal}
         class="mt-4 rounded bg-red-500 px-6 py-2 text-white hover:bg-red-600"
       >
-        Close
+        {m.close()}
       </button>
     </div>
   </div>
