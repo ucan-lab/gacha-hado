@@ -4,6 +4,11 @@
 
   export let releaseNotes = [
     {
+      version: 'v0.7.3',
+      date: '2025-01-25',
+      notes: ['🛠️ コードのリファクタを行いました。']
+    },
+    {
       version: 'v0.7.2',
       date: '2025-01-25',
       notes: ['🛠️ デザインを調整しました。']
@@ -44,7 +49,7 @@
       version: 'v0.3.9',
       date: '2025-01-19',
       notes: [
-        '🛠️ パラメータの重み付けを変更しました。詳細は<a class="hover:underline" href="https://docs.google.com/spreadsheets/d/1zf-2dh_cq37Ict_rj9w9Xm8RIsoB1s4AQMleUT6YzVY/edit?usp=sharing">こちらのパラメータシート</a>でご確認いただけます。'
+        '🛠️ パラメータの重み付けを変更しました。詳細は<a class="underline" href="https://docs.google.com/spreadsheets/d/1zf-2dh_cq37Ict_rj9w9Xm8RIsoB1s4AQMleUT6YzVY/edit?usp=sharing">こちらのパラメータシート</a>でご確認いただけます。'
       ]
     },
     {
@@ -66,7 +71,7 @@
       version: 'v0.3.5',
       date: '2025-01-19',
       notes: [
-        '🛠️ パラメータの重み付けを変更しました。詳細は<a class="hover:underline" href="https://docs.google.com/spreadsheets/d/1zf-2dh_cq37Ict_rj9w9Xm8RIsoB1s4AQMleUT6YzVY/edit?usp=sharing">こちらのパラメータシート</a>でご確認いただけます。'
+        '🛠️ パラメータの重み付けを変更しました。詳細は<a class="underline" href="https://docs.google.com/spreadsheets/d/1zf-2dh_cq37Ict_rj9w9Xm8RIsoB1s4AQMleUT6YzVY/edit?usp=sharing">こちらのパラメータシート</a>でご確認いただけます。'
       ]
     },
     {
