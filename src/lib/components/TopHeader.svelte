@@ -38,7 +38,7 @@
 
 <nav class="flex items-center justify-end bg-gray-900 px-2 py-1 pr-2 text-white shadow-md">
   <button
-    class="flex items-center rounded border border-gray-400 px-2 py-1 text-white hover:border-gray-300 hover:text-gray-300 md:hidden"
+    class="flex cursor-pointer items-center rounded border border-gray-400 px-2 py-1 text-white hover:border-gray-300 hover:text-gray-300 md:hidden"
     on:click={toggleMenu}
   >
     <svg class="h-4 w-4 fill-current" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">

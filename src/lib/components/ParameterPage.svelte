@@ -73,14 +73,14 @@
 
       <div class="grid w-full max-w-lg grid-cols-2 gap-4 px-4">
         <button
-          class="rounded bg-green-500 px-6 py-3 font-bold text-white hover:bg-green-600"
+          class="cursor-pointer rounded bg-green-500 px-6 py-3 font-bold text-white hover:bg-green-600"
           on:click={roll}
           disabled={isDrawing}
         >
           {m.roll()}
         </button>
         <button
-          class="rounded bg-red-500 px-6 py-3 font-bold text-white hover:bg-red-600"
+          class="cursor-pointer rounded bg-red-500 px-6 py-3 font-bold text-white hover:bg-red-600"
           on:click={handleReset}
           disabled={isDrawing}
         >
