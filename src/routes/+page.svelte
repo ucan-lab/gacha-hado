@@ -41,7 +41,7 @@
   <div class="mb-4 flex flex-row gap-2">
     <a
       href="/solo"
-      class="flex items-center gap-1 whitespace-nowrap rounded bg-blue-500 px-6 py-3 font-semibold hover:bg-blue-600"
+      class="flex items-center gap-1 rounded bg-blue-500 px-6 py-3 font-semibold whitespace-nowrap hover:bg-blue-600"
     >
       <IconUser />
       <span>{m.solo()}</span>
@@ -49,7 +49,7 @@
 
     <a
       href="/duo"
-      class="flex items-center gap-1 whitespace-nowrap rounded bg-green-500 px-6 py-3 font-semibold hover:bg-green-600"
+      class="flex items-center gap-1 rounded bg-green-500 px-6 py-3 font-semibold whitespace-nowrap hover:bg-green-600"
     >
       <IconUsers />
       <span>{m.duo()}</span>
@@ -57,7 +57,7 @@
 
     <a
       href="/trio"
-      class="flex items-center gap-1 whitespace-nowrap rounded bg-red-500 px-6 py-3 font-semibold hover:bg-red-600"
+      class="flex items-center gap-1 rounded bg-red-500 px-6 py-3 font-semibold whitespace-nowrap hover:bg-red-600"
     >
       <IconUsersGroup />
       <span>{m.trio()}</span>
@@ -100,7 +100,7 @@
 </div>
 
 {#if showModal}
-  <div class="fixed inset-0 z-10 flex items-center justify-center bg-black bg-opacity-50">
+  <div class="bg-opacity-50 fixed inset-0 z-10 flex items-center justify-center bg-black">
     <div class="rounded-lg bg-white p-6">
       <h3 class="mb-4 text-xl font-bold">{m.QrCode()}</h3>
       <img src={QrCode} alt="QR Code" class="mb-4 h-64 w-64" />

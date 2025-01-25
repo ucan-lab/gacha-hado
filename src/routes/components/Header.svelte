@@ -45,7 +45,7 @@
     </svg>
   </button>
 
-  <div class="hidden space-x-4 md:flex">
+  <div class="hidden gap-4 md:flex">
     <a href="/" class="hover:underline">{m.top()}</a>
     <span class="h-6 border-l border-gray-600"></span>
     <a href="/solo" class="hover:underline">{m.solo()}</a>
@@ -57,7 +57,7 @@
 
   {#if menuOpen}
     <div
-      class="menu-container absolute right-4 top-14 z-10 rounded bg-gray-800 p-4 shadow-lg md:hidden"
+      class="menu-container absolute top-14 right-4 z-10 rounded bg-gray-800 p-4 shadow-lg md:hidden"
     >
       <a href="/" class="block rounded px-4 py-2 hover:bg-gray-700" on:click={handleLinkClick}>
         {m.top()}
