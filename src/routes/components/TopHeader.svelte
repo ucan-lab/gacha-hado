@@ -46,7 +46,7 @@
     {#if $locale !== null}
       {#if $locale !== 'ja'}
         <button
-          class="cursor-pointer bg-transparent hover:underline p-0"
+          class="cursor-pointer bg-transparent p-0 hover:underline"
           on:click={() => changeLocale('ja')}
         >
           日本語
@@ -54,7 +54,7 @@
       {/if}
       {#if $locale !== 'en'}
         <button
-          class="cursor-pointer bg-transparent hover:underline p-0"
+          class="cursor-pointer bg-transparent p-0 hover:underline"
           on:click={() => changeLocale('en')}
         >
           English
@@ -62,7 +62,7 @@
       {/if}
       {#if $locale !== 'zh'}
         <button
-          class="cursor-pointer bg-transparent hover:underline p-0"
+          class="cursor-pointer bg-transparent p-0 hover:underline"
           on:click={() => changeLocale('zh')}
         >
           中文
@@ -73,7 +73,7 @@
 
   {#if menuOpen}
     <div
-      class="menu-container absolute right-4 top-14 z-10 rounded bg-gray-800 p-4 shadow-lg md:hidden"
+      class="menu-container absolute top-14 right-4 z-10 rounded bg-gray-800 p-4 shadow-lg md:hidden"
     >
       {#if $locale !== 'ja'}
         <button
