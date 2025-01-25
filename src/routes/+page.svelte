@@ -1,6 +1,6 @@
 <script>
-  import TopHeader from '$components/TopHeader.svelte';
-  import Footer from '$components/Footer.svelte';
+  import TopHeader from '$lib/components/TopHeader.svelte';
+  import Footer from '$lib/components/Footer.svelte';
   import {
     IconUser,
     IconUsers,

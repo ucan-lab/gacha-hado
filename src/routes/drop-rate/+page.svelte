@@ -1,7 +1,7 @@
 <script lang="ts">
-  import { parameterPatterns } from '$lib/parameterPatterns';
-  import Header from '$components/Header.svelte';
-  import Footer from '$components/Footer.svelte';
+  import { parameterPatterns } from '$lib/utils/parameterPatterns';
+  import Header from '$lib/components/Header.svelte';
+  import Footer from '$lib/components/Footer.svelte';
   import * as m from '$lib/paraglide/messages';
 
   type TableRow = {
