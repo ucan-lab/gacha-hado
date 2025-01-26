@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
   import Parameter from './Parameter.svelte';
   export let parameters;
 

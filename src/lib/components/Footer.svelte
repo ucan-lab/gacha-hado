@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
   const appVersion = __APP_VERSION__;
   const appDeployDate = __APP_DEPLOY_DATE__;
 </script>

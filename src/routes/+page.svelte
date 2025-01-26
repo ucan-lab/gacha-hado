@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
   import TopHeader from '$lib/components/TopHeader.svelte';
   import Footer from '$lib/components/Footer.svelte';
   import {
@@ -32,7 +32,9 @@
 <TopHeader />
 
 <div class="flex min-h-screen flex-col bg-gray-900 text-white">
-  <section class="flex flex-col items-center justify-center py-10 bg-gradient-to-b from-gray-800 to-gray-900">
+  <section
+    class="flex flex-col items-center justify-center bg-gradient-to-b from-gray-800 to-gray-900 py-10"
+  >
     <h1 class="mb-4 text-center text-4xl font-bold sm:text-5xl">{m.appName()}</h1>
     <p class="mb-8 max-w-md text-center text-lg">{m.welcome()}</p>
 
@@ -52,12 +54,12 @@
     </div>
   </section>
 
-  <section class="py-10 bg-gray-800">
+  <section class="bg-gray-800 py-10">
     <div class="text-center">
       <h2 class="mb-4 text-2xl font-bold">{m.dropRate()}</h2>
       <a
         href="/drop-rate"
-        class="inline-flex items-center gap-2 rounded bg-purple-500 px-6 py-3 text-white font-semibold hover:bg-purple-600"
+        class="inline-flex items-center gap-2 rounded bg-purple-500 px-6 py-3 font-semibold text-white hover:bg-purple-600"
       >
         <IconTable />
         {m.dropRateTable()}
@@ -65,7 +67,7 @@
     </div>
   </section>
 
-  <section class="py-10 bg-gray-900">
+  <section class="bg-gray-900 py-10">
     <div class="text-center">
       <h2 class="mb-4 text-2xl font-bold">{m.share()}</h2>
       <div class="flex flex-col items-center gap-4">
@@ -93,7 +95,7 @@
   </section>
 
   {#if showModal}
-    <div class="fixed inset-0 z-10 flex items-center justify-center bg-black bg-opacity-70">
+    <div class="bg-opacity-70 fixed inset-0 z-10 flex items-center justify-center bg-black">
       <div class="rounded-lg bg-white p-6">
         <h3 class="mb-4 text-xl font-bold text-gray-800">{m.QrCode()}</h3>
         <img src={QrCode} alt="QR Code" class="mb-4 h-64 w-64" />
