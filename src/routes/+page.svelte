@@ -32,7 +32,7 @@
 <TopHeader />
 
 <div class="flex min-h-screen flex-col bg-gray-900 text-white">
-  <section class="flex flex-col items-center justify-center py-16 bg-gradient-to-b from-gray-800 to-gray-900">
+  <section class="flex flex-col items-center justify-center py-10 bg-gradient-to-b from-gray-800 to-gray-900">
     <h1 class="mb-4 text-center text-4xl font-bold sm:text-5xl">{m.appName()}</h1>
     <p class="mb-8 max-w-md text-center text-lg">{m.welcome()}</p>
 
