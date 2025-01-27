@@ -4,6 +4,11 @@
 
   export let releaseNotes = [
     {
+      version: 'v0.7.4',
+      date: '2025-01-27',
+      notes: ['🛠️ アイコンを更新しました。']
+    },
+    {
       version: 'v0.7.3',
       date: '2025-01-25',
       notes: ['🛠️ コードのリファクタを行いました。']
