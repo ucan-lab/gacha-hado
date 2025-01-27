@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
   import { generateRandomParameters } from '$lib/stores/parameters';
   import Player from '$lib/components/Player.svelte';
   import Spinner from '$lib/components/Spinner.svelte';

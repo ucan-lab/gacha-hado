@@ -1,8 +1,13 @@
-<script>
+<script lang="ts">
   import Header from '$lib/components/Header.svelte';
   import Footer from '$lib/components/Footer.svelte';
 
   export let releaseNotes = [
+    {
+      version: 'v0.7.4',
+      date: '2025-01-27',
+      notes: ['🛠️ アイコンを更新しました。']
+    },
     {
       version: 'v0.7.3',
       date: '2025-01-25',
