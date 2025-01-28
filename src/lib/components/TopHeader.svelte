@@ -39,6 +39,7 @@
 
 <nav class="flex items-center justify-end bg-gray-900 px-2 py-1 pr-2 text-white shadow-md">
   <button
+    aria-label={m.menu()}
     class="flex cursor-pointer items-center rounded border border-gray-400 px-2 py-1 text-white hover:border-gray-300 hover:text-gray-300 md:hidden"
     on:click={toggleMenu}
   >
@@ -49,6 +50,7 @@
     {#if $locale !== null}
       {#if $locale !== 'ja'}
         <button
+          aria-label="日本語"
           class="cursor-pointer bg-transparent p-0 hover:underline"
           on:click={() => changeLocale('ja')}
         >
@@ -57,6 +59,7 @@
       {/if}
       {#if $locale !== 'en'}
         <button
+          aria-label="English"
           class="cursor-pointer bg-transparent p-0 hover:underline"
           on:click={() => changeLocale('en')}
         >
@@ -65,6 +68,7 @@
       {/if}
       {#if $locale !== 'zh'}
         <button
+          aria-label="中文"
           class="cursor-pointer bg-transparent p-0 hover:underline"
           on:click={() => changeLocale('zh')}
         >
@@ -80,6 +84,7 @@
     >
       {#if $locale !== 'ja'}
         <button
+          aria-label="日本語"
           class="block w-full rounded px-4 py-2 hover:bg-gray-700"
           on:click={() => changeLocaleWithMenuToggle('ja')}
         >
@@ -88,6 +93,7 @@
       {/if}
       {#if $locale !== 'en'}
         <button
+          aria-label="English"
           class="block w-full rounded px-4 py-2 hover:bg-gray-700"
           on:click={() => changeLocaleWithMenuToggle('en')}
         >
@@ -96,6 +102,7 @@
       {/if}
       {#if $locale !== 'zh'}
         <button
+          aria-label="中文"
           class="block w-full rounded px-4 py-2 hover:bg-gray-700"
           on:click={() => changeLocaleWithMenuToggle('zh')}
         >

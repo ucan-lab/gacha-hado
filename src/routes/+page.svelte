@@ -39,15 +39,15 @@
     <p class="mb-8 max-w-md text-center text-lg">{m.welcome()}</p>
 
     <div class="flex flex-wrap justify-center gap-4">
-      <a href="/solo" class="menu-btn bg-blue-500 hover:bg-blue-600">
+      <a aria-label={m.solo()} href="/solo" class="menu-btn bg-blue-800 hover:bg-blue-900">
         <IconUser />
         <span>{m.solo()}</span>
       </a>
-      <a href="/duo" class="menu-btn bg-green-500 hover:bg-green-600">
+      <a aria-label={m.duo()} href="/duo" class="menu-btn bg-green-700 hover:bg-green-800">
         <IconUsers />
         <span>{m.duo()}</span>
       </a>
-      <a href="/trio" class="menu-btn bg-red-500 hover:bg-red-600">
+      <a aria-label={m.trio()} href="/trio" class="menu-btn bg-red-700 hover:bg-red-800">
         <IconUsersGroup />
         <span>{m.trio()}</span>
       </a>
@@ -58,6 +58,7 @@
     <div class="text-center">
       <h2 class="mb-4 text-2xl font-bold">{m.dropRate()}</h2>
       <a
+        aria-label={m.dropRateTable()}
         href="/drop-rate"
         class="inline-flex items-center gap-2 rounded bg-purple-500 px-6 py-3 font-semibold text-white hover:bg-purple-600"
       >
@@ -72,15 +73,17 @@
       <h2 class="mb-4 text-2xl font-bold">{m.share()}</h2>
       <div class="flex flex-col items-center gap-4">
         <button
+          aria-label={m.showQrCode()}
           on:click={toggleModal}
-          class="flex items-center gap-2 rounded bg-orange-500 px-6 py-3 font-semibold hover:bg-orange-600"
+          class="flex cursor-pointer items-center gap-2 rounded bg-orange-700 px-6 py-3 font-semibold hover:bg-orange-800"
         >
           <IconQrcode />
           {m.showQrCode()}
         </button>
         <button
+          aria-label={m.copyLinkToClipboard()}
           on:click={copyLink}
-          class="flex items-center gap-2 rounded bg-yellow-500 px-6 py-3 font-semibold hover:bg-yellow-600"
+          class="flex cursor-pointer items-center gap-2 rounded bg-yellow-700 px-6 py-3 font-semibold hover:bg-yellow-800"
         >
           {#if copied}
             <IconClipboardCheck />
@@ -100,8 +103,9 @@
         <h3 class="mb-4 text-xl font-bold text-gray-800">{m.QrCode()}</h3>
         <img src={QrCode} alt="QR Code" class="mb-4 h-64 w-64" />
         <button
+          aria-label={m.close()}
           on:click={toggleModal}
-          class="mt-4 rounded bg-red-500 px-6 py-2 text-white hover:bg-red-600"
+          class="mt-4 cursor-pointer rounded bg-red-700 px-6 py-2 text-white hover:bg-red-800"
         >
           {m.close()}
         </button>
