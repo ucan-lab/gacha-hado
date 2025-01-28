@@ -6,7 +6,9 @@
 
 <footer class="mt-auto bg-gray-800 py-4 text-center text-white">
   <p class="flex items-center justify-center space-x-4">
-    <a aria-label="Release Note" href="/release-note" class="hover:underline">{appVersion} - {appDeployDate}</a>
+    <a aria-label="Release Note" href="/release-note" class="hover:underline"
+      >{appVersion} - {appDeployDate}</a
+    >
     <span>Created by ucan.</span>
     <a aria-label="X" href="https://x.com/ucan_lab" target="_blank" class="inline-flex">
       <IconBrandX />
