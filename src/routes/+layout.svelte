@@ -12,4 +12,5 @@
 
 <svelte:head>
   <title>{m.appName()}</title>
+  <meta name="description" content={m.description()} />
 </svelte:head>

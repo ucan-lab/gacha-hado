@@ -1,6 +1,7 @@
 {
   "$schema": "https://inlang.com/schema/inlang-message-format",
   "appName": "HADO Gacha",
+  "description": "This app is an enjoy app designed to enhance your experience with the AR sport 'HADO'.",
   "menu": "Menu",
   "welcome": "Please select the number of players.",
   "solo": "Solo",
