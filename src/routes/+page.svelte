@@ -72,6 +72,7 @@
       <h2 class="mb-4 text-2xl font-bold">{m.share()}</h2>
       <div class="flex flex-col items-center gap-4">
         <button
+          aria-label={m.showQrCode()}
           on:click={toggleModal}
           class="flex items-center gap-2 rounded bg-orange-500 px-6 py-3 font-semibold hover:bg-orange-600"
         >
@@ -79,6 +80,7 @@
           {m.showQrCode()}
         </button>
         <button
+          aria-label={m.copyLinkToClipboard()}
           on:click={copyLink}
           class="flex items-center gap-2 rounded bg-yellow-500 px-6 py-3 font-semibold hover:bg-yellow-600"
         >
@@ -100,6 +102,7 @@
         <h3 class="mb-4 text-xl font-bold text-gray-800">{m.QrCode()}</h3>
         <img src={QrCode} alt="QR Code" class="mb-4 h-64 w-64" />
         <button
+          aria-label={m.close()}
           on:click={toggleModal}
           class="mt-4 rounded bg-red-500 px-6 py-2 text-white hover:bg-red-600"
         >

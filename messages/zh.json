@@ -1,6 +1,7 @@
 {
   "$schema": "https://inlang.com/schema/inlang-message-format",
   "appName": "HADO扭蛋",
+  "menu": "菜单",
   "welcome": "请选择玩家数量",
   "solo": "单人",
   "duo": "双人",

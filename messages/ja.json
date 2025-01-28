@@ -1,6 +1,7 @@
 {
   "$schema": "https://inlang.com/schema/inlang-message-format",
   "appName": "HADOガチャ",
+  "menu": "メニュー",
   "welcome": "プレイヤー数を選択してください。",
   "solo": "ソロ",
   "duo": "デュオ",

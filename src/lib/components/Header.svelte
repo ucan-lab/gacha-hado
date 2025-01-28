@@ -37,6 +37,7 @@
   <a href="/" class="text-xl font-bold hover:underline">{m.appName()}</a>
 
   <button
+    aria-label={m.menu()}
     class="flex cursor-pointer items-center rounded border border-gray-400 px-2 py-1 text-white hover:border-gray-300 hover:text-gray-300 md:hidden"
     on:click={toggleMenu}
   >
