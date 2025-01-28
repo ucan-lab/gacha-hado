@@ -6,15 +6,15 @@
 
 <footer class="mt-auto bg-gray-800 py-4 text-center text-white">
   <p class="flex items-center justify-center space-x-4">
-    <a href="/release-note" class="hover:underline">{appVersion} - {appDeployDate}</a>
+    <a aria-label="Release Note" href="/release-note" class="hover:underline">{appVersion} - {appDeployDate}</a>
     <span>Created by ucan.</span>
-    <a href="https://x.com/ucan_lab" target="_blank" class="inline-flex">
+    <a aria-label="X" href="https://x.com/ucan_lab" target="_blank" class="inline-flex">
       <IconBrandX />
     </a>
-    <a href="https://github.com/ucan-lab" target="_blank" class="inline-flex">
+    <a aria-label="GitHub" href="https://github.com/ucan-lab" target="_blank" class="inline-flex">
       <IconBrandGithub />
     </a>
-    <a href="https://qiita.com/ucan-lab" target="_blank" class="inline-flex">
+    <a aria-label="Qiita" href="https://qiita.com/ucan-lab" target="_blank" class="inline-flex">
       <IconNote />
     </a>
   </p>

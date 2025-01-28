@@ -39,15 +39,15 @@
     <p class="mb-8 max-w-md text-center text-lg">{m.welcome()}</p>
 
     <div class="flex flex-wrap justify-center gap-4">
-      <a href="/solo" class="menu-btn bg-blue-500 hover:bg-blue-600">
+      <a aria-label={m.solo()} href="/solo" class="menu-btn bg-blue-500 hover:bg-blue-600">
         <IconUser />
         <span>{m.solo()}</span>
       </a>
-      <a href="/duo" class="menu-btn bg-green-500 hover:bg-green-600">
+      <a aria-label={m.duo()} href="/duo" class="menu-btn bg-green-500 hover:bg-green-600">
         <IconUsers />
         <span>{m.duo()}</span>
       </a>
-      <a href="/trio" class="menu-btn bg-red-500 hover:bg-red-600">
+      <a aria-label={m.trio()} href="/trio" class="menu-btn bg-red-500 hover:bg-red-600">
         <IconUsersGroup />
         <span>{m.trio()}</span>
       </a>
@@ -58,6 +58,7 @@
     <div class="text-center">
       <h2 class="mb-4 text-2xl font-bold">{m.dropRate()}</h2>
       <a
+        aria-label={m.dropRateTable()}
         href="/drop-rate"
         class="inline-flex items-center gap-2 rounded bg-purple-500 px-6 py-3 font-semibold text-white hover:bg-purple-600"
       >
