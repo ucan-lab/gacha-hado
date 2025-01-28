@@ -4,6 +4,11 @@
 
   export let releaseNotes = [
     {
+      version: 'v0.7.5',
+      date: '2025-01-29',
+      notes: ['🛠️ メタディスクリプションを設定']
+    },
+    {
       version: 'v0.7.4',
       date: '2025-01-27',
       notes: ['🛠️ アイコンを更新しました。']
