@@ -4,9 +4,14 @@
 
   export let releaseNotes = [
     {
+      version: 'v0.7.6',
+      date: '2025-01-29',
+      notes: ['🛠️ PageSpeed Insightsの指摘を受け改善しました。2']
+    },
+    {
       version: 'v0.7.5',
       date: '2025-01-29',
-      notes: ['🛠️ メタディスクリプションを設定']
+      notes: ['🛠️ PageSpeed Insightsの指摘を受け改善しました。']
     },
     {
       version: 'v0.7.4',
