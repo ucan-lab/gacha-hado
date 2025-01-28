@@ -56,11 +56,11 @@
 
   <section class="bg-gray-800 py-10">
     <div class="text-center">
-      <h2 class="mb-4 text-2xl font-bold">{m.dropRate()}</h2>
+      <h2 class="mb-4 text-2xl font-bold text-white">{m.dropRate()}</h2>
       <a
         aria-label={m.dropRateTable()}
         href="/drop-rate"
-        class="inline-flex items-center gap-2 rounded bg-purple-500 px-6 py-3 font-semibold text-white hover:bg-purple-600"
+        class="inline-flex items-center gap-2 rounded bg-purple-700 px-6 py-3 font-semibold text-white hover:bg-purple-800"
       >
         <IconTable />
         {m.dropRateTable()}
