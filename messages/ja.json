@@ -1,6 +1,6 @@
 {
   "$schema": "https://inlang.com/schema/inlang-message-format",
-  "appName": "HADOガチャ",
+  "appName": "ガチャHADO",
   "description": "このアプリはARスポーツ「HADO」をより楽しむためのエンジョイアプリです。",
   "menu": "メニュー",
   "welcome": "プレイヤー数を選択してください。",

@@ -1,6 +1,6 @@
 {
   "$schema": "https://inlang.com/schema/inlang-message-format",
-  "appName": "HADO扭蛋",
+  "appName": "扭蛋HADO",
   "description": "这个应用程序是为了更好地享受AR运动 HADO 而设计的娱乐应用程序",
   "menu": "菜单",
   "welcome": "请选择玩家数量",
