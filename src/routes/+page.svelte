@@ -36,14 +36,16 @@
   <section
     class="flex flex-col items-center justify-center bg-gradient-to-b from-gray-800 to-gray-900 py-10"
   >
-    <h1 class="mb-4 text-center text-4xl font-bold sm:text-5xl">
+    <h1 class="mb-6 text-center text-4xl font-bold sm:text-5xl">
       {#if $locale !== null && $locale === 'ja'}
         <span class="text-red-600 transition-colors">ガチ</span>ャHADO
       {:else}
         {m.appName()}
       {/if}
     </h1>
-    <p class="mb-8 max-w-md text-center text-lg">{m.welcome()}</p>
+    <p class="max-w-md text-center text-md">{@html m.welcome()}</p>
+    <p class="mb-6 max-w-md text-center text-md">{m.attention()}</p>
+    <p class="mb-6 max-w-md text-center text-md">{m.select()}</p>
 
     <div class="flex flex-wrap justify-center gap-4">
       <a aria-label={m.solo()} href="/solo" class="menu-btn bg-blue-800 hover:bg-blue-900">
