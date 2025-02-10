@@ -2,10 +2,7 @@
   import { onMount, onDestroy } from 'svelte';
   import { browser } from '$app/environment';
   import { IconMenu2 } from '@tabler/icons-svelte';
-  import { initializeLocale, locale } from '$lib/utils/locale';
   import * as m from '$lib/paraglide/messages';
-
-  initializeLocale();
 
   let menuOpen = false;
 
@@ -38,11 +35,7 @@
 
 <nav class="flex items-center justify-between bg-gray-900 px-2 py-1 text-white shadow-md">
   <a aria-label={m.top()} href="/" class="text-xl font-bold hover:underline">
-    {#if $locale !== null && $locale === 'ja'}
-      <span class="text-red-600">ガチ</span>ャHADO
-    {:else}
-      {m.appName()}
-    {/if}
+    {m.appName()}
   </a>
 
   <button
