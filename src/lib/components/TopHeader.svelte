@@ -37,7 +37,15 @@
   }
 </script>
 
-<nav class="flex items-center justify-end bg-gray-900 px-2 py-1 pr-2 text-white shadow-md">
+<nav class="flex items-center justify-between bg-gray-900 px-2 py-1 text-white shadow-md">
+  <a aria-label={m.top()} href="/" class="text-xl font-bold hover:underline">
+    {#if $locale !== null && $locale === 'ja'}
+      <span class="text-red-600">ガチ</span>ャHADO
+    {:else}
+      {m.appName()}
+    {/if}
+  </a>
+
   <button
     aria-label={m.menu()}
     class="flex cursor-pointer items-center rounded border border-gray-400 px-2 py-1 text-white hover:border-gray-300 hover:text-gray-300 md:hidden"
@@ -45,38 +53,6 @@
   >
     <IconMenu2 />
   </button>
-
-  <div class="mr-4 hidden gap-4 md:flex">
-    {#if $locale !== null}
-      {#if $locale !== 'ja'}
-        <button
-          aria-label="日本語"
-          class="cursor-pointer bg-transparent p-0 hover:underline"
-          on:click={() => changeLocale('ja')}
-        >
-          日本語
-        </button>
-      {/if}
-      {#if $locale !== 'en'}
-        <button
-          aria-label="English"
-          class="cursor-pointer bg-transparent p-0 hover:underline"
-          on:click={() => changeLocale('en')}
-        >
-          English
-        </button>
-      {/if}
-      {#if $locale !== 'zh'}
-        <button
-          aria-label="中文"
-          class="cursor-pointer bg-transparent p-0 hover:underline"
-          on:click={() => changeLocale('zh')}
-        >
-          中文
-        </button>
-      {/if}
-    {/if}
-  </div>
 
   {#if menuOpen}
     <div

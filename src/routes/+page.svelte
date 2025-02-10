@@ -11,6 +11,7 @@
     IconClipboardCheck
   } from '@tabler/icons-svelte';
   import QrCode from '$lib/assets/qr-code.jpg';
+  import { locale } from '$lib/utils/locale';
   import * as m from '$lib/paraglide/messages';
 
   let copied = false;
@@ -35,7 +36,13 @@
   <section
     class="flex flex-col items-center justify-center bg-gradient-to-b from-gray-800 to-gray-900 py-10"
   >
-    <h1 class="mb-4 text-center text-4xl font-bold sm:text-5xl">{m.appName()}</h1>
+    <h1 class="mb-4 text-center text-4xl font-bold sm:text-5xl">
+      {#if $locale !== null && $locale === 'ja'}
+        <span class="text-red-600 transition-colors">ガチ</span>ャHADO
+      {:else}
+        {m.appName()}
+      {/if}
+    </h1>
     <p class="mb-8 max-w-md text-center text-lg">{m.welcome()}</p>
 
     <div class="flex flex-wrap justify-center gap-4">
