@@ -42,6 +42,20 @@
     {m.appName()}
   </a>
 
+  <div class="hidden gap-4 md:flex">
+    {#if $locale !== null}
+      {#if $locale !== 'ja'}
+        <button aria-label="日本語" on:click={() => changeLocaleWithMenuToggle('ja')} class="cursor-pointer bg-transparent p-0 hover:underline">日本語</button>
+      {/if}
+      {#if $locale !== 'en'}
+        <button aria-label="English" on:click={() => changeLocaleWithMenuToggle('en')} class="cursor-pointer bg-transparent p-0 hover:underline">English</button>
+      {/if}
+      {#if $locale !== 'zh'}
+        <button aria-label="中文" on:click={() => changeLocaleWithMenuToggle('zh')} class="cursor-pointer bg-transparent p-0 hover:underline">中文</button>
+      {/if}
+    {/if}
+  </div>
+
   <button
     aria-label={m.menu()}
     class="flex cursor-pointer items-center rounded border border-gray-400 px-2 py-1 text-white hover:border-gray-300 hover:text-gray-300 md:hidden"
