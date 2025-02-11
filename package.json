@@ -1,7 +1,7 @@
 {
   "name": "gacha-hado",
   "private": true,
-  "version": "v0.7.6",
+  "version": "v1.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite dev",
