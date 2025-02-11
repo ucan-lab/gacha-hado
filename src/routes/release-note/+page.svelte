@@ -4,8 +4,15 @@
 
   export let releaseNotes = [
     {
+      version: 'v1.0.1',
+      date: '2025-02-11',
+      notes: [
+        '🛠️ manifestファイル修正',
+      ]
+    },
+    {
       version: 'v1.0.0',
-      date: '2025-02-09',
+      date: '2025-02-11',
       notes: [
         '🚀 hado-gacha.vercel.app から gacha-hado.vercel.app へドメインを変更しました。',
         '🎉 v1.0 リリース'
