@@ -36,7 +36,7 @@
     class="flex flex-col items-center justify-center bg-gradient-to-b from-gray-800 to-gray-900 py-10"
   >
     <h1 class="mb-6 text-center text-4xl font-bold sm:text-5xl">{m.appName()}</h1>
-    <p class="text-md max-w-md text-center">{@html m.welcome()}</p>
+    <p class="text-md max-w-md text-center">{m.welcome()}</p>
     <p class="text-md mb-6 max-w-md text-center">{m.attention()}</p>
     <p class="text-md mb-6 max-w-md text-center">{m.select()}</p>
 

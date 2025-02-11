@@ -3,7 +3,7 @@
   "appName": "ガチャHADO",
   "description": "このアプリはARスポーツ「HADO」をより楽しむためのエンジョイアプリです。",
   "menu": "メニュー",
-  "welcome": "このアプリはARスポーツ「<a href=\"https://hado-official.com\" class=\"underline\" target=\"_blank\">HADO</a>」をより楽しむためのエンジョイアプリです。",
+  "welcome": "このアプリはARスポーツ「HADO」をより楽しむためのエンジョイアプリです。",
   "attention": "このアプリは公式アプリではありません。",
   "select": "プレイヤー数を選択してください。",
   "solo": "ソロ",
