@@ -6,7 +6,10 @@
     {
       version: 'v1.0.0',
       date: '2025-02-09',
-      notes: ['🚀 hado-gacha.vercel.app から gacha-hado.vercel.app へドメインを変更しました。']
+      notes: [
+        '🚀 hado-gacha.vercel.app から gacha-hado.vercel.app へドメインを変更しました。',
+        '🎉 v1.0 リリース'
+      ]
     },
     {
       version: 'v0.7.6',
