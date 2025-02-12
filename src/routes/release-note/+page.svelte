@@ -4,6 +4,13 @@
 
   export let releaseNotes = [
     {
+      version: 'v1.0.2',
+      date: '2025-02-12',
+      notes: [
+        '🛠️ QRコードのリンクを修正',
+      ]
+    },
+    {
       version: 'v1.0.1',
       date: '2025-02-11',
       notes: [
