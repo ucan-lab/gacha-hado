@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { generateRandomParameters } from '$lib/stores/parameters';
+  import { generateWeightedRandomParameters } from '$lib/stores/parameters';
   import Player from '$lib/components/Player.svelte';
   import Spinner from '$lib/components/Spinner.svelte';
   import Header from '$lib/components/Header.svelte';
@@ -26,13 +26,13 @@
     isBlackout.set(true);
 
     const interval = setInterval(() => {
-      players.forEach((player) => player.set(generateRandomParameters()));
+      players.forEach((player) => player.set(generateWeightedRandomParameters()));
     }, 100);
 
     await new Promise((resolve) => setTimeout(resolve, 1200));
     clearInterval(interval);
 
-    players.forEach((player) => player.set(generateRandomParameters()));
+    players.forEach((player) => player.set(generateWeightedRandomParameters()));
 
     players.forEach((player, index) => {
       const values = get(player);
