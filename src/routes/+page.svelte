@@ -33,7 +33,7 @@
 
 <div class="flex min-h-screen flex-col bg-gray-900 text-white">
   <section
-    class="flex flex-col items-center justify-center bg-gradient-to-b from-gray-800 to-gray-900 py-10"
+    class="flex flex-col items-center justify-center bg-gradient-to-b from-gray-800 to-gray-900 py-6"
   >
     <h1 class="mb-6 text-center text-4xl font-bold sm:text-5xl">{m.appName()}</h1>
     <p class="text-md max-w-md text-center">{m.welcome()}</p>
@@ -56,7 +56,7 @@
     </div>
   </section>
 
-  <section class="bg-gray-900 py-10">
+  <section class="bg-gray-900 py-6">
     <div class="text-center">
       <h2 class="mb-4 text-2xl font-bold">{m.share()}</h2>
       <div class="flex flex-col items-center gap-4">
