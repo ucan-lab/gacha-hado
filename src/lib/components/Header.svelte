@@ -10,8 +10,7 @@
     menuOpen = !menuOpen;
   };
 
-  // ハンバーガーメニュー以外をクリックしたら閉じる
-  const closeMenu = (event: MouseEvent) => {
+  const changeLocaleWithMenuToggle = (event: MouseEvent) => {
     const target = event.target as HTMLElement | null;
     if (menuOpen && target && !target.closest('.menu-container') && !target.closest('button')) {
       menuOpen = false;
@@ -24,11 +23,11 @@
 
   if (browser) {
     onMount(() => {
-      document.addEventListener('click', closeMenu);
+      document.addEventListener('click', changeLocaleWithMenuToggle);
     });
 
     onDestroy(() => {
-      document.removeEventListener('click', closeMenu);
+      document.removeEventListener('click', changeLocaleWithMenuToggle);
     });
   }
 </script>
