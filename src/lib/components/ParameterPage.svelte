@@ -74,7 +74,7 @@
       <div class="grid w-full max-w-lg grid-cols-2 gap-4 px-4">
         <button
           aria-label={m.roll()}
-          class="cursor-pointer rounded bg-green-700 px-6 py-3 font-bold text-white hover:bg-green-800"
+          class="cursor-pointer rounded bg-green-500 px-6 py-3 font-bold text-white hover:bg-green-600"
           on:click={roll}
           disabled={isDrawing}
         >
@@ -82,7 +82,7 @@
         </button>
         <button
           aria-label={m.reset()}
-          class="cursor-pointer rounded bg-red-700 px-6 py-3 font-bold text-white hover:bg-red-800"
+          class="cursor-pointer rounded bg-red-500 px-6 py-3 font-bold text-white hover:bg-red-600"
           on:click={handleReset}
           disabled={isDrawing}
         >

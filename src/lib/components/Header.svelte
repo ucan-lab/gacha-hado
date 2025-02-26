@@ -32,7 +32,7 @@
   }
 </script>
 
-<nav class="flex items-center justify-between bg-gray-900 px-2 py-1 text-white shadow-md">
+<nav class="bg-secondary flex items-center justify-between px-2 py-1">
   <a aria-label={m.top()} href="/" class="text-xl font-bold hover:underline">
     {m.appName()}
   </a>
@@ -51,7 +51,7 @@
 
   <button
     aria-label={m.menu()}
-    class="flex cursor-pointer items-center rounded border border-gray-400 px-2 py-1 text-white hover:border-gray-300 hover:text-gray-300 md:hidden"
+    class="flex cursor-pointer items-center rounded border px-2 py-1 md:hidden"
     on:click={toggleMenu}
   >
     <IconMenu2 />
@@ -59,12 +59,12 @@
 
   {#if menuOpen}
     <div
-      class="menu-container absolute top-14 right-4 z-10 rounded bg-gray-800 p-4 shadow-lg md:hidden"
+      class="menu-container bg-secondary absolute top-14 right-4 z-10 rounded p-4 shadow-lg md:hidden"
     >
       <a
         aria-label={m.top()}
         href="/"
-        class="block rounded px-4 py-2 hover:bg-gray-700"
+        class="bg-secondary-hover block rounded px-4 py-2"
         on:click={handleLinkClick}
       >
         {m.top()}
@@ -73,7 +73,7 @@
       <a
         aria-label={m.solo()}
         href="/solo"
-        class="block rounded px-4 py-2 hover:bg-gray-700"
+        class="bg-secondary-hover block rounded px-4 py-2"
         on:click={handleLinkClick}
       >
         {m.solo()}
@@ -81,7 +81,7 @@
       <a
         aria-label={m.duo()}
         href="/duo"
-        class="block rounded px-4 py-2 hover:bg-gray-700"
+        class="bg-secondary-hover block rounded px-4 py-2"
         on:click={handleLinkClick}
       >
         {m.duo()}
@@ -89,7 +89,7 @@
       <a
         aria-label={m.trio()}
         href="/trio"
-        class="block rounded px-4 py-2 hover:bg-gray-700"
+        class="bg-secondary-hover block rounded px-4 py-2"
         on:click={handleLinkClick}
       >
         {m.trio()}
@@ -98,7 +98,7 @@
       <a
         aria-label={m.dropRateTable()}
         href="/drop-rate"
-        class="block rounded px-4 py-2 hover:bg-gray-700"
+        class="bg-secondary-hover block rounded px-4 py-2"
         on:click={handleLinkClick}
       >
         {m.dropRateTable()}

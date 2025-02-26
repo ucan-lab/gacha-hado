@@ -1,4 +1,5 @@
 @import 'tailwindcss';
+@custom-variant dark (&:where(.dark, .dark *));
 
 @font-face {
   font-family: 'Noto Sans JP';
@@ -16,9 +17,103 @@
   src: url('/fonts/NotoSansJP-Bold.woff2') format('woff2');
 }
 
+:root {
+  --accent-color: #007aff;
+  --bg-primary-color: #f9f9f9;
+  --bg-secondary-color: #efefef;
+  --bg-secondary-hover-color: #dedede;
+  --text-primary-color: #333333;
+  --text-secondary-color: #666666;
+  --border-color: #dddddd;
+  --table-header-bg: #dedede;
+  --table-even-bg: #efefef;
+  --table-odd-bg: #ffffff;
+  --table-border-color: #ababab;
+  --table-text-color: #333333;
+}
+
+[data-theme='dark']:root {
+  --accent-color: #0a84ff;
+  --bg-primary-color: #121212;
+  --bg-secondary-color: #232323;
+  --bg-secondary-hover-color: #343434;
+  --text-primary-color: #eaeaea;
+  --text-secondary-color: #a1a1a1;
+  --border-color: #333333;
+  --table-header-bg: #454545;
+  --table-even-bg: #232323;
+  --table-odd-bg: #121212;
+  --table-border-color: #666666;
+  --table-text-color: #eaeaea;
+}
+
 body {
   margin: 0;
-  background-color: #000000;
-  color: #ffffff;
   font-family: 'Noto Sans JP', sans-serif;
+  background-color: var(--bg-primary-color);
+  color: var(--text-primary-color);
+  border-color: var(--border-color);
+  transition: 1.2s;
+}
+
+.bg-accent {
+  background-color: var(--accent-color);
+}
+
+.bg-primary {
+  background-color: var(--bg-primary-color);
+}
+
+.bg-secondary {
+  background-color: var(--bg-secondary-color);
+}
+
+.bg-secondary-hover:hover {
+  background-color: var(--bg-secondary-hover-color);
+}
+
+.text-brand {
+  color: var(--text-brand-color);
+}
+
+.text-primary {
+  color: var(--text-primary-color);
+}
+
+.text-secondary {
+  color: var(--text-secondary-color);
+}
+
+.text-error {
+  color: #ff3b30;
+}
+
+.text-warning {
+  color: #ff9500;
+}
+
+.text-success {
+  color: #34c759;
+}
+
+table {
+  border: 1px solid var(--table-border-color);
+  color: var(--table-text-color);
+}
+
+th,
+td {
+  border: 1px solid var(--table-border-color);
+}
+
+th {
+  background-color: var(--table-header-bg);
+}
+
+tr:nth-child(even) {
+  background-color: var(--table-even-bg);
+}
+
+tr:nth-child(odd) {
+  background-color: var(--table-odd-bg);
 }

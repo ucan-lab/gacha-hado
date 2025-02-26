@@ -10,7 +10,6 @@
     IconClipboardCheck
   } from '@tabler/icons-svelte';
   import QrCode from '$lib/assets/qr-code.jpg';
-  import { locale } from '$lib/utils/locale';
   import * as m from '$lib/paraglide/messages';
 
   let copied = false;
@@ -31,39 +30,45 @@
 
 <TopHeader />
 
-<div class="flex min-h-screen flex-col bg-gray-900 text-white">
-  <section
-    class="flex flex-col items-center justify-center bg-gradient-to-b from-gray-800 to-gray-900 py-10"
-  >
+<div class="flex min-h-screen flex-col">
+  <section class="flex flex-col items-center justify-center py-10">
     <h1 class="mb-6 text-center text-4xl font-bold sm:text-5xl">{m.appName()}</h1>
     <p class="text-md max-w-md text-center">{m.welcome()}</p>
     <p class="text-md mb-6 max-w-md text-center">{m.attention()}</p>
     <p class="text-md mb-6 max-w-md text-center">{m.select()}</p>
 
     <div class="flex flex-wrap justify-center gap-4">
-      <a aria-label={m.solo()} href="/solo" class="menu-btn bg-blue-800 hover:bg-blue-900">
+      <a
+        aria-label={m.solo()}
+        href="/solo"
+        class="menu-btn bg-blue-500 text-white hover:bg-blue-600"
+      >
         <IconUser />
         <span>{m.solo()}</span>
       </a>
-      <a aria-label={m.duo()} href="/duo" class="menu-btn bg-green-700 hover:bg-green-800">
+      <a
+        aria-label={m.duo()}
+        href="/duo"
+        class="menu-btn bg-green-500 text-white hover:bg-green-600"
+      >
         <IconUsers />
         <span>{m.duo()}</span>
       </a>
-      <a aria-label={m.trio()} href="/trio" class="menu-btn bg-red-700 hover:bg-red-800">
+      <a aria-label={m.trio()} href="/trio" class="menu-btn bg-red-500 text-white hover:bg-red-600">
         <IconUsersGroup />
         <span>{m.trio()}</span>
       </a>
     </div>
   </section>
 
-  <section class="bg-gray-900 py-10">
+  <section class="py-10">
     <div class="text-center">
       <h2 class="mb-4 text-2xl font-bold">{m.share()}</h2>
       <div class="flex flex-col items-center gap-4">
         <button
           aria-label={m.showQrCode()}
           on:click={toggleModal}
-          class="flex cursor-pointer items-center gap-2 rounded bg-orange-700 px-6 py-3 font-semibold hover:bg-orange-800"
+          class="flex cursor-pointer items-center gap-2 rounded bg-orange-500 px-6 py-3 font-semibold text-white hover:bg-orange-600"
         >
           <IconQrcode />
           {m.showQrCode()}
@@ -71,7 +76,7 @@
         <button
           aria-label={m.copyLinkToClipboard()}
           on:click={copyLink}
-          class="flex cursor-pointer items-center gap-2 rounded bg-yellow-700 px-6 py-3 font-semibold hover:bg-yellow-800"
+          class="flex cursor-pointer items-center gap-2 rounded bg-yellow-600 px-6 py-3 font-semibold text-white hover:bg-yellow-700"
         >
           {#if copied}
             <IconClipboardCheck />
@@ -87,13 +92,13 @@
 
   {#if showModal}
     <div class="bg-opacity-70 fixed inset-0 z-10 flex items-center justify-center bg-black">
-      <div class="rounded-lg bg-white p-6">
-        <h3 class="mb-4 text-xl font-bold text-gray-800">{m.QrCode()}</h3>
+      <div class="rounded-lg bg-white p-6 dark:bg-gray-800">
+        <h3 class="mb-4 text-xl font-bold text-gray-900 dark:text-white">{m.QrCode()}</h3>
         <img src={QrCode} alt="QR Code" class="mb-4 h-64 w-64" />
         <button
           aria-label={m.close()}
           on:click={toggleModal}
-          class="mt-4 cursor-pointer rounded bg-red-700 px-6 py-2 text-white hover:bg-red-800"
+          class="mt-4 cursor-pointer rounded bg-red-600 px-6 py-2 text-white hover:bg-red-700 dark:bg-red-700 dark:hover:bg-red-800"
         >
           {m.close()}
         </button>
