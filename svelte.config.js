@@ -15,7 +15,9 @@ const config = {
     // See https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy
     csp: {
       directives: {
-        'script-src': ['self']
+        'script-src': ['unsafe-inline', 'self'],
+        'object-src': ['none'],
+        'base-uri': ['self']
       }
     }
   }

@@ -4,6 +4,11 @@
 
   export let releaseNotes = [
     {
+      version: 'v1.1.2',
+      date: '2025-03-03',
+      notes: ['🛠️ PegeSpeed Insightsで指摘されたCSPを修正しました。']
+    },
+    {
       version: 'v1.1.1',
       date: '2025-03-03',
       notes: ['🛠️ コンテンツセキュリティポリシーを設定しました。']
