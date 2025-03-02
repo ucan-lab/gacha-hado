@@ -4,6 +4,11 @@
 
   export let releaseNotes = [
     {
+      version: 'v1.1.4',
+      date: '2025-03-03',
+      notes: ['🛠️ デザインを微調整しました。']
+    },
+    {
       version: 'v1.1.3',
       date: '2025-03-03',
       notes: ['🛠️ Vercelで必要なCSPを追加しました。']
