@@ -1,5 +1,5 @@
 <script lang="ts">
-  import TopHeader from '$lib/components/TopHeader.svelte';
+  import Header from '$lib/components/Header.svelte';
   import Footer from '$lib/components/Footer.svelte';
   import {
     IconUser,
@@ -28,7 +28,7 @@
   }
 </script>
 
-<TopHeader />
+<Header />
 
 <div class="flex min-h-screen flex-col">
   <section class="flex flex-col items-center justify-center py-10">
