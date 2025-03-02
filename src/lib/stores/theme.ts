@@ -1,22 +1,43 @@
 import { writable } from 'svelte/store';
 
-const getInitialTheme = () => {
-  if (typeof document !== 'undefined') {
-    return (
-      localStorage.getItem('theme') || document.documentElement.getAttribute('data-theme') || 'dark'
-    );
-  }
-  return 'dark';
+const isBrowser = typeof window !== 'undefined';
+const isDocument = typeof document !== 'undefined';
+
+const getStoredTheme = (): string => {
+  if (!isBrowser) return 'auto';
+  return localStorage.getItem('theme') || 'auto';
 };
 
-export const theme = writable(getInitialTheme());
+// テーマの適用
+const applyTheme = (theme: string): string => {
+  if (!isDocument) return theme;
 
-theme.subscribe((value) => {
-  if (typeof document !== 'undefined') {
-    localStorage.setItem('theme', value);
-    document.documentElement.setAttribute('data-theme', value);
-    document.documentElement.classList.remove('dark', 'light');
-    document.documentElement.classList.add(value);
-    document.cookie = `theme=${value}; path=/; max-age=31536000`; // 1年
+  let effectiveTheme = theme;
+
+  if (theme === 'auto') {
+    effectiveTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
   }
-});
+
+  localStorage.setItem('theme', theme);
+  document.documentElement.setAttribute('data-theme', effectiveTheme);
+  document.documentElement.classList.remove('dark', 'light');
+  document.documentElement.classList.add(effectiveTheme);
+  document.cookie = `theme=${theme}; path=/; max-age=31536000`; // 1年
+
+  return theme;
+};
+
+// テーマのストア
+export const theme = writable(getStoredTheme());
+theme.subscribe((value: string) => applyTheme(value));
+
+// システムのテーマ変更を監視し、適用するリスナー
+const initializeThemeListener = () => {
+  if (!isBrowser) return;
+
+  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
+    theme.update((current) => (current === 'auto' ? applyTheme('auto') : current));
+  });
+};
+
+initializeThemeListener();

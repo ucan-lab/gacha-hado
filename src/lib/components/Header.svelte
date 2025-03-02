@@ -4,7 +4,7 @@
   import { theme } from '$lib/stores/theme';
   import { page } from '$app/state';
   import { browser } from '$app/environment';
-  import { IconHome, IconMenu2, IconWorld, IconSun } from '@tabler/icons-svelte';
+  import { IconHome, IconMenu2, IconWorld, IconCheck, IconSun } from '@tabler/icons-svelte';
   import * as m from '$lib/paraglide/messages';
 
   initializeLocale();
@@ -117,15 +117,28 @@
         <IconSun />{m.theme()}
       </button>
       {#if themeMenuOpen}
-        <div class="bg-secondary absolute right-0 z-60 mt-3 w-36 rounded p-2 shadow-lg">
+        <div class="bg-secondary absolute right-0 z-60 mt-3 w-48 rounded p-2 shadow-lg">
           <button
-            class="bg-secondary-hover block w-full cursor-pointer px-4 py-2 text-left"
-            on:click={() => changeThemeWithMenuToggle('light')}>{m.light()}</button
+            class="bg-secondary-hover flex w-full cursor-pointer items-center gap-1 px-4 py-2 text-left"
+            on:click={() => changeThemeWithMenuToggle('auto')}
           >
+            {#if $theme === 'auto'}<IconCheck class="text-green-500" />{/if}
+            {m.auto()}
+          </button>
           <button
-            class="bg-secondary-hover block w-full cursor-pointer px-4 py-2 text-left"
-            on:click={() => changeThemeWithMenuToggle('dark')}>{m.dark()}</button
+            class="bg-secondary-hover flex w-full cursor-pointer items-center gap-1 px-4 py-2 text-left"
+            on:click={() => changeThemeWithMenuToggle('light')}
           >
+            {#if $theme === 'light'}<IconCheck class="text-green-500" />{/if}
+            {m.light()}
+          </button>
+          <button
+            class="bg-secondary-hover flex w-full cursor-pointer items-center gap-1 px-4 py-2 text-left"
+            on:click={() => changeThemeWithMenuToggle('dark')}
+          >
+            {#if $theme === 'dark'}<IconCheck class="text-green-500" />{/if}
+            {m.dark()}
+          </button>
         </div>
       {/if}
     </div>

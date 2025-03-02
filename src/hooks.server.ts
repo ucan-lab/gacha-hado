@@ -5,7 +5,10 @@ const handleParaglide: Handle = i18n.handle();
 export const handle: Handle = async ({ event, resolve }) => {
   const response = await handleParaglide({ event, resolve });
 
-  const theme = event.cookies.get('theme') || 'dark';
+  let theme = event.cookies.get('theme') || 'light';
+  if (theme === 'auto') {
+    theme = 'light';
+  }
 
   return new Response(await response.text(), {
     status: response.status,
