@@ -5,7 +5,15 @@
   import { theme } from '$lib/stores/theme';
   import { page } from '$app/state';
   import { browser } from '$app/environment';
-  import { IconHome, IconMenu2, IconWorld, IconCheck, IconSun } from '@tabler/icons-svelte';
+  import {
+    IconHome,
+    IconMenu2,
+    IconWorld,
+    IconCheck,
+    IconBrightnessFilled,
+    IconSunFilled,
+    IconMoonFilled
+  } from '@tabler/icons-svelte';
   import * as m from '$lib/paraglide/messages';
 
   initializeLocale();
@@ -63,7 +71,6 @@
     {#if page.url.pathname !== '/'}
       <a aria-label={m.home()} href="/" class="flex items-center gap-1 hover:underline">
         <IconHome />
-        {m.home()}
       </a>
     {/if}
     <div class="language-menu relative">
@@ -72,7 +79,7 @@
         class="flex cursor-pointer items-center gap-1 p-0 hover:underline"
         on:click={() => toggleMenuState('language')}
       >
-        <IconWorld />Language
+        <IconWorld />
       </button>
       {#if $languageMenuOpen}
         <div class="bg-secondary absolute right-0 z-60 mt-2 w-32 rounded p-2 shadow-lg">
@@ -106,29 +113,47 @@
         class="flex cursor-pointer items-center gap-1 p-0 hover:underline"
         on:click={() => toggleMenuState('theme')}
       >
-        <IconSun />{m.theme()}
+        {#if $theme === 'auto'}
+          <IconBrightnessFilled />
+        {:else if $theme === 'light'}
+          <IconSunFilled />
+        {:else if $theme === 'dark'}
+          <IconMoonFilled />
+        {/if}
       </button>
       {#if $themeMenuOpen}
-        <div class="bg-secondary absolute right-0 z-60 mt-2 w-44 rounded p-2 shadow-lg">
+        <div class="bg-secondary absolute right-0 z-60 mt-2 w-48 rounded p-2 shadow-lg">
           <button
             class="bg-secondary-hover flex w-full cursor-pointer items-center gap-1 px-4 py-2 text-left"
             on:click={() => changeThemeWithMenuToggle('auto')}
           >
-            {#if $theme === 'auto'}<IconCheck class="text-green-500" />{/if}
+            {#if $theme === 'auto'}
+              <IconCheck class="text-green-500" />
+            {:else}
+              <IconBrightnessFilled />
+            {/if}
             {m.auto()}
           </button>
           <button
             class="bg-secondary-hover flex w-full cursor-pointer items-center gap-1 px-4 py-2 text-left"
             on:click={() => changeThemeWithMenuToggle('light')}
           >
-            {#if $theme === 'light'}<IconCheck class="text-green-500" />{/if}
+            {#if $theme === 'light'}
+              <IconCheck class="text-green-500" />
+            {:else}
+              <IconSunFilled />
+            {/if}
             {m.light()}
           </button>
           <button
             class="bg-secondary-hover flex w-full cursor-pointer items-center gap-1 px-4 py-2 text-left"
             on:click={() => changeThemeWithMenuToggle('dark')}
           >
-            {#if $theme === 'dark'}<IconCheck class="text-green-500" />{/if}
+            {#if $theme === 'dark'}
+              <IconCheck class="text-green-500" />
+            {:else}
+              <IconMoonFilled />
+            {/if}
             {m.dark()}
           </button>
         </div>

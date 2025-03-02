@@ -20,7 +20,7 @@ const config = {
           'https://vercel.live',
           'https://*.vercel.app',
           'wss://ws-us3.pusher.com',
-          'ws://localhost:5176',
+          'ws://localhost:5176'
         ],
         'img-src': ['self', 'data: blob:', 'https://vercel.live', 'https://vercel.com'],
         'frame-src': ['https://vercel.live'],
