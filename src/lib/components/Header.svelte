@@ -38,7 +38,7 @@
 
   const closeMenuOnOutsideClick = (event: MouseEvent) => {
     const target = event.target as HTMLElement | null;
-    if (target && !target.closest('.menu-container') && !target.closest('button')) {
+    if (target && !target.closest('.hamburger-menu-container') && !target.closest('button')) {
       closeAllMenus();
     }
   };
@@ -75,7 +75,7 @@
         <IconWorld />Language
       </button>
       {#if $languageMenuOpen}
-        <div class="bg-secondary absolute right-0 z-60 mt-3 w-32 rounded p-2 shadow-lg">
+        <div class="bg-secondary absolute right-0 z-60 mt-2 w-32 rounded p-2 shadow-lg">
           <button
             class="bg-secondary-hover flex w-full cursor-pointer items-center gap-1 px-4 py-2 text-left"
             on:click={() => changeLocaleWithMenuToggle('ja')}
@@ -109,7 +109,7 @@
         <IconSun />{m.theme()}
       </button>
       {#if $themeMenuOpen}
-        <div class="bg-secondary absolute right-0 z-60 mt-3 w-48 rounded p-2 shadow-lg">
+        <div class="bg-secondary absolute right-0 z-60 mt-2 w-44 rounded p-2 shadow-lg">
           <button
             class="bg-secondary-hover flex w-full cursor-pointer items-center gap-1 px-4 py-2 text-left"
             on:click={() => changeThemeWithMenuToggle('auto')}
@@ -134,50 +134,64 @@
         </div>
       {/if}
     </div>
-    <button
-      aria-label={m.menu()}
-      class="flex cursor-pointer rounded border px-2 py-1"
-      on:click={() => toggleMenuState('menu')}
-    >
-      <IconMenu2 />
-    </button>
-  </div>
-
-  {#if $menuOpen}
-    <div class="menu-container bg-secondary absolute top-14 right-4 z-60 rounded p-4 shadow-lg">
-      <a
-        aria-label={m.solo()}
-        href="/solo"
-        class="bg-secondary-hover block rounded px-4 py-2"
-        on:click={closeMenuOnOutsideClick}
+    <div class="hamburger-menu relative">
+      <button
+        aria-label={m.menu()}
+        class="flex cursor-pointer rounded border px-2 py-1"
+        on:click={() => toggleMenuState('menu')}
       >
-        {m.solo()}
-      </a>
-      <a
-        aria-label={m.duo()}
-        href="/duo"
-        class="bg-secondary-hover block rounded px-4 py-2"
-        on:click={closeMenuOnOutsideClick}
-      >
-        {m.duo()}
-      </a>
-      <a
-        aria-label={m.trio()}
-        href="/trio"
-        class="bg-secondary-hover block rounded px-4 py-2"
-        on:click={closeMenuOnOutsideClick}
-      >
-        {m.trio()}
-      </a>
-      <hr class="my-2 border-gray-600" />
-      <a
-        aria-label={m.dropRateTable()}
-        href="/drop-rate"
-        class="bg-secondary-hover block rounded px-4 py-2"
-        on:click={closeMenuOnOutsideClick}
-      >
-        {m.dropRateTable()}
-      </a>
+        <IconMenu2 />
+      </button>
+      {#if $menuOpen}
+        <div
+          class="hamburger-menu-container bg-secondary absolute right-0 z-60 mt-2 w-44 rounded p-2 shadow-lg"
+        >
+          <a
+            aria-label={m.solo()}
+            href="/solo"
+            class="bg-secondary-hover block rounded px-4 py-2"
+            on:click={closeMenuOnOutsideClick}
+          >
+            {m.solo()}
+          </a>
+          <a
+            aria-label={m.duo()}
+            href="/duo"
+            class="bg-secondary-hover block rounded px-4 py-2"
+            on:click={closeMenuOnOutsideClick}
+          >
+            {m.duo()}
+          </a>
+          <a
+            aria-label={m.trio()}
+            href="/trio"
+            class="bg-secondary-hover block rounded px-4 py-2"
+            on:click={closeMenuOnOutsideClick}
+          >
+            {m.trio()}
+          </a>
+          <hr class="my-2" />
+          <a
+            aria-label={m.dropRateTable()}
+            href="/drop-rate"
+            class="bg-secondary-hover block rounded px-4 py-2"
+            on:click={closeMenuOnOutsideClick}
+          >
+            {m.dropRateTable()}
+          </a>
+        </div>
+      {/if}
     </div>
-  {/if}
+  </div>
 </nav>
+
+<style>
+  .language-menu button,
+  .theme-menu button,
+  .hamburger-menu button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 34px;
+  }
+</style>
