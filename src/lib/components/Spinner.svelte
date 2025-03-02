@@ -3,31 +3,31 @@
 </script>
 
 {#if isVisible}
-  <div class="absolute inset-0 z-10 flex items-center justify-center bg-black opacity-80">
+  <div class="overlay">
     <div class="spinner"></div>
   </div>
 {/if}
 
 <style>
-  .absolute {
-    position: absolute;
-  }
-  .inset-0 {
+  .overlay {
+    position: fixed;
     top: 0;
     left: 0;
-    right: 0;
-    bottom: 0;
-  }
-  .z-10 {
-    z-index: 10;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 50;
   }
 
   .spinner {
-    border: 4px solid rgba(255, 255, 255, 0.3);
+    border: 6px solid rgba(255, 255, 255, 0.3);
     border-top-color: #ffffff;
     border-radius: 50%;
-    width: 3rem;
-    height: 3rem;
+    width: 7rem;
+    height: 7rem;
     animation: spin 1s linear infinite;
   }
 

@@ -4,7 +4,7 @@
   import { IconBrandX, IconBrandGithub, IconNote } from '@tabler/icons-svelte';
 </script>
 
-<footer class="mt-auto bg-gray-800 py-4 text-center text-white">
+<footer class="bg-secondary mt-auto py-4 text-center">
   <p class="flex items-center justify-center space-x-2">
     <a aria-label="Release Note" href="/release-note" class="hover:underline"
       >{appVersion} - {appDeployDate}</a

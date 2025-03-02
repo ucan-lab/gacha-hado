@@ -4,18 +4,19 @@
 
   export let releaseNotes = [
     {
+      version: 'v1.1.0',
+      date: '2025-03-03',
+      notes: ['🚀 ライトモード、ダークモードのテーマ切り替え機能を実装しました。']
+    },
+    {
       version: 'v1.0.2',
       date: '2025-02-12',
-      notes: [
-        '🛠️ QRコードのリンクを修正',
-      ]
+      notes: ['🛠️ QRコードのリンクを修正']
     },
     {
       version: 'v1.0.1',
       date: '2025-02-11',
-      notes: [
-        '🛠️ manifestファイル修正',
-      ]
+      notes: ['🛠️ manifestファイル修正']
     },
     {
       version: 'v1.0.0',
@@ -173,13 +174,13 @@
 
   <div class="space-y-6">
     {#each releaseNotes as release}
-      <div class="rounded-lg bg-white p-4 shadow-md">
-        <h2 class="text-xl font-semibold text-gray-800">
-          {release.version} <span class="text-sm text-gray-500">({release.date})</span>
+      <div class="bg-secondary text-seconday rounded-lg p-4 shadow-md">
+        <h2 class="text-xl font-semibold">
+          {release.version} <span class="text-sm">({release.date})</span>
         </h2>
-        <ul class="mt-2 list-disc space-y-1 pl-6">
+        <ul class="mt-2 list-none space-y-1 pl-6">
           {#each release.notes as note}
-            <li><span class="text-gray-800">{@html note}</span></li>
+            <li><span>{@html note}</span></li>
           {/each}
         </ul>
       </div>

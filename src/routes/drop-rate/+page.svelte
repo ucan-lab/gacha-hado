@@ -41,73 +41,53 @@
 
 <Header />
 
-<div class="container mx-auto mt-8 p-4 text-center text-white">
+<div class="container mx-auto p-4 text-center">
   <h1 class="mb-6 text-2xl font-bold">{m.dropRateTable()}</h1>
 
-  <table class="w-full table-auto border-collapse border border-gray-700 text-sm">
-    <thead>
-      <tr class="bg-gray-800">
-        <th
-          class="cursor-pointer border border-gray-700 px-4 py-2 hover:bg-gray-700"
-          on:click={() => sortTable('parameter')}
-        >
-          {m.parameter()}
-          {#if sortKey === 'parameter'}
-            {sortDirection === 'asc' ? ' ↑' : ' ↓'}
-          {/if}
-        </th>
-        <th
-          class="weight cursor-pointer border border-gray-700 px-4 py-2 hover:bg-gray-700"
-          on:click={() => sortTable('weight')}
-        >
-          {m.weight()}
-          {#if sortKey === 'weight'}
-            {sortDirection === 'asc' ? ' ↑' : ' ↓'}
-          {/if}
-        </th>
-        <th
-          class="cursor-pointer border border-gray-700 px-4 py-2 hover:bg-gray-700"
-          on:click={() => sortTable('dropRate')}
-        >
-          {m.dropRate()}
-          {#if sortKey === 'dropRate'}
-            {sortDirection === 'asc' ? ' ↑' : ' ↓'}
-          {/if}
-        </th>
-      </tr>
-    </thead>
-    <tbody>
-      {#each dropRateTable as row}
-        <tr class="odd:bg-gray-900 even:bg-gray-800">
-          <td class="border border-gray-700 px-4 py-2">{row.parameter}</td>
-          <td class="border border-gray-700 px-4 py-2">{row.weight}</td>
-          <td class="border border-gray-700 px-4 py-2">{row.dropRate}%</td>
+  <div class="flex max-w-full justify-center overflow-x-auto">
+    <table class="mx-auto w-full max-w-md table-auto text-sm">
+      <thead>
+        <tr>
+          <th class="sticky top-0 z-10 px-4 py-2" on:click={() => sortTable('parameter')}>
+            {m.parameter()}
+            {#if sortKey === 'parameter'}
+              {sortDirection === 'asc' ? ' ↑' : ' ↓'}
+            {/if}
+          </th>
+          <th class="sticky top-0 z-10 px-4 py-2" on:click={() => sortTable('weight')}>
+            {m.weight()}
+            {#if sortKey === 'weight'}
+              {sortDirection === 'asc' ? ' ↑' : ' ↓'}
+            {/if}
+          </th>
+          <th class="sticky top-0 z-10 px-4 py-2" on:click={() => sortTable('dropRate')}>
+            {m.dropRate()}
+            {#if sortKey === 'dropRate'}
+              {sortDirection === 'asc' ? ' ↑' : ' ↓'}
+            {/if}
+          </th>
         </tr>
-      {/each}
-    </tbody>
-  </table>
+      </thead>
+      <tbody>
+        {#each dropRateTable as row}
+          <tr>
+            <td class="px-4 py-2">{row.parameter}</td>
+            <td class="px-4 py-2">{row.weight}</td>
+            <td class="px-4 py-2">{row.dropRate}%</td>
+          </tr>
+        {/each}
+      </tbody>
+    </table>
+  </div>
 </div>
 
 <Footer />
 
 <style>
-  table {
-    margin: auto;
-    max-width: 400px;
-  }
-
-  th,
-  td {
-    text-align: center;
-  }
-
   th {
-    position: sticky;
     top: 0;
-    background-color: #2d2d2d;
     z-index: 1;
   }
-
   th:nth-child(2),
   td:nth-child(2) {
     width: 100px;
