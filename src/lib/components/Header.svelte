@@ -66,15 +66,15 @@
 </script>
 
 <nav class="bg-secondary flex items-center justify-between px-2 py-1">
-  <a aria-label={m.top()} href="/" class="text-xl font-bold hover:underline">
+  <a aria-label={m.home()} href="/" class="text-xl font-bold hover:underline">
     {m.appName()}
   </a>
 
   <div class="flex items-center gap-4">
     {#if page.url.pathname !== '/'}
-      <a aria-label={m.top()} href="/" class="flex items-center gap-1 hover:underline">
+      <a aria-label={m.home()} href="/" class="flex items-center gap-1 hover:underline">
         <IconHome />
-        {m.top()}
+        {m.home()}
       </a>
     {/if}
     <div class="language-menu relative">
