@@ -91,14 +91,14 @@
   </section>
 
   {#if showModal}
-    <div class="bg-opacity-70 fixed inset-0 z-10 flex items-center justify-center bg-black">
-      <div class="rounded-lg bg-white p-6 dark:bg-gray-800">
-        <h3 class="mb-4 text-xl font-bold text-gray-900 dark:text-white">{m.QrCode()}</h3>
+    <div class="bg-black fixed inset-0 z-10 flex items-center justify-center">
+      <div class="rounded-lg">
+        <h3 class="mb-4 text-xl font-bold text-white">{m.QrCode()}</h3>
         <img src={QrCode} alt="QR Code" class="mb-4 h-64 w-64" />
         <button
           aria-label={m.close()}
           on:click={toggleModal}
-          class="mt-4 cursor-pointer rounded bg-red-600 px-6 py-2 text-white hover:bg-red-700 dark:bg-red-700 dark:hover:bg-red-800"
+          class="mt-4 cursor-pointer rounded bg-red-500 px-6 py-2 text-white hover:bg-red-600"
         >
           {m.close()}
         </button>
