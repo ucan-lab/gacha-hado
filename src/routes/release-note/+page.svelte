@@ -4,6 +4,11 @@
 
   export let releaseNotes = [
     {
+      version: 'v1.1.1',
+      date: '2025-03-03',
+      notes: ['🛠️ コンテンツセキュリティポリシーを設定しました。']
+    },
+    {
       version: 'v1.1.0',
       date: '2025-03-03',
       notes: ['🚀 ライトモード、ダークモードのテーマ切り替え機能を実装しました。']
@@ -11,12 +16,12 @@
     {
       version: 'v1.0.2',
       date: '2025-02-12',
-      notes: ['🛠️ QRコードのリンクを修正']
+      notes: ['🛠️ QRコードのリンクを修正しました。']
     },
     {
       version: 'v1.0.1',
       date: '2025-02-11',
-      notes: ['🛠️ manifestファイル修正']
+      notes: ['🛠️ manifestファイルを修正しました。']
     },
     {
       version: 'v1.0.0',
