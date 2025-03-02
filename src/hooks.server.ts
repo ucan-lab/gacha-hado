@@ -1,5 +1,6 @@
 import type { Handle } from '@sveltejs/kit';
 import { i18n } from '$lib/i18n';
+
 const handleParaglide: Handle = i18n.handle();
 
 export const handle: Handle = async ({ event, resolve }) => {
@@ -10,15 +11,10 @@ export const handle: Handle = async ({ event, resolve }) => {
     theme = 'light';
   }
 
-  return new Response(await response.text(), {
+  const text = await response.text();
+
+  return new Response(text.replace('%THEME%', theme), {
     status: response.status,
     headers: response.headers
-  })
-    .text()
-    .then((html) => {
-      return new Response(html.replace('%THEME%', theme), {
-        status: response.status,
-        headers: response.headers
-      });
-    });
+  });
 };
