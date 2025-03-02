@@ -1,6 +1,7 @@
 <script lang="ts">
   import { initializeLocale, changeLocale, locale } from '$lib/utils/locale';
   import { onMount, onDestroy } from 'svelte';
+  import { writable } from 'svelte/store';
   import { theme } from '$lib/stores/theme';
   import { page } from '$app/state';
   import { browser } from '$app/environment';
@@ -9,48 +10,36 @@
 
   initializeLocale();
 
-  let menuOpen = false;
-  let languageMenuOpen = false;
-  let themeMenuOpen = false;
+  const menuOpen = writable(false);
+  const languageMenuOpen = writable(false);
+  const themeMenuOpen = writable(false);
 
-  const toggleMenu = () => {
-    themeMenuOpen = false;
-    languageMenuOpen = false;
-    menuOpen = !menuOpen;
-  };
-
-  const toggleLanguageMenu = () => {
-    menuOpen = false;
-    themeMenuOpen = false;
-    languageMenuOpen = !languageMenuOpen;
-  };
-
-  const toggleThemeMenu = () => {
-    menuOpen = false;
-    languageMenuOpen = false;
-    themeMenuOpen = !themeMenuOpen;
+  const toggleMenuState = (menu: string) => {
+    menuOpen.set(menu === 'menu' ? !$menuOpen : false);
+    languageMenuOpen.set(menu === 'language' ? !$languageMenuOpen : false);
+    themeMenuOpen.set(menu === 'theme' ? !$themeMenuOpen : false);
   };
 
   const changeLocaleWithMenuToggle = (locale: string) => {
     changeLocale(locale);
-    closeAllMenu();
+    closeAllMenus();
   };
 
   const changeThemeWithMenuToggle = (themeName: string) => {
     theme.set(themeName);
-    closeAllMenu();
+    closeAllMenus();
   };
 
-  const closeAllMenu = () => {
-    menuOpen = false;
-    languageMenuOpen = false;
-    themeMenuOpen = false;
+  const closeAllMenus = () => {
+    menuOpen.set(false);
+    languageMenuOpen.set(false);
+    themeMenuOpen.set(false);
   };
 
   const closeMenuOnOutsideClick = (event: MouseEvent) => {
     const target = event.target as HTMLElement | null;
     if (target && !target.closest('.menu-container') && !target.closest('button')) {
-      closeAllMenu();
+      closeAllMenus();
     }
   };
 
@@ -81,11 +70,11 @@
       <button
         aria-label="Language"
         class="flex cursor-pointer items-center gap-1 p-0 hover:underline"
-        on:click={toggleLanguageMenu}
+        on:click={() => toggleMenuState('language')}
       >
         <IconWorld />Language
       </button>
-      {#if languageMenuOpen}
+      {#if $languageMenuOpen}
         <div class="bg-secondary absolute right-0 z-60 mt-3 w-32 rounded p-2 shadow-lg">
           {#if $locale !== 'ja'}
             <button
@@ -112,11 +101,11 @@
       <button
         aria-label="Theme"
         class="flex cursor-pointer items-center gap-1 p-0 hover:underline"
-        on:click={toggleThemeMenu}
+        on:click={() => toggleMenuState('theme')}
       >
         <IconSun />{m.theme()}
       </button>
-      {#if themeMenuOpen}
+      {#if $themeMenuOpen}
         <div class="bg-secondary absolute right-0 z-60 mt-3 w-48 rounded p-2 shadow-lg">
           <button
             class="bg-secondary-hover flex w-full cursor-pointer items-center gap-1 px-4 py-2 text-left"
@@ -145,13 +134,13 @@
     <button
       aria-label={m.menu()}
       class="flex cursor-pointer rounded border px-2 py-1"
-      on:click={toggleMenu}
+      on:click={() => toggleMenuState('menu')}
     >
       <IconMenu2 />
     </button>
   </div>
 
-  {#if menuOpen}
+  {#if $menuOpen}
     <div class="menu-container bg-secondary absolute top-14 right-4 z-60 rounded p-4 shadow-lg">
       <a
         aria-label={m.solo()}
