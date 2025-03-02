@@ -33,9 +33,9 @@
 <div class="flex min-h-screen flex-col">
   <section class="flex flex-col items-center justify-center py-10">
     <h1 class="mb-6 text-center text-4xl font-bold sm:text-5xl">{m.appName()}</h1>
-    <p class="text-md max-w-md text-center">{m.welcome()}</p>
-    <p class="text-md mb-6 max-w-md text-center">{m.attention()}</p>
-    <p class="text-md mb-6 max-w-md text-center">{m.select()}</p>
+    <p class="text-md text-center">{m.welcome()}</p>
+    <p class="text-md mb-6 text-center">{m.attention()}</p>
+    <p class="text-md mb-6 text-center">{m.select()}</p>
 
     <div class="flex flex-wrap justify-center gap-4">
       <a
@@ -91,7 +91,7 @@
   </section>
 
   {#if showModal}
-    <div class="bg-black fixed inset-0 z-10 flex items-center justify-center">
+    <div class="fixed inset-0 z-10 flex items-center justify-center bg-black">
       <div class="rounded-lg">
         <h3 class="mb-4 text-xl font-bold text-white">{m.QrCode()}</h3>
         <img src={QrCode} alt="QR Code" class="mb-4 h-64 w-64" />
