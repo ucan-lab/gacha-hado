@@ -76,24 +76,27 @@
       </button>
       {#if $languageMenuOpen}
         <div class="bg-secondary absolute right-0 z-60 mt-3 w-32 rounded p-2 shadow-lg">
-          {#if $locale !== 'ja'}
-            <button
-              class="bg-secondary-hover block w-full cursor-pointer px-4 py-2 text-left"
-              on:click={() => changeLocaleWithMenuToggle('ja')}>日本語</button
-            >
-          {/if}
-          {#if $locale !== 'en'}
-            <button
-              class="bg-secondary-hover block w-full cursor-pointer px-4 py-2 text-left"
-              on:click={() => changeLocaleWithMenuToggle('en')}>English</button
-            >
-          {/if}
-          {#if $locale !== 'zh'}
-            <button
-              class="bg-secondary-hover block w-full cursor-pointer px-4 py-2 text-left"
-              on:click={() => changeLocaleWithMenuToggle('zh')}>中文</button
-            >
-          {/if}
+          <button
+            class="bg-secondary-hover flex w-full cursor-pointer items-center gap-1 px-4 py-2 text-left"
+            on:click={() => changeLocaleWithMenuToggle('ja')}
+          >
+            {#if $locale === 'ja'}<IconCheck class="text-green-500" />{/if}
+            日本語
+          </button>
+          <button
+            class="bg-secondary-hover flex w-full cursor-pointer items-center gap-1 px-4 py-2 text-left"
+            on:click={() => changeLocaleWithMenuToggle('en')}
+          >
+            {#if $locale === 'en'}<IconCheck class="text-green-500" />{/if}
+            English
+          </button>
+          <button
+            class="bg-secondary-hover flex w-full cursor-pointer items-center gap-1 px-4 py-2 text-left"
+            on:click={() => changeLocaleWithMenuToggle('zh')}
+          >
+            {#if $locale === 'zh'}<IconCheck class="text-green-500" />{/if}
+            中文
+          </button>
         </div>
       {/if}
     </div>
