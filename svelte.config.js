@@ -15,14 +15,20 @@ const config = {
     // See https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy
     csp: {
       directives: {
-        'script-src': ['self', 'https://vercel.live'],
+        'script-src': ['self', 'https://vercel.live', 'ws://localhost:5173'],
         'connect-src': [
           'https://vercel.live',
           'https://*.vercel.app',
           'wss://ws-us3.pusher.com',
-          'ws://localhost:5176'
+          'ws://localhost:5173'
         ],
-        'img-src': ['self', 'data: blob:', 'https://vercel.live', 'https://vercel.com'],
+        'img-src': [
+          'self',
+          'data: blob:',
+          'https://vercel.live',
+          'https://vercel.com',
+          'http://localhost:5173'
+        ],
         'frame-src': ['https://vercel.live'],
         'style-src': ['https://vercel.live', 'https://*.vercel.app', "'unsafe-inline'"],
         'font-src': ['self', 'https://vercel.live', 'https://assets.vercel.com'],
