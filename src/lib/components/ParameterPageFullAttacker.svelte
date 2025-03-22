@@ -8,4 +8,8 @@
   export let playerCount = 1;
 </script>
 
-<ParameterPageBase {playerCount} generateParams={generateRandomParametersFullAttacker} resetParams={resetParametersFullAttacker} />
+<ParameterPageBase
+  {playerCount}
+  generateParams={generateRandomParametersFullAttacker}
+  resetParams={resetParametersFullAttacker}
+/>

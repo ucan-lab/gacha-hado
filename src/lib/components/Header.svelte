@@ -10,10 +10,29 @@
     IconMenu2,
     IconWorld,
     IconCheck,
+    IconQrcode,
+    IconClipboardText,
+    IconClipboardCheck,
     IconSunFilled,
     IconMoonFilled
   } from '@tabler/icons-svelte';
   import * as m from '$lib/paraglide/messages';
+  import QrCode from '$lib/assets/qr-code.jpg';
+
+  let copied = false;
+  let showModal = false;
+
+  function copyLink() {
+    const link = 'https://gacha-hado.vercel.app';
+    navigator.clipboard.writeText(link).then(() => {
+      copied = true;
+      setTimeout(() => (copied = false), 2000);
+    });
+  }
+
+  function toggleModal() {
+    showModal = !showModal;
+  }
 
   initializeLocale();
 
@@ -81,6 +100,52 @@
         {/if}
       </button>
     </div>
+    <div class="qrcode-menu relative">
+      <button
+        aria-label={m.QrCode()}
+        class="flex cursor-pointer items-center gap-1 p-0 hover:underline"
+        on:click={() => toggleModal()}
+      >
+        <IconQrcode />
+      </button>
+    </div>
+    {#if showModal}
+      <div class="fixed inset-0 z-10 flex items-center justify-center bg-black">
+        <div class="rounded-lg">
+          <h3 class="mb-4 text-xl font-bold text-white">{m.QrCode()}</h3>
+          <img src={QrCode} alt={m.QrCode()} class="h-96 w-96" />
+          <input type="text" readonly value="" />
+
+          <div class="flex max-w-md items-center space-x-2 rounded-lg border p-2">
+            <input
+              type="text"
+              value="https://gacha-hado.vercel.app"
+              readonly
+              class="flex-1 border-none bg-transparent px-3 py-2 focus:outline-none"
+            />
+            <button
+              class="cursor-pointer rounded p-2"
+              aria-label={m.copyLink()}
+              on:click={() => copyLink()}
+            >
+              {#if copied}
+                <IconClipboardCheck class="h-5 w-5 text-green-600" />
+              {:else}
+                <IconClipboardText class="h-5 w-5" />
+              {/if}
+            </button>
+          </div>
+
+          <button
+            aria-label={m.close()}
+            on:click={toggleModal}
+            class="mt-4 cursor-pointer rounded bg-red-500 px-6 py-2 text-white hover:bg-red-600"
+          >
+            {m.close()}
+          </button>
+        </div>
+      </div>
+    {/if}
     <div class="language-menu relative">
       <button
         aria-label="Language"

@@ -1,32 +1,8 @@
 <script lang="ts">
   import Header from '$lib/components/Header.svelte';
   import Footer from '$lib/components/Footer.svelte';
-  import {
-    IconUser,
-    IconUsers,
-    IconUsersGroup,
-    IconQrcode,
-    IconClipboardText,
-    IconClipboardCheck,
-    IconFlame
-  } from '@tabler/icons-svelte';
-  import QrCode from '$lib/assets/qr-code.jpg';
+  import { IconUser, IconUsers, IconUsersGroup, IconFlame } from '@tabler/icons-svelte';
   import * as m from '$lib/paraglide/messages';
-
-  let copied = false;
-  let showModal = false;
-
-  function copyLink() {
-    const link = 'https://gacha-hado.vercel.app';
-    navigator.clipboard.writeText(link).then(() => {
-      copied = true;
-      setTimeout(() => (copied = false), 2000);
-    });
-  }
-
-  function toggleModal() {
-    showModal = !showModal;
-  }
 </script>
 
 <Header />
@@ -76,51 +52,6 @@
       </div>
     </div>
   </section>
-
-  <section class="py-4">
-    <div class="text-center">
-      <h2 class="mb-4 text-2xl font-bold">{m.share()}</h2>
-      <div class="flex flex-col items-center gap-4">
-        <button
-          aria-label={m.showQrCode()}
-          on:click={toggleModal}
-          class="flex cursor-pointer items-center gap-2 rounded bg-orange-500 px-6 py-3 font-semibold text-white hover:bg-orange-600"
-        >
-          <IconQrcode />
-          {m.showQrCode()}
-        </button>
-        <button
-          aria-label={m.copyLinkToClipboard()}
-          on:click={copyLink}
-          class="flex cursor-pointer items-center gap-2 rounded bg-yellow-600 px-6 py-3 font-semibold text-white hover:bg-yellow-700"
-        >
-          {#if copied}
-            <IconClipboardCheck />
-            {m.linkCopied()}
-          {:else}
-            <IconClipboardText />
-            {m.copyLinkToClipboard()}
-          {/if}
-        </button>
-      </div>
-    </div>
-  </section>
-
-  {#if showModal}
-  <div class="fixed inset-0 z-10 flex items-center justify-center bg-black">
-      <div class="rounded-lg">
-        <h3 class="mb-4 text-xl font-bold text-white">{m.QrCode()}</h3>
-        <img src={QrCode} alt="QR Code" class="mb-4 h-64 w-64" />
-        <button
-          aria-label={m.close()}
-          on:click={toggleModal}
-          class="mt-4 cursor-pointer rounded bg-red-500 px-6 py-2 text-white hover:bg-red-600"
-        >
-          {m.close()}
-        </button>
-      </div>
-    </div>
-  {/if}
 </div>
 
 <Footer />

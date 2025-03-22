@@ -5,4 +5,8 @@
   export let playerCount = 1;
 </script>
 
-<ParameterPageBase {playerCount} generateParams={generateRandomParameters} resetParams={resetParameters} />
+<ParameterPageBase
+  {playerCount}
+  generateParams={generateRandomParameters}
+  resetParams={resetParameters}
+/>
