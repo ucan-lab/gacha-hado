@@ -18,10 +18,7 @@ interface ParameterObject {
  * @param patternList ウェイト付きパターンの配列
  * @param storeName ログ等で識別したい場合
  */
-export function createParameterStore(
-  patternList: PatternItem[],
-  storeName = 'default'
-) {
+export function createParameterStore(patternList: PatternItem[], storeName = 'default') {
   // Svelte ストアの初期値
   const initial: ParameterObject = {
     bulletSpeed: 1,
