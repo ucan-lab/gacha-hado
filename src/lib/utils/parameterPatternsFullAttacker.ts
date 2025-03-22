@@ -1,0 +1,21 @@
+export const parameterPatternsFullAttacker = [
+  { parameter: '1351', weight: 1 },
+  { parameter: '1441', weight: 2 },
+  { parameter: '1531', weight: 3 },
+  { parameter: '2251', weight: 2 },
+  { parameter: '2341', weight: 3 },
+  { parameter: '2431', weight: 8 },
+  { parameter: '2521', weight: 4 },
+  { parameter: '3151', weight: 1 },
+  { parameter: '3241', weight: 2 },
+  { parameter: '3331', weight: 5 },
+  { parameter: '3421', weight: 2 },
+  { parameter: '3511', weight: 1 },
+  { parameter: '4141', weight: 5 },
+  { parameter: '4231', weight: 7 },
+  { parameter: '4321', weight: 2 },
+  { parameter: '4411', weight: 1 },
+  { parameter: '5131', weight: 12 },
+  { parameter: '5221', weight: 3 },
+  { parameter: '5311', weight: 2 }
+];
