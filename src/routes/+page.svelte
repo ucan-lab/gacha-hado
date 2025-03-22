@@ -7,7 +7,8 @@
     IconUsersGroup,
     IconQrcode,
     IconClipboardText,
-    IconClipboardCheck
+    IconClipboardCheck,
+    IconFlame
   } from '@tabler/icons-svelte';
   import QrCode from '$lib/assets/qr-code.jpg';
   import * as m from '$lib/paraglide/messages';
@@ -61,7 +62,22 @@
     </div>
   </section>
 
-  <section class="py-10">
+  <section class="py-4">
+    <div class="text-center">
+      <div class="flex flex-wrap justify-center gap-4">
+        <a
+          aria-label={m.fullAtacker()}
+          href="/full-atacker"
+          class="menu-btn bg-yellow-600 text-white hover:bg-yellow-700"
+        >
+          <IconFlame />
+          <span>{m.fullAtacker()}</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-4">
     <div class="text-center">
       <h2 class="mb-4 text-2xl font-bold">{m.share()}</h2>
       <div class="flex flex-col items-center gap-4">
@@ -91,7 +107,7 @@
   </section>
 
   {#if showModal}
-    <div class="fixed inset-0 z-10 flex items-center justify-center bg-black">
+  <div class="fixed inset-0 z-10 flex items-center justify-center bg-black">
       <div class="rounded-lg">
         <h3 class="mb-4 text-xl font-bold text-white">{m.QrCode()}</h3>
         <img src={QrCode} alt="QR Code" class="mb-4 h-64 w-64" />
