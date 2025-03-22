@@ -10,7 +10,6 @@
     IconMenu2,
     IconWorld,
     IconCheck,
-    IconBrightnessFilled,
     IconSunFilled,
     IconMoonFilled
   } from '@tabler/icons-svelte';
@@ -20,12 +19,10 @@
 
   const menuOpen = writable(false);
   const languageMenuOpen = writable(false);
-  const themeMenuOpen = writable(false);
 
   const toggleMenuState = (menu: string) => {
     menuOpen.set(menu === 'menu' ? !$menuOpen : false);
     languageMenuOpen.set(menu === 'language' ? !$languageMenuOpen : false);
-    themeMenuOpen.set(menu === 'theme' ? !$themeMenuOpen : false);
   };
 
   const changeLocaleWithMenuToggle = (locale: string) => {
@@ -33,15 +30,13 @@
     closeAllMenus();
   };
 
-  const changeThemeWithMenuToggle = (themeName: string) => {
+  const changeTheme = (themeName: string) => {
     theme.set(themeName);
-    closeAllMenus();
   };
 
   const closeAllMenus = () => {
     menuOpen.set(false);
     languageMenuOpen.set(false);
-    themeMenuOpen.set(false);
   };
 
   const closeMenuOnOutsideClick = (event: MouseEvent) => {
@@ -73,6 +68,19 @@
         <IconHome />
       </a>
     {/if}
+    <div class="theme-menu relative">
+      <button
+        aria-label="Theme"
+        class="flex cursor-pointer items-center gap-1 p-0 hover:underline"
+        on:click={() => changeTheme($theme === 'dark' ? 'light' : 'dark')}
+      >
+        {#if $theme === 'dark'}
+          <IconSunFilled />
+        {:else if $theme === 'light'}
+          <IconMoonFilled />
+        {/if}
+      </button>
+    </div>
     <div class="language-menu relative">
       <button
         aria-label="Language"
@@ -103,58 +111,6 @@
           >
             {#if $locale === 'zh'}<IconCheck class="text-green-500" />{/if}
             中文
-          </button>
-        </div>
-      {/if}
-    </div>
-    <div class="theme-menu relative">
-      <button
-        aria-label="Theme"
-        class="flex cursor-pointer items-center gap-1 p-0 hover:underline"
-        on:click={() => toggleMenuState('theme')}
-      >
-        {#if $theme === 'auto'}
-          <IconBrightnessFilled />
-        {:else if $theme === 'light'}
-          <IconSunFilled />
-        {:else if $theme === 'dark'}
-          <IconMoonFilled />
-        {/if}
-      </button>
-      {#if $themeMenuOpen}
-        <div class="bg-secondary absolute right-0 z-60 mt-2 w-48 rounded p-2 shadow-lg">
-          <button
-            class="bg-secondary-hover flex w-full cursor-pointer items-center gap-1 px-4 py-2 text-left"
-            on:click={() => changeThemeWithMenuToggle('auto')}
-          >
-            {#if $theme === 'auto'}
-              <IconCheck class="text-green-500" />
-            {:else}
-              <IconBrightnessFilled />
-            {/if}
-            {m.auto()}
-          </button>
-          <button
-            class="bg-secondary-hover flex w-full cursor-pointer items-center gap-1 px-4 py-2 text-left"
-            on:click={() => changeThemeWithMenuToggle('light')}
-          >
-            {#if $theme === 'light'}
-              <IconCheck class="text-green-500" />
-            {:else}
-              <IconSunFilled />
-            {/if}
-            {m.light()}
-          </button>
-          <button
-            class="bg-secondary-hover flex w-full cursor-pointer items-center gap-1 px-4 py-2 text-left"
-            on:click={() => changeThemeWithMenuToggle('dark')}
-          >
-            {#if $theme === 'dark'}
-              <IconCheck class="text-green-500" />
-            {:else}
-              <IconMoonFilled />
-            {/if}
-            {m.dark()}
           </button>
         </div>
       {/if}
