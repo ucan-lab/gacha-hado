@@ -1,8 +1,6 @@
 <script lang="ts">
   import Player from '$lib/components/Player.svelte';
   import Spinner from '$lib/components/Spinner.svelte';
-  import Header from '$lib/components/Header.svelte';
-  import Footer from '$lib/components/Footer.svelte';
   import { writable, get } from 'svelte/store';
   import * as m from '$lib/paraglide/messages';
 
@@ -89,7 +87,6 @@
 </script>
 
 <div class="flex min-h-screen flex-col">
-  <Header />
 
   <main class="flex-grow">
     <div class="relative flex flex-col items-center py-2">
@@ -122,5 +119,3 @@
     </div>
   </main>
 </div>
-
-<Footer />

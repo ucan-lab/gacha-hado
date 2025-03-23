@@ -7,8 +7,8 @@
 
 <Header />
 
-<div class="flex min-h-screen flex-col">
-  <section class="flex flex-col items-center justify-center py-10">
+<div class="bg-secondary flex min-h-screen flex-col">
+  <section class="bg-primary flex flex-col items-center justify-center py-6">
     <h1 class="mb-6 text-center text-4xl font-bold sm:text-5xl">{m.appName()}</h1>
     <p class="text-md text-center">{m.welcome()}</p>
     <p class="text-md mb-6 text-center">{m.attention()}</p>
@@ -38,18 +38,16 @@
     </div>
   </section>
 
-  <section class="py-4">
-    <div class="text-center">
-      <div class="flex flex-wrap justify-center gap-4">
-        <a
-          aria-label={m.fullAtacker()}
-          href="/full-atacker"
-          class="menu-btn bg-yellow-600 text-white hover:bg-yellow-700"
-        >
-          <IconFlame />
-          <span>{m.fullAtacker()}</span>
-        </a>
-      </div>
+  <section class="py-6 bg-secondary">
+    <div class="flex flex-wrap justify-center gap-4">
+      <a
+        aria-label={m.fullAtacker()}
+        href="/full-atacker"
+        class="menu-btn bg-yellow-600 text-white hover:bg-yellow-700"
+      >
+        <IconFlame />
+        <span>{m.fullAtacker()}</span>
+      </a>
     </div>
   </section>
 </div>
