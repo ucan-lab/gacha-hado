@@ -1,7 +1,7 @@
 name: Create Renovate Pull Request
 on:
   push:
-    branches: [develop]
+    branches: [main]
 jobs:
   create-renovate-pr:
     runs-on: ubuntu-latest
@@ -23,4 +23,4 @@ jobs:
           git switch -c renovate-pr
           git commit --allow-empty -m "Renovate Updates"
           git push origin renovate-pr
-          gh pr create -B develop -H renovate-pr -t "Renovate Updates" -b ''
+          gh pr create -B main -H renovate-pr -t "Renovate Updates" -b ''
