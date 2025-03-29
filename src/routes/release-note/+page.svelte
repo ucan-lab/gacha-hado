@@ -4,6 +4,13 @@
 
   export let releaseNotes = [
     {
+      version: 'v1.2.2',
+      date: '2025-03-29',
+      notes: [
+        '🛠️ 使用ライブラリのアップデート',
+      ]
+    },
+    {
       version: 'v1.2.1',
       date: '2025-03-23',
       notes: [
