@@ -14,7 +14,8 @@
     IconClipboardText,
     IconClipboardCheck,
     IconSunFilled,
-    IconMoonFilled
+    IconMoonFilled,
+    IconX
   } from '@tabler/icons-svelte';
   import * as m from '$lib/paraglide/messages';
   import QrCode from '$lib/assets/qr-code.jpg';
@@ -112,7 +113,18 @@
     {#if showModal}
       <div class="fixed inset-0 z-10 flex items-center justify-center bg-black">
         <div class="rounded-lg">
-          <h3 class="mb-4 text-xl font-bold text-white">{m.QrCode()}</h3>
+          <div class="flex items-center justify-between">
+            <h3 class="mb-4 text-xl font-bold text-white">{m.QrCode()}</h3>
+            <div class="-mt-4">
+              <button
+                aria-label={m.close()}
+                on:click={toggleModal}
+                class="cursor-pointer rounded-full bg-gray-800 p-2 text-white hover:bg-gray-700"
+              >
+                <IconX />
+              </button>
+            </div>
+          </div>
           <div class="mb-4">
             <img src={QrCode} alt={m.QrCode()} class="h-96 w-96" />
           </div>
@@ -135,14 +147,6 @@
               {/if}
             </button>
           </div>
-
-          <button
-            aria-label={m.close()}
-            on:click={toggleModal}
-            class="mt-4 cursor-pointer rounded bg-red-500 px-6 py-2 text-white hover:bg-red-600"
-          >
-            {m.close()}
-          </button>
         </div>
       </div>
     {/if}
