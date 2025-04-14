@@ -113,10 +113,10 @@
       <div class="fixed inset-0 z-10 flex items-center justify-center bg-black">
         <div class="rounded-lg">
           <h3 class="mb-4 text-xl font-bold text-white">{m.QrCode()}</h3>
-          <img src={QrCode} alt={m.QrCode()} class="h-96 w-96" />
-          <input type="text" readonly value="" />
-
-          <div class="flex max-w-md items-center space-x-2 rounded-lg border p-2">
+          <div class="mb-4">
+            <img src={QrCode} alt={m.QrCode()} class="h-96 w-96" />
+          </div>
+          <div class="flex max-w-md items-center space-x-2 rounded-lg border p-2 text-white">
             <input
               type="text"
               value="https://gacha-hado.vercel.app"
