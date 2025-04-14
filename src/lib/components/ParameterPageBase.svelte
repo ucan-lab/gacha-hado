@@ -19,7 +19,14 @@
     bulletScale: number;
     chargeSpeed: number;
     shieldStrength: number;
-  };
+  }[];
+
+  interface ParameterObject {
+    bulletSpeed: number;
+    bulletScale: number;
+    chargeSpeed: number;
+    shieldStrength: number;
+  }
 
   /**
    * リセット時に呼ぶ追加処理があれば設定 (例: resetParametersFullAttacker)
@@ -44,29 +51,24 @@
     isDrawing = true;
     isBlackout.set(true);
 
-    // 「ガチャが回っている」演出用のインターバル
     const interval = setInterval(() => {
-      players.forEach((player) => player.set(generateParams()));
+      const generated = generateParams();
+      generated.forEach((param: ParameterObject, index: number) => {
+        players[index].set(param);
+      });
     }, 100);
 
-    // 1.2秒待ってから最終決定
     await new Promise((resolve) => setTimeout(resolve, 1200));
     clearInterval(interval);
 
-    // 最終的なパラメータを確定
-    players.forEach((player) => player.set(generateParams()));
+    const finalParams = generateParams();
+    finalParams.forEach((param: ParameterObject, index: number) => {
+      players[index].set(param);
+    });
 
-    // ログ出力
-    players.forEach((player, index) => {
-      const values = get(player);
+    finalParams.forEach((values: ParameterObject, index: number) => {
       console.info(
-        [
-          `player${index + 1}: `,
-          values.bulletSpeed,
-          values.bulletScale,
-          values.chargeSpeed,
-          values.shieldStrength
-        ].join('')
+        [`player${index + 1}: `, values.bulletSpeed, values.bulletScale, values.chargeSpeed, values.shieldStrength].join('')
       );
     });
 
