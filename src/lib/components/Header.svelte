@@ -35,8 +35,6 @@
     showModal = !showModal;
   }
 
-  initializeLocale();
-
   const menuOpen = writable(false);
   const languageMenuOpen = writable(false);
 
@@ -69,6 +67,7 @@
   if (browser) {
     onMount(() => {
       document.addEventListener('click', closeMenuOnOutsideClick);
+      initializeLocale();
     });
 
     onDestroy(() => {
