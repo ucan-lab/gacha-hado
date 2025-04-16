@@ -6,10 +6,13 @@
   } from '$lib/stores/parametersFullAttacker';
 
   export let playerCount = 1;
+
+  const generateParams = () => Array.from({ length: playerCount }, () => generateRandomParametersFullAttacker());
+  const resetParams = resetParametersFullAttacker;
 </script>
 
 <ParameterPageBase
   {playerCount}
-  generateParams={generateRandomParametersFullAttacker}
-  resetParams={resetParametersFullAttacker}
+  generateParams={generateParams}
+  resetParams={resetParams}
 />

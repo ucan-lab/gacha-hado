@@ -35,8 +35,6 @@
     showModal = !showModal;
   }
 
-  initializeLocale();
-
   const menuOpen = writable(false);
   const languageMenuOpen = writable(false);
 
@@ -69,6 +67,7 @@
   if (browser) {
     onMount(() => {
       document.addEventListener('click', closeMenuOnOutsideClick);
+      initializeLocale();
     });
 
     onDestroy(() => {
@@ -194,7 +193,7 @@
       </button>
       {#if $menuOpen}
         <div
-          class="hamburger-menu-container bg-secondary absolute right-0 z-60 mt-2 w-44 rounded p-2 shadow-lg"
+          class="hamburger-menu-container bg-secondary absolute right-0 z-60 mt-3 w-60 rounded p-2 shadow-lg"
         >
           <a
             aria-label={m.solo()}
@@ -219,6 +218,23 @@
             on:click={closeMenuOnOutsideClick}
           >
             {m.trio()}
+          </a>
+          <hr class="my-2" />
+          <a
+            aria-label={m.fullAtacker()}
+            href="/full-atacker"
+            class="bg-secondary-hover block rounded px-4 py-2"
+            on:click={closeMenuOnOutsideClick}
+          >
+            {m.fullAtacker()}
+          </a>
+          <a
+            aria-label={m.gachiMatch()}
+            href="/gachi"
+            class="bg-secondary-hover block rounded px-4 py-2"
+            on:click={closeMenuOnOutsideClick}
+          >
+            {m.gachiMatch()}
           </a>
           <hr class="my-2" />
           <a

@@ -1,0 +1,17 @@
+export const teamPatterns = [
+  { player1: '5311', player2: '3241', player3: '3241' },
+  { player1: '5311', player2: '3241', player3: '1135' },
+  { player1: '5311', player2: '1135', player3: '1135' },
+  { player1: '4411', player2: '3511', player3: '1144' },
+  { player1: '4411', player2: '3241', player3: '3241' },
+  { player1: '4411', player2: '3241', player3: '1135' },
+  { player1: '4411', player2: '1135', player3: '1135' },
+  { player1: '4321', player2: '4321', player3: '3331' },
+  { player1: '4321', player2: '4321', player3: '1135' },
+  { player1: '4321', player2: '1135', player3: '5221' },
+  { player1: '3511', player2: '3241', player3: '3241' },
+  { player1: '3511', player2: '1144', player3: '5311' },
+  { player1: '3331', player2: '1135', player3: '3331' },
+  { player1: '3241', player2: '3241', player3: '5221' },
+  { player1: '3241', player2: '3241', player3: '3241' },
+];
