@@ -14,7 +14,8 @@
     IconClipboardText,
     IconClipboardCheck,
     IconSunFilled,
-    IconMoonFilled
+    IconMoonFilled,
+    IconX
   } from '@tabler/icons-svelte';
   import * as m from '$lib/paraglide/messages';
   import QrCode from '$lib/assets/qr-code.jpg';
@@ -33,8 +34,6 @@
   function toggleModal() {
     showModal = !showModal;
   }
-
-  initializeLocale();
 
   const menuOpen = writable(false);
   const languageMenuOpen = writable(false);
@@ -68,6 +67,7 @@
   if (browser) {
     onMount(() => {
       document.addEventListener('click', closeMenuOnOutsideClick);
+      initializeLocale();
     });
 
     onDestroy(() => {
@@ -112,11 +112,22 @@
     {#if showModal}
       <div class="fixed inset-0 z-10 flex items-center justify-center bg-black">
         <div class="rounded-lg">
-          <h3 class="mb-4 text-xl font-bold text-white">{m.QrCode()}</h3>
-          <img src={QrCode} alt={m.QrCode()} class="h-96 w-96" />
-          <input type="text" readonly value="" />
-
-          <div class="flex max-w-md items-center space-x-2 rounded-lg border p-2">
+          <div class="flex items-center justify-between">
+            <h3 class="mb-4 text-xl font-bold text-white">{m.QrCode()}</h3>
+            <div class="-mt-4">
+              <button
+                aria-label={m.close()}
+                on:click={toggleModal}
+                class="cursor-pointer rounded-full bg-gray-800 p-2 text-white hover:bg-gray-700"
+              >
+                <IconX />
+              </button>
+            </div>
+          </div>
+          <div class="mb-4">
+            <img src={QrCode} alt={m.QrCode()} class="h-96 w-96" />
+          </div>
+          <div class="flex max-w-md items-center space-x-2 rounded-lg border p-2 text-white">
             <input
               type="text"
               value="https://gacha-hado.vercel.app"
@@ -135,14 +146,6 @@
               {/if}
             </button>
           </div>
-
-          <button
-            aria-label={m.close()}
-            on:click={toggleModal}
-            class="mt-4 cursor-pointer rounded bg-red-500 px-6 py-2 text-white hover:bg-red-600"
-          >
-            {m.close()}
-          </button>
         </div>
       </div>
     {/if}
@@ -190,7 +193,7 @@
       </button>
       {#if $menuOpen}
         <div
-          class="hamburger-menu-container bg-secondary absolute right-0 z-60 mt-2 w-44 rounded p-2 shadow-lg"
+          class="hamburger-menu-container bg-secondary absolute right-0 z-60 mt-3 w-60 rounded p-2 shadow-lg"
         >
           <a
             aria-label={m.solo()}
@@ -215,6 +218,23 @@
             on:click={closeMenuOnOutsideClick}
           >
             {m.trio()}
+          </a>
+          <hr class="my-2" />
+          <a
+            aria-label={m.fullAtacker()}
+            href="/full-atacker"
+            class="bg-secondary-hover block rounded px-4 py-2"
+            on:click={closeMenuOnOutsideClick}
+          >
+            {m.fullAtacker()}
+          </a>
+          <a
+            aria-label={m.gachiMatch()}
+            href="/gachi"
+            class="bg-secondary-hover block rounded px-4 py-2"
+            on:click={closeMenuOnOutsideClick}
+          >
+            {m.gachiMatch()}
           </a>
           <hr class="my-2" />
           <a

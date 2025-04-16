@@ -1,7 +1,13 @@
 <script lang="ts">
   import Header from '$lib/components/Header.svelte';
   import Footer from '$lib/components/Footer.svelte';
-  import { IconUser, IconUsers, IconUsersGroup, IconFlame } from '@tabler/icons-svelte';
+  import {
+    IconUser,
+    IconUsers,
+    IconUsersGroup,
+    IconFlame,
+    IconBolt
+  } from '@tabler/icons-svelte';
   import * as m from '$lib/paraglide/messages';
 </script>
 
@@ -38,18 +44,32 @@
     </div>
   </section>
 
-  <section class="py-6 bg-secondary">
+  <section class="mt-6 mb-6 bg-secondary">
     <div class="flex flex-wrap justify-center gap-4">
       <a
         aria-label={m.fullAtacker()}
         href="/full-atacker"
-        class="menu-btn bg-yellow-600 text-white hover:bg-yellow-700"
+        class="menu-btn bg-sky-600 text-white hover:bg-sky-700"
       >
         <IconFlame />
         <span>{m.fullAtacker()}</span>
       </a>
     </div>
   </section>
+
+  <section class="mb-6 bg-secondary">
+    <div class="flex flex-wrap justify-center gap-4">
+      <a
+        aria-label={m.gachiMatch()}
+        href="/gachi"
+        class="menu-btn bg-yellow-600 text-white hover:bg-yellow-700"
+      >
+        <IconBolt />
+        <span>{m.gachiMatch()}</span>
+      </a>
+    </div>
+  </section>
+
 </div>
 
 <Footer />
