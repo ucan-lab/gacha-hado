@@ -67,12 +67,15 @@
   if (browser) {
     onMount(() => {
       document.addEventListener('click', closeMenuOnOutsideClick);
-      initializeLocale();
     });
 
     onDestroy(() => {
       document.removeEventListener('click', closeMenuOnOutsideClick);
     });
+  }
+
+  if (browser) {
+    initializeLocale();
   }
 </script>
 
