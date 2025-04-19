@@ -4,6 +4,13 @@
 
   export let releaseNotes = [
     {
+      version: 'v1.3.2',
+      date: '2025-04-20',
+      notes: [
+        '🛠️ ガチマッチの抽選テーブルを変更しました。',
+      ]
+    },
+    {
       version: 'v1.3.1',
       date: '2025-04-17',
       notes: [
