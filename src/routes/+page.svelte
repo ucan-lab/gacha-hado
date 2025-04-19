@@ -1,13 +1,7 @@
 <script lang="ts">
   import Header from '$lib/components/Header.svelte';
   import Footer from '$lib/components/Footer.svelte';
-  import {
-    IconUser,
-    IconUsers,
-    IconUsersGroup,
-    IconFlame,
-    IconBolt
-  } from '@tabler/icons-svelte';
+  import { IconUser, IconUsers, IconUsersGroup, IconFlame, IconBolt } from '@tabler/icons-svelte';
   import * as m from '$lib/paraglide/messages';
 </script>
 
@@ -44,7 +38,7 @@
     </div>
   </section>
 
-  <section class="mt-6 mb-6 bg-secondary">
+  <section class="bg-secondary mt-6 mb-6">
     <div class="flex flex-wrap justify-center gap-4">
       <a
         aria-label={m.fullAtacker()}
@@ -57,7 +51,7 @@
     </div>
   </section>
 
-  <section class="mb-6 bg-secondary">
+  <section class="bg-secondary mb-6">
     <div class="flex flex-wrap justify-center gap-4">
       <a
         aria-label={m.gachiMatch()}
@@ -69,7 +63,6 @@
       </a>
     </div>
   </section>
-
 </div>
 
 <Footer />

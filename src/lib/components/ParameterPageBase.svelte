@@ -68,7 +68,13 @@
 
     finalParams.forEach((values: ParameterObject, index: number) => {
       console.info(
-        [`player${index + 1}: `, values.bulletSpeed, values.bulletScale, values.chargeSpeed, values.shieldStrength].join('')
+        [
+          `player${index + 1}: `,
+          values.bulletSpeed,
+          values.bulletScale,
+          values.chargeSpeed,
+          values.shieldStrength
+        ].join('')
       );
     });
 
@@ -89,7 +95,6 @@
 </script>
 
 <div class="flex min-h-screen flex-col">
-
   <main class="flex-grow">
     <div class="relative flex flex-col items-center py-2">
       <Spinner isVisible={$isBlackout} />
