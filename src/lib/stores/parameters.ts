@@ -2,10 +2,7 @@ import { parameterPatterns } from '$lib/utils/parameterPatterns';
 import { createParameterStore } from './createParameterStore';
 
 // Trio 用ストアを生成
-const {
-  parameters,
-  generateRandomParameters,
-  resetParameters
-} = createParameterStore(parameterPatterns);
+const { parameters, generateRandomParameters, resetParameters } =
+  createParameterStore(parameterPatterns);
 
 export { parameters, generateRandomParameters, resetParameters };

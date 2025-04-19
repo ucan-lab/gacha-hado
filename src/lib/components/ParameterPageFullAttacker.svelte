@@ -7,12 +7,9 @@
 
   export let playerCount = 1;
 
-  const generateParams = () => Array.from({ length: playerCount }, () => generateRandomParametersFullAttacker());
+  const generateParams = () =>
+    Array.from({ length: playerCount }, () => generateRandomParametersFullAttacker());
   const resetParams = resetParametersFullAttacker;
 </script>
 
-<ParameterPageBase
-  {playerCount}
-  generateParams={generateParams}
-  resetParams={resetParams}
-/>
+<ParameterPageBase {playerCount} {generateParams} {resetParams} />

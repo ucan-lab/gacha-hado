@@ -13,17 +13,12 @@
     shieldStrength: number;
   }
 
-  const generateParams: () => ParameterObject[] = mode === 'gachi'
-    ? () => generateGachiMatchParameters()
-    : () => Array.from({ length: playerCount }, () => generateRandomParameters());
+  const generateParams: () => ParameterObject[] =
+    mode === 'gachi'
+      ? () => generateGachiMatchParameters()
+      : () => Array.from({ length: playerCount }, () => generateRandomParameters());
 
-  const resetParams = mode === 'gachi'
-    ? resetGachiMatchParameters
-    : resetParameters;
+  const resetParams = mode === 'gachi' ? resetGachiMatchParameters : resetParameters;
 </script>
 
-<ParameterPageBase
-  {playerCount}
-  {generateParams}
-  {resetParams}
-/>
+<ParameterPageBase {playerCount} {generateParams} {resetParams} />
