@@ -4,6 +4,7 @@ export const teamPatterns = [
   { player1: '5311', player2: '1135', player3: '1135' },
   { player1: '5221', player2: '5221', player3: '1135' },
   { player1: '4411', player2: '4411', player3: '3511' },
+  { player1: '4411', player2: '4411', player3: '1144' },
   { player1: '4411', player2: '3511', player3: '1144' },
   { player1: '4411', player2: '3241', player3: '3241' },
   { player1: '4411', player2: '3241', player3: '1135' },
