@@ -18,7 +18,7 @@
     "build-storybook": "storybook build"
   },
   "devDependencies": {
-    "@chromatic-com/storybook": "^3.2.3",
+    "@chromatic-com/storybook": "^5.0.0",
     "@eslint/compat": "^2.0.0",
     "@playwright/test": "^1.45.3",
     "@storybook/addon-essentials": "^8.4.7",
