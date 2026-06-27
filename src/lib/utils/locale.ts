@@ -1,7 +1,6 @@
 import {
   setLocale,
   baseLocale,
-  extractLocaleFromCookie,
   cookieName,
   cookieMaxAge,
   type Locale,
@@ -26,32 +25,45 @@ const negotiateBrowserLocale = (): Locale => {
   return baseLocale;
 };
 
+// document.cookie を直接読み、サポート済みロケールのみ返す（paraglide のキャッシュを介さず
+// 書き込み直後の読み戻し確認に使えるようにする）
+const readLocaleCookie = (): Locale | null => {
+  const match = document.cookie.match(new RegExp(`(?:^|;\\s*)${cookieName}=([^;]*)`));
+  const value = match?.[1];
+  return value && locales.includes(value as Locale) ? (value as Locale) : null;
+};
+
 const writeLocaleCookie = (value: Locale) => {
-  const base = `${cookieName}=${value}; path=/; max-age=${cookieMaxAge}`;
-  document.cookie = base;
+  document.cookie = `${cookieName}=${value}; path=/; max-age=${cookieMaxAge}`;
 };
 
 export const initializeLocale = () => {
   if (typeof window === 'undefined') return;
 
-  const cookieLocale = extractLocaleFromCookie();
-  const storedLocale = localStorage.getItem(LOCALE_KEY);
-  const hasStored = storedLocale && locales.includes(storedLocale as Locale);
+  const cookieLocale = readLocaleCookie();
+  const storedRaw = localStorage.getItem(LOCALE_KEY);
+  const storedLocale =
+    storedRaw && locales.includes(storedRaw as Locale) ? (storedRaw as Locale) : null;
 
   // 旧 localStorage['locale'] を持つユーザーで cookie とずれている場合のみ、
   // 一度だけ cookie を localStorage 値へ揃えてフルリロードし、SSR と一致させる（cookie 移行）。
-  // 揃った後 (cookie === stored) は二度と入らないためループしない。
-  if (hasStored && cookieLocale !== storedLocale) {
-    writeLocaleCookie(storedLocale as Locale);
-    locale.set(storedLocale as Locale);
-    window.location.reload();
+  if (storedLocale && cookieLocale !== storedLocale) {
+    writeLocaleCookie(storedLocale);
+    // cookie が実際に反映された場合のみ reload する。cookie 無効環境では反映されず、
+    // reload しても同じ分岐に戻るため、無限リロードを避けて reload しない（client 側のみ適用）。
+    if (readLocaleCookie() === storedLocale) {
+      locale.set(storedLocale);
+      window.location.reload();
+      return;
+    }
+    locale.set(storedLocale);
+    setLocale(storedLocale, { reload: false });
     return;
   }
 
   // 通常解決: cookie があればそれ（SSR と一致）、無ければブラウザ言語ネゴシエーション。
   // いずれも SSR と同じ解決のためハイドレーション不一致は出ない。
-  const resolvedLocale =
-    cookieLocale && locales.includes(cookieLocale) ? cookieLocale : negotiateBrowserLocale();
+  const resolvedLocale = cookieLocale ?? negotiateBrowserLocale();
 
   locale.set(resolvedLocale);
   setLocale(resolvedLocale, { reload: false });
