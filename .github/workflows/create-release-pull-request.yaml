@@ -12,7 +12,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: ruby/setup-ruby@v1
         with:
-          ruby-version: 3.1
+          ruby-version: 3.4.9
       - run: gem install --no-document git-pr-release
       - run: git-pr-release
         env:
