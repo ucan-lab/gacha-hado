@@ -28,3 +28,6 @@ src/lib/paraglide
 
 # Storybook
 storybook-static
+
+# Worktrees
+.worktrees
