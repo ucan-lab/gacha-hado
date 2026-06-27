@@ -1,7 +1,7 @@
 <script lang="ts">
   import Player from '$lib/components/Player.svelte';
   import Spinner from '$lib/components/Spinner.svelte';
-  import { writable, get } from 'svelte/store';
+  import { writable } from 'svelte/store';
   import * as m from '$lib/paraglide/messages';
 
   // ---- Props ----
@@ -100,7 +100,7 @@
       <Spinner isVisible={$isBlackout} />
 
       <div class="flex flex-col">
-        {#each players as parameters, index}
+        {#each players as parameters}
           <Player {parameters} />
         {/each}
       </div>

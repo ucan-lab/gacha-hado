@@ -22,17 +22,17 @@ ARスポーツ「[HADO](https://hado-official.com/)」をより楽しむため�
 
 ## 技術スタック
 
-| 領域 | 採用技術 |
-| --- | --- |
-| フレームワーク | [SvelteKit 2](https://svelte.dev/docs/kit) / [Svelte 5](https://svelte.dev/) |
-| 言語 | TypeScript |
-| スタイリング | [Tailwind CSS 4](https://tailwindcss.com/) |
-| 国際化 (i18n) | [Paraglide (inlang)](https://inlang.com/m/gerre34r/library-inlang-paraglideJs) |
-| アイコン | [@tabler/icons-svelte](https://tabler.io/icons) |
-| デプロイ | [Vercel](https://vercel.com/)（`@sveltejs/adapter-vercel`） |
-| UIカタログ | [Storybook](https://storybook.js.org/) |
-| テスト | [Vitest](https://vitest.dev/)（ユニット） / [Playwright](https://playwright.dev/)（E2E） |
-| パッケージ管理 | [Bun](https://bun.sh/) |
+| 領域           | 採用技術                                                                                 |
+| -------------- | ---------------------------------------------------------------------------------------- |
+| フレームワーク | [SvelteKit 2](https://svelte.dev/docs/kit) / [Svelte 5](https://svelte.dev/)             |
+| 言語           | TypeScript                                                                               |
+| スタイリング   | [Tailwind CSS 4](https://tailwindcss.com/)                                               |
+| 国際化 (i18n)  | [Paraglide (inlang)](https://inlang.com/m/gerre34r/library-inlang-paraglideJs)           |
+| アイコン       | [@tabler/icons-svelte](https://tabler.io/icons)                                          |
+| デプロイ       | [Vercel](https://vercel.com/)（`@sveltejs/adapter-vercel`）                              |
+| UIカタログ     | [Storybook](https://storybook.js.org/)                                                   |
+| テスト         | [Vitest](https://vitest.dev/)（ユニット） / [Playwright](https://playwright.dev/)（E2E） |
+| パッケージ管理 | [Bun](https://bun.sh/)                                                                   |
 
 ## セットアップ
 
@@ -53,17 +53,17 @@ bun run dev -- --open
 
 ## 開発コマンド
 
-| コマンド | 説明 |
-| --- | --- |
-| `bun run dev` | 開発サーバーを起動 |
-| `bun run build` | 本番ビルドを生成 |
-| `bun run preview` | 本番ビルドをローカルでプレビュー |
-| `bun run check` | `svelte-check` による型チェック |
-| `bun run format` | Prettier でフォーマット |
-| `bun run lint` | Prettier チェック + ESLint |
-| `bun run test` | ユニット + E2E テストを実行 |
-| `bun run test:unit` | Vitest（ユニットテスト） |
-| `bun run test:e2e` | Playwright（E2Eテスト） |
+| コマンド            | 説明                                      |
+| ------------------- | ----------------------------------------- |
+| `bun run dev`       | 開発サーバーを起動                        |
+| `bun run build`     | 本番ビルドを生成                          |
+| `bun run preview`   | 本番ビルドをローカルでプレビュー          |
+| `bun run check`     | `svelte-check` による型チェック           |
+| `bun run format`    | Prettier でフォーマット                   |
+| `bun run lint`      | Prettier チェック + ESLint                |
+| `bun run test`      | ユニット + E2E テストを実行               |
+| `bun run test:unit` | Vitest（ユニットテスト）                  |
+| `bun run test:e2e`  | Playwright（E2Eテスト）                   |
 | `bun run storybook` | Storybook を起動（http://localhost:6006） |
 
 ## ディレクトリ構成
