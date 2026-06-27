@@ -66,18 +66,6 @@
       players[index].set(param);
     });
 
-    finalParams.forEach((values: ParameterObject, index: number) => {
-      console.info(
-        [
-          `player${index + 1}: `,
-          values.bulletSpeed,
-          values.bulletScale,
-          values.chargeSpeed,
-          values.shieldStrength
-        ].join('')
-      );
-    });
-
     isBlackout.set(false);
     isDrawing = false;
   }
