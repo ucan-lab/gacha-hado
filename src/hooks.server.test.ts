@@ -24,6 +24,24 @@ const makeEvent = (theme?: string) => ({
 const run = (event: ReturnType<typeof makeEvent>, resolve: any) =>
   handle({ event, resolve } as never) as Promise<Response>;
 
+// app.html 相当の data-theme プレースホルダを持つ HTML を返す resolve
+const htmlResolve = vi.fn(
+  async (_event: unknown, opts: ResolveOpts) =>
+    new Response(
+      opts.transformPageChunk({
+        html: '<html data-theme="%THEME%" lang="%paraglide.lang%" dir="%paraglide.textDirection%">',
+        done: true
+      }),
+      { headers: { 'content-type': 'text/html' } }
+    )
+);
+
+const themeOf = async (cookie?: string): Promise<string | undefined> => {
+  const res = await run(makeEvent(cookie), htmlResolve);
+  const html = await res.text();
+  return html.match(/data-theme="([^"]*)"/)?.[1];
+};
+
 describe('handle hook (#139 レスポンス非破壊)', () => {
   it('204 (no-body) レスポンスを同一インスタンスのまま返し throw しない', async () => {
     // 旧実装は new Response(body, { status: 204 }) を組み立てて throw していた
@@ -84,5 +102,32 @@ describe('handle hook (#139 レスポンス非破壊)', () => {
     const res = await run(makeEvent('auto'), resolve);
 
     expect(await res.text()).toContain('data-theme="light"');
+  });
+});
+
+describe('handle hook (#140 theme 許可リスト検証)', () => {
+  it('theme=dark は dark を注入する', async () => {
+    expect(await themeOf('dark')).toBe('dark');
+  });
+
+  it('theme=light は light を注入する', async () => {
+    expect(await themeOf('light')).toBe('light');
+  });
+
+  it('theme=auto は light に正規化される', async () => {
+    expect(await themeOf('auto')).toBe('light');
+  });
+
+  it('cookie 未設定は light にフォールバックする', async () => {
+    expect(await themeOf(undefined)).toBe('light');
+  });
+
+  it('クォートを含む細工値は light に落ち、data-theme 属性をブレイクアウトしない', async () => {
+    const malicious = '" onerror="alert(1)';
+    const res = await run(makeEvent(malicious), htmlResolve);
+    const html = await res.text();
+
+    expect(html).toContain('data-theme="light"');
+    expect(html).not.toContain('onerror');
   });
 });
