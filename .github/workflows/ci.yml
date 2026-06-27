@@ -21,3 +21,11 @@ jobs:
       - run: bun run check
       - run: bun run test:unit -- --run
       - run: bun run build-storybook
+  e2e:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: oven-sh/setup-bun@v2
+      - run: bun install --frozen-lockfile
+      - run: bunx playwright install --with-deps
+      - run: bun run test:e2e
