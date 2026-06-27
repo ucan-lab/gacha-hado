@@ -12,7 +12,8 @@ vi.mock('$lib/paraglide/runtime', () => ({
 
 import { handle } from './hooks.server';
 
-type ResolveOpts = { transformPageChunk: (input: { html: string }) => string };
+// SvelteKit の transformPageChunk は { html, done } を受け取る契約
+type ResolveOpts = { transformPageChunk: (input: { html: string; done: boolean }) => string };
 
 const makeEvent = (theme?: string) => ({
   request: new Request('http://localhost/'),
@@ -24,32 +25,44 @@ const run = (event: ReturnType<typeof makeEvent>, resolve: any) =>
   handle({ event, resolve } as never) as Promise<Response>;
 
 describe('handle hook (#139 レスポンス非破壊)', () => {
-  it('204 (no-body) レスポンスを再構築せずそのまま返し throw しない', async () => {
+  it('204 (no-body) レスポンスを同一インスタンスのまま返し throw しない', async () => {
     // 旧実装は new Response(body, { status: 204 }) を組み立てて throw していた
-    const resolve = vi.fn(async () => new Response(null, { status: 204 }));
+    const original = new Response(null, { status: 204 });
+    const resolve = vi.fn(async () => original);
 
     const res = await run(makeEvent(), resolve);
 
+    expect(res).toBe(original);
     expect(res.status).toBe(204);
     expect(res.body).toBeNull();
   });
 
-  it('非HTMLレスポンス(JSON)のボディと Content-Type を変更しない', async () => {
-    const json = JSON.stringify({ ok: true });
-    const resolve = vi.fn(
-      async () => new Response(json, { headers: { 'content-type': 'application/json' } })
-    );
+  it('非HTML(ストリーム)レスポンスを再構築せず同一インスタンス・ボディ未消費のまま返す', async () => {
+    // 旧実装は response.text() でボディを消費し new Response を組み直すため、
+    // 同一インスタンス/未消費/Content-Length 非合成 のいずれも満たさなかった
+    const stream = new ReadableStream<Uint8Array>({
+      start(controller) {
+        controller.enqueue(new TextEncoder().encode('{"ok":true}'));
+        controller.close();
+      }
+    });
+    const original = new Response(stream, { headers: { 'content-type': 'application/json' } });
+    const resolve = vi.fn(async () => original);
 
     const res = await run(makeEvent('dark'), resolve);
 
-    expect(await res.text()).toBe(json);
+    expect(res).toBe(original); // 再構築していない（同一インスタンス）
+    expect(original.bodyUsed).toBe(false); // hook がボディを消費していない（ストリーム保持）
+    expect(res.headers.get('content-length')).toBeNull(); // Content-Length を合成していない
     expect(res.headers.get('content-type')).toBe('application/json');
+    expect(await res.text()).toBe('{"ok":true}');
   });
 
   it('HTML の %THEME% / %paraglide.lang% / %paraglide.textDirection% を transformPageChunk で置換する', async () => {
     const resolve = vi.fn(async (_event: unknown, opts: ResolveOpts) => {
       const html = opts.transformPageChunk({
-        html: '<html data-theme="%THEME%" lang="%paraglide.lang%" dir="%paraglide.textDirection%">'
+        html: '<html data-theme="%THEME%" lang="%paraglide.lang%" dir="%paraglide.textDirection%">',
+        done: true
       });
       return new Response(html, { headers: { 'content-type': 'text/html' } });
     });
@@ -65,7 +78,7 @@ describe('handle hook (#139 レスポンス非破壊)', () => {
   it('theme=auto は light に正規化される', async () => {
     const resolve = vi.fn(
       async (_event: unknown, opts: ResolveOpts) =>
-        new Response(opts.transformPageChunk({ html: 'data-theme="%THEME%"' }))
+        new Response(opts.transformPageChunk({ html: 'data-theme="%THEME%"', done: true }))
     );
 
     const res = await run(makeEvent('auto'), resolve);
