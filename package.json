@@ -26,7 +26,7 @@
     "@storybook/sveltekit": "^10.0.0",
     "@sveltejs/adapter-vercel": "^6.0.0",
     "@sveltejs/kit": "^2.68.0",
-    "@sveltejs/vite-plugin-svelte": "^6.0.0",
+    "@sveltejs/vite-plugin-svelte": "^7.0.0",
     "autoprefixer": "^10.4.20",
     "eslint": "^10.0.0",
     "eslint-config-prettier": "^10.0.0",
@@ -36,12 +36,12 @@
     "prettier-plugin-svelte": "^4.1.1",
     "prettier-plugin-tailwindcss": "^0.8.0",
     "storybook": "^10.0.0",
-    "svelte": "^5.0.0",
+    "svelte": "^5.46.4",
     "svelte-check": "^4.0.0",
     "tailwindcss": "^4.0.0",
     "typescript": "^6.0.0",
     "typescript-eslint": "^8.62.0",
-    "vite": "^6.4.3",
+    "vite": "^8.0.0",
     "vitest": "^4.0.0"
   },
   "dependencies": {
@@ -49,8 +49,8 @@
     "@tabler/icons-svelte": "^3.29.0",
     "@tailwindcss/container-queries": "^0.1.1",
     "@tailwindcss/forms": "^0.5.9",
-    "@tailwindcss/postcss": "^4.0.0",
     "@tailwindcss/typography": "^0.5.15",
+    "@tailwindcss/vite": "^4.0.0",
     "postcss": "^8.5.1"
   }
 }
