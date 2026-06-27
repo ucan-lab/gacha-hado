@@ -12,25 +12,15 @@ export const handle: Handle = async ({ event, resolve }) => {
       theme = 'light';
     }
 
-    const response = await resolve(event, {
+    // %THEME% も transformPageChunk 内で置換し、HTML ページのみを対象にする。
+    // resolve() の戻り値をそのまま返すことで、ストリーミングを保ち、
+    // 非HTML/静的/204/304 などのレスポンスを再構築しない（Content-Length 手動計算も不要）。
+    return resolve(event, {
       transformPageChunk: ({ html }) =>
         html
           .replace('%paraglide.lang%', getLocale())
           .replace('%paraglide.textDirection%', getTextDirection())
-    });
-
-    const responseText = await response.text();
-    const modifiedResponseText = responseText.replace('%THEME%', theme);
-
-    // Content-Length を再計算しないと ERR_CONTENT_LENGTH_MISMATCH エラーが発生するため
-    const contentLength = new TextEncoder().encode(modifiedResponseText).length;
-    const headers = new Headers(response.headers);
-    headers.delete('Content-Length');
-    headers.set('Content-Length', contentLength.toString());
-
-    return new Response(modifiedResponseText, {
-      status: response.status,
-      headers
+          .replace('%THEME%', theme)
     });
   });
 };
