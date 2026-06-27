@@ -1,6 +1,9 @@
 <script lang="ts">
   import Parameter from './Parameter.svelte';
-  export let parameters;
+  import type { Writable } from 'svelte/store';
+  import type { ParameterObject } from '$lib/types';
+
+  export let parameters: Writable<ParameterObject>;
 
   const colors = {
     bulletSpeed: '#ED9E38',

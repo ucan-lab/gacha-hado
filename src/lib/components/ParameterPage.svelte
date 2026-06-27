@@ -2,16 +2,10 @@
   import ParameterPageBase from '$lib/components/ParameterPageBase.svelte';
   import { generateRandomParameters, resetParameters } from '$lib/stores/parameters';
   import { generateGachiMatchParameters, resetGachiMatchParameters } from '$lib/stores/gachiMatch';
+  import type { ParameterObject } from '$lib/types';
 
   export let playerCount = 1;
   export let mode: 'normal' | 'gachi' = 'normal';
-
-  interface ParameterObject {
-    bulletSpeed: number;
-    bulletScale: number;
-    chargeSpeed: number;
-    shieldStrength: number;
-  }
 
   const generateParams: () => ParameterObject[] =
     mode === 'gachi'

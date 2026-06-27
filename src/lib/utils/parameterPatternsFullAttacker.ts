@@ -1,4 +1,6 @@
-export const parameterPatternsFullAttacker = [
+import type { PatternItem } from '$lib/types';
+
+export const parameterPatternsFullAttacker: PatternItem[] = [
   { parameter: '1351', weight: 1 },
   { parameter: '1441', weight: 2 },
   { parameter: '1531', weight: 3 },
