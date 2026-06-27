@@ -15,7 +15,7 @@ export default defineConfig({
     paraglide({
       project: './project.inlang',
       outdir: './src/lib/paraglide',
-      strategy: ['localStorage', 'preferredLanguage', 'baseLocale']
+      strategy: ['cookie', 'localStorage', 'preferredLanguage', 'baseLocale']
     })
   ],
   define: {

@@ -1,33 +1,43 @@
-import { setLocale, type Locale, locales } from '$lib/paraglide/runtime';
+import { setLocale, baseLocale, type Locale, locales } from '$lib/paraglide/runtime';
 import { writable } from 'svelte/store';
 
 const LOCALE_KEY = 'locale';
 export const locale = writable<Locale | null>(null);
 
-export const initializeLocale = () => {
-  if (typeof window !== 'undefined') {
-    const storedLocale = localStorage.getItem(LOCALE_KEY);
+// navigator.languages を優先順に評価し、サポート済みロケールが無ければ baseLocale(ja) を返す
+const negotiateBrowserLocale = (): Locale => {
+  const candidates = navigator.languages?.length ? navigator.languages : [navigator.language];
 
-    if (storedLocale && locales.includes(storedLocale as Locale)) {
-      locale.set(storedLocale as Locale);
-      setLocale(storedLocale as Locale, { reload: false });
-    } else {
-      const browserLocale = navigator.language.split('-')[0]; // "en-US" -> "en"
-      const fallbackLocale = 'en';
-      const resolvedLocale = locales.includes(browserLocale as Locale)
-        ? (browserLocale as Locale)
-        : fallbackLocale;
-
-      locale.set(resolvedLocale as Locale);
-      setLocale(resolvedLocale as Locale, { reload: false });
+  for (const lang of candidates) {
+    const base = lang.split('-')[0]; // "en-US" -> "en"
+    if (locales.includes(base as Locale)) {
+      return base as Locale;
     }
   }
+
+  return baseLocale;
+};
+
+export const initializeLocale = () => {
+  if (typeof window === 'undefined') return;
+
+  const storedLocale = localStorage.getItem(LOCALE_KEY);
+  const resolvedLocale =
+    storedLocale && locales.includes(storedLocale as Locale)
+      ? (storedLocale as Locale)
+      : negotiateBrowserLocale();
+
+  locale.set(resolvedLocale);
+  // cookie strategy 有効時、setLocale が PARAGLIDE_LOCALE cookie も書き込むため、
+  // 既存 localStorage['locale'] 利用者の cookie 移行も初回クライアントで一度ここで行われる
+  setLocale(resolvedLocale, { reload: false });
 };
 
 export const changeLocale = (newLocale: string) => {
   if (locales.includes(newLocale as Locale)) {
     locale.set(newLocale as Locale);
     localStorage.setItem(LOCALE_KEY, newLocale);
+    // setLocale が cookie(PARAGLIDE_LOCALE) と paraglide 側 localStorage の両方へ書き込む
     setLocale(newLocale as Locale);
   }
 };
