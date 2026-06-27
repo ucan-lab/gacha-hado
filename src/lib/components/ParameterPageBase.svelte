@@ -100,7 +100,7 @@
       <Spinner isVisible={$isBlackout} />
 
       <div class="flex flex-col">
-        {#each players as parameters}
+        {#each players as parameters, i (i)}
           <Player {parameters} />
         {/each}
       </div>

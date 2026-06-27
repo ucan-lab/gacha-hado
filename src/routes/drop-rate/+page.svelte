@@ -69,7 +69,7 @@
         </tr>
       </thead>
       <tbody>
-        {#each dropRateTable as row}
+        {#each dropRateTable as row (row.parameter)}
           <tr>
             <td class="px-4 py-2">{row.parameter}</td>
             <td class="px-4 py-2">{row.weight}</td>
