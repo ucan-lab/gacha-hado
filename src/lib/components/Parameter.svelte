@@ -1,7 +1,7 @@
 <script lang="ts">
-  export let name;
-  export let value;
-  export let color;
+  export let name: string;
+  export let value: number;
+  export let color: string;
 </script>
 
 <div

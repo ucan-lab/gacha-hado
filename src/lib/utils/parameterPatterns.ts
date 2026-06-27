@@ -1,4 +1,6 @@
-export const parameterPatterns = [
+import type { PatternItem } from '$lib/types';
+
+export const parameterPatterns: PatternItem[] = [
   { parameter: '1135', weight: 1 },
   { parameter: '1144', weight: 2 },
   { parameter: '1153', weight: 1 },

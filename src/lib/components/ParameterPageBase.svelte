@@ -2,7 +2,9 @@
   import Player from '$lib/components/Player.svelte';
   import Spinner from '$lib/components/Spinner.svelte';
   import { writable } from 'svelte/store';
+  import type { Writable } from 'svelte/store';
   import * as m from '$lib/paraglide/messages';
+  import type { ParameterObject } from '$lib/types';
 
   // ---- Props ----
   /**
@@ -14,19 +16,7 @@
    * パラメータ生成関数を外部から受け取る (trio or fullAttacker)
    * 例: generateRandomParameters もしくは generateRandomParametersFullAttacker
    */
-  export let generateParams: () => {
-    bulletSpeed: number;
-    bulletScale: number;
-    chargeSpeed: number;
-    shieldStrength: number;
-  }[];
-
-  interface ParameterObject {
-    bulletSpeed: number;
-    bulletScale: number;
-    chargeSpeed: number;
-    shieldStrength: number;
-  }
+  export let generateParams: () => ParameterObject[];
 
   /**
    * リセット時に呼ぶ追加処理があれば設定 (例: resetParametersFullAttacker)
@@ -38,7 +28,7 @@
   let isBlackout = writable(false);
 
   // 各プレイヤーのパラメータ管理
-  const players = Array.from({ length: playerCount }, () =>
+  const players: Writable<ParameterObject>[] = Array.from({ length: playerCount }, () =>
     writable({
       bulletSpeed: 1,
       bulletScale: 1,

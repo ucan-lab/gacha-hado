@@ -1,11 +1,5 @@
 import { teamPatterns } from '$lib/utils/teamPatterns';
-
-interface ParameterObject {
-  bulletSpeed: number;
-  bulletScale: number;
-  chargeSpeed: number;
-  shieldStrength: number;
-}
+import type { ParameterObject } from '$lib/types';
 
 function parseParameterString(param: string): ParameterObject {
   return {

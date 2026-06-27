@@ -1,17 +1,5 @@
 import { writable } from 'svelte/store';
-
-// パターン項目の型定義例（必要に応じて修正）
-type PatternItem = {
-  parameter: string; // "1234" のような4桁のパラメータ文字列
-  weight: number;
-};
-
-interface ParameterObject {
-  bulletSpeed: number;
-  bulletScale: number;
-  chargeSpeed: number;
-  shieldStrength: number;
-}
+import type { ParameterObject, PatternItem } from '$lib/types';
 
 /**
  * パラメータストア + パラメータ生成関数 + リセット関数を作るファクトリ
