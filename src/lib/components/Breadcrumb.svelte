@@ -6,7 +6,7 @@
 
 <nav class="mb-4" aria-label="パンくずリスト">
   <ol class="flex items-center space-x-2">
-    {#each items as item, i}
+    {#each items as item, i (item.href)}
       <li class="flex items-center">
         {#if i > 0}
           <IconChevronRight class="mx-2 h-4 w-4 text-gray-500" />
