@@ -1,7 +1,6 @@
 <script lang="ts">
   import Header from '$lib/components/Header.svelte';
   import Footer from '$lib/components/Footer.svelte';
-  import * as m from '$lib/paraglide/messages';
   import UnderConstruction from '$lib/components/UnderConstruction.svelte';
   import Breadcrumb from '$lib/components/Breadcrumb.svelte';
 </script>
