@@ -1,4 +1,4 @@
-import { paraglide } from '@inlang/paraglide-sveltekit/vite';
+import { paraglideVitePlugin as paraglide } from '@inlang/paraglide-js';
 import { defineConfig } from 'vite';
 import { sveltekit } from '@sveltejs/kit/vite';
 import tailwindcss from '@tailwindcss/vite';
@@ -14,7 +14,8 @@ export default defineConfig({
     sveltekit(),
     paraglide({
       project: './project.inlang',
-      outdir: './src/lib/paraglide'
+      outdir: './src/lib/paraglide',
+      strategy: ['localStorage', 'preferredLanguage', 'baseLocale']
     })
   ],
   define: {
