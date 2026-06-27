@@ -1,38 +1,33 @@
-import {
-  setLanguageTag,
-  type AvailableLanguageTag,
-  availableLanguageTags
-} from '$lib/paraglide/runtime';
+import { setLocale, type Locale, locales } from '$lib/paraglide/runtime';
 import { writable } from 'svelte/store';
 
 const LOCALE_KEY = 'locale';
-export const locale = writable<AvailableLanguageTag | null>(null);
+export const locale = writable<Locale | null>(null);
 
 export const initializeLocale = () => {
   if (typeof window !== 'undefined') {
     const storedLocale = localStorage.getItem(LOCALE_KEY);
 
-    if (storedLocale && availableLanguageTags.includes(storedLocale as AvailableLanguageTag)) {
-      locale.set(storedLocale as AvailableLanguageTag);
-      setLanguageTag(storedLocale as AvailableLanguageTag);
+    if (storedLocale && locales.includes(storedLocale as Locale)) {
+      locale.set(storedLocale as Locale);
+      setLocale(storedLocale as Locale, { reload: false });
     } else {
       const browserLocale = navigator.language.split('-')[0]; // "en-US" -> "en"
       const fallbackLocale = 'en';
-      const resolvedLocale = availableLanguageTags.includes(browserLocale as AvailableLanguageTag)
-        ? (browserLocale as AvailableLanguageTag)
+      const resolvedLocale = locales.includes(browserLocale as Locale)
+        ? (browserLocale as Locale)
         : fallbackLocale;
 
-      locale.set(resolvedLocale);
-      setLanguageTag(resolvedLocale);
+      locale.set(resolvedLocale as Locale);
+      setLocale(resolvedLocale as Locale, { reload: false });
     }
   }
 };
 
 export const changeLocale = (newLocale: string) => {
-  if (availableLanguageTags.includes(newLocale as AvailableLanguageTag)) {
-    locale.set(newLocale as AvailableLanguageTag);
-    setLanguageTag(newLocale as AvailableLanguageTag);
+  if (locales.includes(newLocale as Locale)) {
+    locale.set(newLocale as Locale);
     localStorage.setItem(LOCALE_KEY, newLocale);
-    window.location.reload();
+    setLocale(newLocale as Locale);
   }
 };
