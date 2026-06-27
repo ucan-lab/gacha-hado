@@ -1,4 +1,12 @@
-import { setLocale, baseLocale, type Locale, locales } from '$lib/paraglide/runtime';
+import {
+  setLocale,
+  baseLocale,
+  extractLocaleFromCookie,
+  cookieName,
+  cookieMaxAge,
+  type Locale,
+  locales
+} from '$lib/paraglide/runtime';
 import { writable } from 'svelte/store';
 
 const LOCALE_KEY = 'locale';
@@ -18,18 +26,34 @@ const negotiateBrowserLocale = (): Locale => {
   return baseLocale;
 };
 
+const writeLocaleCookie = (value: Locale) => {
+  const base = `${cookieName}=${value}; path=/; max-age=${cookieMaxAge}`;
+  document.cookie = base;
+};
+
 export const initializeLocale = () => {
   if (typeof window === 'undefined') return;
 
+  const cookieLocale = extractLocaleFromCookie();
   const storedLocale = localStorage.getItem(LOCALE_KEY);
+  const hasStored = storedLocale && locales.includes(storedLocale as Locale);
+
+  // 旧 localStorage['locale'] を持つユーザーで cookie とずれている場合のみ、
+  // 一度だけ cookie を localStorage 値へ揃えてフルリロードし、SSR と一致させる（cookie 移行）。
+  // 揃った後 (cookie === stored) は二度と入らないためループしない。
+  if (hasStored && cookieLocale !== storedLocale) {
+    writeLocaleCookie(storedLocale as Locale);
+    locale.set(storedLocale as Locale);
+    window.location.reload();
+    return;
+  }
+
+  // 通常解決: cookie があればそれ（SSR と一致）、無ければブラウザ言語ネゴシエーション。
+  // いずれも SSR と同じ解決のためハイドレーション不一致は出ない。
   const resolvedLocale =
-    storedLocale && locales.includes(storedLocale as Locale)
-      ? (storedLocale as Locale)
-      : negotiateBrowserLocale();
+    cookieLocale && locales.includes(cookieLocale) ? cookieLocale : negotiateBrowserLocale();
 
   locale.set(resolvedLocale);
-  // cookie strategy 有効時、setLocale が PARAGLIDE_LOCALE cookie も書き込むため、
-  // 既存 localStorage['locale'] 利用者の cookie 移行も初回クライアントで一度ここで行われる
   setLocale(resolvedLocale, { reload: false });
 };
 

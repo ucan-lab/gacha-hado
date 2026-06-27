@@ -60,9 +60,34 @@ test('切替→フルリロード: UI でロケールを切替えると cookie �
   await page.getByRole('button', { name: 'Language' }).click();
   await page.getByRole('button', { name: 'English' }).click();
 
+  // フルリロードの完了を明示的に待ってから検証する（リロード前の旧 document を見ないため）
+  await page.waitForLoadState('load');
+
   // フルリロード後、SSR が cookie を読んで en でレンダリングされる
   await expect(page.locator('html')).toHaveAttribute('lang', 'en');
 
+  const cookies = await ctx.cookies();
+  expect(cookies.find((c) => c.name === 'PARAGLIDE_LOCALE')?.value).toBe('en');
+
+  await ctx.close();
+});
+
+test('移行: localStorage[locale] のみ保持する旧ユーザーは cookie 移行後に SSR と一致する', async ({
+  browser
+}) => {
+  // ブラウザ言語 ja-JP・cookie 無しで、旧システムで en を選択済み(localStorage['locale']='en')を再現
+  const ctx = await browser.newContext({ locale: 'ja-JP' });
+  const page = await ctx.newPage();
+  await page.addInitScript(() => localStorage.setItem('locale', 'en'));
+
+  // 初回ロード: SSR は cookie 不在で ja。initializeLocale が cookie 移行のため
+  // setLocale(既定 reload) で PARAGLIDE_LOCALE を書きフルリロードする。
+  await page.goto('/');
+  await page.waitForLoadState('load');
+
+  // 移行後は SSR が cookie=en を読み <html lang="en"> に収束する
+  // (旧実装は reload:false のため lang が ja のまま残り、この検証は失敗する)
+  await expect(page.locator('html')).toHaveAttribute('lang', 'en');
   const cookies = await ctx.cookies();
   expect(cookies.find((c) => c.name === 'PARAGLIDE_LOCALE')?.value).toBe('en');
 
