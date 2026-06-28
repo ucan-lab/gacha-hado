@@ -113,5 +113,21 @@ describe('sortDropRateRows', () => {
       const result = sortDropRateRows(tiedRows, 'weight', 'asc');
       expect(result.map((r) => r.weight)).toEqual([1, 1, 2, 2, 2]);
     });
+
+    const tiedParameterRows = [
+      { parameter: 'same', weight: 3, dropRate: 75 },
+      { parameter: 'same', weight: 1, dropRate: 25 },
+      { parameter: 'same', weight: 2, dropRate: 50 }
+    ];
+
+    it('preserves input order for tied parameter rows (asc)', () => {
+      const result = sortDropRateRows(tiedParameterRows, 'parameter', 'asc');
+      expect(result.map((r) => r.weight)).toEqual([3, 1, 2]);
+    });
+
+    it('preserves input order for tied parameter rows (desc)', () => {
+      const result = sortDropRateRows(tiedParameterRows, 'parameter', 'desc');
+      expect(result.map((r) => r.weight)).toEqual([3, 1, 2]);
+    });
   });
 });
