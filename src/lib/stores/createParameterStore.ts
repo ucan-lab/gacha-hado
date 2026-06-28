@@ -1,5 +1,6 @@
 import { writable } from 'svelte/store';
 import type { ParameterObject, PatternItem } from '$lib/types';
+import { parseParameterString } from '$lib/utils/parseParameterString';
 
 /**
  * パラメータストア + パラメータ生成関数 + リセット関数を作るファクトリ
@@ -42,12 +43,7 @@ export function createParameterStore(patternList: PatternItem[], storeName = 'de
   function generateRandomParameters() {
     const randomParameter = getWeightedRandomSelectionParameter();
 
-    const parameterObj: ParameterObject = {
-      bulletSpeed: parseInt(randomParameter[0], 10),
-      bulletScale: parseInt(randomParameter[1], 10),
-      chargeSpeed: parseInt(randomParameter[2], 10),
-      shieldStrength: parseInt(randomParameter[3], 10)
-    };
+    const parameterObj = parseParameterString(randomParameter);
 
     parameters.set(parameterObj);
 
