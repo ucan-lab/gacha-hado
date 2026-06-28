@@ -23,10 +23,7 @@ export function sortDropRateRows(
   direction: 'asc' | 'desc'
 ): DropRateRow[] {
   return [...rows].sort((a, b) => {
-    if (direction === 'asc') {
-      return a[key] > b[key] ? 1 : -1;
-    } else {
-      return a[key] < b[key] ? 1 : -1;
-    }
+    if (a[key] === b[key]) return 0;
+    return direction === 'asc' ? (a[key] > b[key] ? 1 : -1) : a[key] < b[key] ? 1 : -1;
   });
 }

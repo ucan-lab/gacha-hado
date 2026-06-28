@@ -79,4 +79,39 @@ describe('sortDropRateRows', () => {
     sortDropRateRows(rows, 'weight', 'asc');
     expect(rows).toEqual(original);
   });
+
+  describe('stable sort for tied rows', () => {
+    const tiedRows = [
+      { parameter: 'a', weight: 2, dropRate: 50 },
+      { parameter: 'b', weight: 1, dropRate: 25 },
+      { parameter: 'c', weight: 2, dropRate: 50 },
+      { parameter: 'd', weight: 1, dropRate: 25 },
+      { parameter: 'e', weight: 2, dropRate: 50 }
+    ];
+
+    it('preserves input order for tied weight rows (asc)', () => {
+      const result = sortDropRateRows(tiedRows, 'weight', 'asc');
+      expect(result.map((r) => r.parameter)).toEqual(['b', 'd', 'a', 'c', 'e']);
+    });
+
+    it('preserves input order for tied weight rows (desc)', () => {
+      const result = sortDropRateRows(tiedRows, 'weight', 'desc');
+      expect(result.map((r) => r.parameter)).toEqual(['a', 'c', 'e', 'b', 'd']);
+    });
+
+    it('preserves input order for tied dropRate rows (asc)', () => {
+      const result = sortDropRateRows(tiedRows, 'dropRate', 'asc');
+      expect(result.map((r) => r.parameter)).toEqual(['b', 'd', 'a', 'c', 'e']);
+    });
+
+    it('preserves input order for tied dropRate rows (desc)', () => {
+      const result = sortDropRateRows(tiedRows, 'dropRate', 'desc');
+      expect(result.map((r) => r.parameter)).toEqual(['a', 'c', 'e', 'b', 'd']);
+    });
+
+    it('keeps non-tied ordering correct alongside ties', () => {
+      const result = sortDropRateRows(tiedRows, 'weight', 'asc');
+      expect(result.map((r) => r.weight)).toEqual([1, 1, 2, 2, 2]);
+    });
+  });
 });
