@@ -24,6 +24,7 @@ export function sortDropRateRows(
 ): DropRateRow[] {
   return [...rows].sort((a, b) => {
     if (a[key] === b[key]) return 0;
-    return direction === 'asc' ? (a[key] > b[key] ? 1 : -1) : a[key] < b[key] ? 1 : -1;
+    const comparison = a[key] > b[key] ? 1 : -1;
+    return direction === 'asc' ? comparison : -comparison;
   });
 }
