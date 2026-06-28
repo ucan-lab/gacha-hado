@@ -2,8 +2,6 @@
   import { parameterPatterns } from '$lib/utils/parameterPatterns';
   import { buildDropRateTable, sortDropRateRows } from '$lib/utils/dropRate';
   import type { DropRateRow, SortKey } from '$lib/utils/dropRate';
-  import Header from '$lib/components/Header.svelte';
-  import Footer from '$lib/components/Footer.svelte';
   import * as m from '$lib/paraglide/messages';
 
   let dropRateTable: DropRateRow[] = buildDropRateTable(parameterPatterns);
@@ -22,8 +20,6 @@
     dropRateTable = sortDropRateRows(dropRateTable, key, sortDirection);
   }
 </script>
-
-<Header />
 
 <div class="container mx-auto p-4 text-center">
   <h1 class="mb-6 text-2xl font-bold">{m.dropRateTable()}</h1>
@@ -64,8 +60,6 @@
     </table>
   </div>
 </div>
-
-<Footer />
 
 <style>
   th {
