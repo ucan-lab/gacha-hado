@@ -1,7 +1,5 @@
 <script lang="ts">
   import { parameterPatterns } from '$lib/utils/parameterPatterns';
-  import Header from '$lib/components/Header.svelte';
-  import Footer from '$lib/components/Footer.svelte';
   import * as m from '$lib/paraglide/messages';
 
   type TableRow = {
@@ -38,8 +36,6 @@
     });
   }
 </script>
-
-<Header />
 
 <div class="container mx-auto p-4 text-center">
   <h1 class="mb-6 text-2xl font-bold">{m.dropRateTable()}</h1>
@@ -80,8 +76,6 @@
     </table>
   </div>
 </div>
-
-<Footer />
 
 <style>
   th {

@@ -1,7 +1,4 @@
 <script lang="ts">
-  import Header from '$lib/components/Header.svelte';
-  import Footer from '$lib/components/Footer.svelte';
-
   const releaseNotes = [
     {
       version: 'v1.3.4',
@@ -234,8 +231,6 @@
   ];
 </script>
 
-<Header />
-
 <div class="container mx-auto p-6">
   <h1 class="mb-6 text-center text-3xl font-bold">リリースノート</h1>
 
@@ -256,5 +251,3 @@
     {/each}
   </div>
 </div>
-
-<Footer />

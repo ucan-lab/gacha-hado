@@ -1,12 +1,8 @@
 <script lang="ts">
-  import Header from '$lib/components/Header.svelte';
-  import Footer from '$lib/components/Footer.svelte';
   import { IconExternalLink } from '@tabler/icons-svelte';
   import UnderConstruction from '$lib/components/UnderConstruction.svelte';
   import Breadcrumb from '$lib/components/Breadcrumb.svelte';
 </script>
-
-<Header />
 
 <div class="bg-primary flex min-h-screen flex-col">
   <div class="container mx-auto p-4">
@@ -225,4 +221,3 @@
     </ul>
   </div>
 </div>
-<Footer />
