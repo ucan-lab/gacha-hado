@@ -1,27 +1,17 @@
 <script lang="ts">
   import { parameterPatterns } from '$lib/utils/parameterPatterns';
+  import { buildDropRateTable, sortDropRateRows } from '$lib/utils/dropRate';
+  import type { DropRateRow, SortKey } from '$lib/utils/dropRate';
   import Header from '$lib/components/Header.svelte';
   import Footer from '$lib/components/Footer.svelte';
   import * as m from '$lib/paraglide/messages';
 
-  type TableRow = {
-    parameter: string;
-    weight: number;
-    dropRate: number;
-  };
+  let dropRateTable: DropRateRow[] = buildDropRateTable(parameterPatterns);
 
-  const totalWeight = parameterPatterns.reduce((sum, item) => sum + item.weight, 0);
-
-  let dropRateTable: TableRow[] = parameterPatterns.map((item) => ({
-    parameter: item.parameter,
-    weight: item.weight,
-    dropRate: parseFloat(((item.weight / totalWeight) * 100).toFixed(2))
-  }));
-
-  let sortKey: keyof TableRow = 'parameter';
+  let sortKey: SortKey = 'parameter';
   let sortDirection: 'asc' | 'desc' = 'asc';
 
-  function sortTable(key: keyof TableRow) {
+  function sortTable(key: SortKey) {
     if (sortKey === key) {
       sortDirection = sortDirection === 'asc' ? 'desc' : 'asc';
     } else {
@@ -29,13 +19,7 @@
       sortDirection = 'asc';
     }
 
-    dropRateTable = dropRateTable.sort((a, b) => {
-      if (sortDirection === 'asc') {
-        return a[key] > b[key] ? 1 : -1;
-      } else {
-        return a[key] < b[key] ? 1 : -1;
-      }
-    });
+    dropRateTable = sortDropRateRows(dropRateTable, key, sortDirection);
   }
 </script>
 
