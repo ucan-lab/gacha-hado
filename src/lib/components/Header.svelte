@@ -72,7 +72,7 @@
       { href: '/trio', label: m.trio }
     ],
     [
-      { href: '/full-atacker', label: m.fullAtacker },
+      { href: '/full-atacker', label: m.fullAttacker },
       { href: '/gachi', label: m.gachiMatch }
     ],
     [{ href: '/drop-rate', label: m.dropRateTable }]
