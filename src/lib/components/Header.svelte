@@ -224,12 +224,12 @@
           </a>
           <hr class="my-2" />
           <a
-            aria-label={m.fullAtacker()}
+            aria-label={m.fullAttacker()}
             href="/full-atacker"
             class="bg-secondary-hover block rounded px-4 py-2"
             on:click={closeMenuOnOutsideClick}
           >
-            {m.fullAtacker()}
+            {m.fullAttacker()}
           </a>
           <a
             aria-label={m.gachiMatch()}

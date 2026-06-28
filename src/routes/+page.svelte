@@ -41,12 +41,12 @@
   <section class="bg-secondary mt-6 mb-6">
     <div class="flex flex-wrap justify-center gap-4">
       <a
-        aria-label={m.fullAtacker()}
+        aria-label={m.fullAttacker()}
         href="/full-atacker"
         class="menu-btn bg-sky-600 text-white hover:bg-sky-700"
       >
         <IconFlame />
-        <span>{m.fullAtacker()}</span>
+        <span>{m.fullAttacker()}</span>
       </a>
     </div>
   </section>
