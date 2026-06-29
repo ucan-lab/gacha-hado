@@ -29,5 +29,5 @@
   "weight": "重み",
   "theme": "テーマ",
   "breadcrumb": "パンくずリスト",
-  "releaseNote": "リリースノート"
+  "releaseNote": "リリースノート {version}"
 }

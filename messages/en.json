@@ -30,5 +30,5 @@
   "weight": "Weight",
   "theme": "Theme",
   "breadcrumb": "Breadcrumb",
-  "releaseNote": "Release Note"
+  "releaseNote": "Release Note {version}"
 }

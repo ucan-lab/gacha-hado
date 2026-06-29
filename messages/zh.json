@@ -29,5 +29,5 @@
   "weight": "权重",
   "theme": "主题",
   "breadcrumb": "面包屑导航",
-  "releaseNote": "发布说明"
+  "releaseNote": "发布说明 {version}"
 }
