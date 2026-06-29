@@ -38,7 +38,7 @@
     <div class="flex flex-wrap justify-center gap-4">
       <a
         aria-label={m.fullAttacker()}
-        href="/full-atacker"
+        href="/full-attacker"
         class="menu-btn bg-sky-600 text-white hover:bg-sky-700"
       >
         <IconFlame />
