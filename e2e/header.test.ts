@@ -44,7 +44,7 @@ test('コピー操作: 共有URLがクリップボードにコピーされ緑チ
   await copyButton.click();
 
   // アイコン切替に加え、実際にクリップボードへ共有URLが書き込まれたことも検証する
-  await expect(copyButton.locator('.text-green-600')).toBeVisible();
+  await expect(page.getByRole('status')).toHaveText('コピーしました');
   const clipboardText = await page.evaluate(() => navigator.clipboard.readText());
   expect(clipboardText).toBe('https://gacha-hado.vercel.app');
 });
@@ -53,10 +53,10 @@ test('言語メニュー開閉: Language ボタンで開き、再クリックで
   await page.goto('/');
 
   await page.getByRole('button', { name: 'Language' }).click();
-  await expect(page.getByRole('button', { name: '日本語' })).toBeVisible();
+  await expect(page.getByRole('menuitemradio', { name: '日本語' })).toBeVisible();
 
   await page.getByRole('button', { name: 'Language' }).click();
-  await expect(page.getByRole('button', { name: '日本語' })).not.toBeVisible();
+  await expect(page.getByRole('menuitemradio', { name: '日本語' })).not.toBeVisible();
 });
 
 test('現在ロケールのチェックマーク: en 固定時に English 項目のみチェックアイコンが表示される', async ({
@@ -69,14 +69,11 @@ test('現在ロケールのチェックマーク: en 固定時に English 項目
   await page.goto('/');
   await page.getByRole('button', { name: 'Language' }).click();
 
-  const englishButton = page.getByRole('button', { name: 'English' });
-  await expect(englishButton.locator('.text-green-500')).toBeVisible();
+  await expect(page.getByRole('menuitemradio', { name: 'English', checked: true })).toBeVisible();
 
-  const jaButton = page.getByRole('button', { name: '日本語' });
-  await expect(jaButton.locator('.text-green-500')).not.toBeVisible();
+  await expect(page.getByRole('menuitemradio', { name: '日本語', checked: false })).toBeVisible();
 
-  const zhButton = page.getByRole('button', { name: '中文' });
-  await expect(zhButton.locator('.text-green-500')).not.toBeVisible();
+  await expect(page.getByRole('menuitemradio', { name: '中文', checked: false })).toBeVisible();
 });
 
 test('ロケール選択でメニューが閉じ言語切替が反映される: ja 起点で English 選択後にリロードで lang=en', async ({
@@ -90,12 +87,12 @@ test('ロケール選択でメニューが閉じ言語切替が反映される: 
   await expect(page.locator('html')).toHaveAttribute('lang', 'ja');
 
   await page.getByRole('button', { name: 'Language' }).click();
-  await page.getByRole('button', { name: 'English' }).click();
+  await page.getByRole('menuitemradio', { name: 'English' }).click();
 
   await page.waitForLoadState('load');
 
   await expect(page.locator('html')).toHaveAttribute('lang', 'en');
-  await expect(page.getByRole('button', { name: '日本語' })).not.toBeVisible();
+  await expect(page.getByRole('menuitemradio', { name: '日本語' })).not.toBeVisible();
 
   const cookies = await context.cookies();
   expect(cookies.find((c) => c.name === 'PARAGLIDE_LOCALE')?.value).toBe('en');

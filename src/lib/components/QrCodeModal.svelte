@@ -52,6 +52,7 @@
             <IconClipboardText class="h-5 w-5" />
           {/if}
         </button>
+        <span role="status" aria-live="polite" class="sr-only">{copied ? m.copied() : ''}</span>
       </div>
     </div>
   </div>
