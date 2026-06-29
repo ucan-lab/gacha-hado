@@ -44,7 +44,7 @@ test('コピー操作: 共有URLがクリップボードにコピーされ緑チ
   await copyButton.click();
 
   // アイコン切替に加え、実際にクリップボードへ共有URLが書き込まれたことも検証する
-  await expect(copyButton.locator('.text-green-600')).toBeVisible();
+  await expect(page.getByRole('status')).toHaveText('コピーしました');
   const clipboardText = await page.evaluate(() => navigator.clipboard.readText());
   expect(clipboardText).toBe('https://gacha-hado.vercel.app');
 });
@@ -52,10 +52,15 @@ test('コピー操作: 共有URLがクリップボードにコピーされ緑チ
 test('言語メニュー開閉: Language ボタンで開き、再クリックで閉じる', async ({ page }) => {
   await page.goto('/');
 
-  await page.getByRole('button', { name: 'Language' }).click();
+  const trigger = page.getByRole('button', { name: 'Language' });
+  await expect(trigger).toHaveAttribute('aria-expanded', 'false');
+
+  await trigger.click();
+  await expect(trigger).toHaveAttribute('aria-expanded', 'true');
   await expect(page.getByRole('button', { name: '日本語' })).toBeVisible();
 
-  await page.getByRole('button', { name: 'Language' }).click();
+  await trigger.click();
+  await expect(trigger).toHaveAttribute('aria-expanded', 'false');
   await expect(page.getByRole('button', { name: '日本語' })).not.toBeVisible();
 });
 
@@ -69,14 +74,18 @@ test('現在ロケールのチェックマーク: en 固定時に English 項目
   await page.goto('/');
   await page.getByRole('button', { name: 'Language' }).click();
 
-  const englishButton = page.getByRole('button', { name: 'English' });
-  await expect(englishButton.locator('.text-green-500')).toBeVisible();
-
-  const jaButton = page.getByRole('button', { name: '日本語' });
-  await expect(jaButton.locator('.text-green-500')).not.toBeVisible();
-
-  const zhButton = page.getByRole('button', { name: '中文' });
-  await expect(zhButton.locator('.text-green-500')).not.toBeVisible();
+  await expect(page.getByRole('button', { name: 'English' })).toHaveAttribute(
+    'aria-current',
+    'true'
+  );
+  await expect(page.getByRole('button', { name: '日本語' })).not.toHaveAttribute(
+    'aria-current',
+    'true'
+  );
+  await expect(page.getByRole('button', { name: '中文' })).not.toHaveAttribute(
+    'aria-current',
+    'true'
+  );
 });
 
 test('ロケール選択でメニューが閉じ言語切替が反映される: ja 起点で English 選択後にリロードで lang=en', async ({

@@ -23,6 +23,7 @@
 <div class="language-menu relative">
   <button
     aria-label="Language"
+    aria-expanded={open}
     class="flex cursor-pointer items-center gap-1 p-0 hover:underline"
     onclick={onToggle}
   >
@@ -32,6 +33,7 @@
     <div class="bg-secondary absolute right-0 z-60 mt-2 w-32 rounded p-2 shadow-lg">
       {#each languages as lang (lang.code)}
         <button
+          aria-current={currentLocale === lang.code ? 'true' : undefined}
           class="bg-secondary-hover flex w-full cursor-pointer items-center gap-1 px-4 py-2 text-left"
           onclick={() => onSelect(lang.code)}
         >
