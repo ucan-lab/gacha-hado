@@ -1,6 +1,10 @@
 <script lang="ts">
   import { releaseNotes } from './releaseNotes';
+  import Seo from '$lib/components/Seo.svelte';
+  import * as m from '$lib/paraglide/messages';
 </script>
+
+<Seo title={m.releaseNoteTitle()} description={m.releaseNoteDescription()} />
 
 <div class="container mx-auto p-6">
   <h1 class="mb-6 text-center text-3xl font-bold">リリースノート</h1>

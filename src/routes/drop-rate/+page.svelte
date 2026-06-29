@@ -2,6 +2,7 @@
   import { parameterPatterns } from '$lib/utils/parameterPatterns';
   import { buildDropRateTable, sortDropRateRows } from '$lib/utils/dropRate';
   import type { DropRateRow, SortKey } from '$lib/utils/dropRate';
+  import Seo from '$lib/components/Seo.svelte';
   import * as m from '$lib/paraglide/messages';
 
   let dropRateTable: DropRateRow[] = buildDropRateTable(parameterPatterns);
@@ -25,6 +26,8 @@
     return sortDirection === 'asc' ? 'ascending' : 'descending';
   }
 </script>
+
+<Seo title={m.dropRateTitle()} description={m.dropRateDescription()} />
 
 <div class="container mx-auto p-4 text-center">
   <h1 class="mb-6 text-2xl font-bold">{m.dropRateTable()}</h1>
