@@ -2,8 +2,53 @@
   import { IconExternalLink } from '@tabler/icons-svelte';
   import UnderConstruction from '$lib/components/UnderConstruction.svelte';
   import Breadcrumb from '$lib/components/Breadcrumb.svelte';
+  import ParameterTable from '$lib/components/ParameterTable.svelte';
   import { buildBreadcrumb } from '$lib/breadcrumb';
   import { page } from '$app/state';
+
+  const speedTable = {
+    headers: ['Lv', 'スピード'],
+    rows: [
+      ['1', '13km/h'],
+      ['2', '20km/h'],
+      ['3', '27km/h'],
+      ['4', '31km/h'],
+      ['5', '34km/h']
+    ]
+  };
+
+  const scaleTable = {
+    headers: ['Lv', '大きさ', 'ライフと大きさ比較'],
+    rows: [
+      ['1', '16cm', 'ライフ0.8枚分'],
+      ['2', '22cm', 'ライフ1.1枚分'],
+      ['3', '30cm', 'ライフ1.5枚分'],
+      ['4', '45cm', 'ライフ2.25枚分'],
+      ['5', '60cm', 'ライフ3枚分']
+    ]
+  };
+
+  const chargeTable = {
+    headers: ['Lv', '5発分のチャージ時間', '1試合の球数目安'],
+    rows: [
+      ['1', '16秒', '20〜24発'],
+      ['2', '11秒', '30〜34発'],
+      ['3', '7.5秒', '40〜44発'],
+      ['4', '4.5秒', '50〜60発'],
+      ['5', '3秒', '70〜80発']
+    ]
+  };
+
+  const shieldTable = {
+    headers: ['Lv', '耐久力', '持続時間'],
+    rows: [
+      ['1', '4発', '13秒'],
+      ['2', '5発', '17秒'],
+      ['3', '6発', '21秒'],
+      ['4', '7発', '25秒'],
+      ['5', '8発', '26秒']
+    ]
+  };
 </script>
 
 <div class="bg-primary flex min-h-screen flex-col">
@@ -26,38 +71,7 @@
       <div class="mb-8">
         <h2 class="text-primary mb-4 text-2xl font-bold">スピード</h2>
         <p class="text-secondary mb-4">パラメータLvが上がるごとに移動速度が上昇します。</p>
-        <div class="overflow-x-auto">
-          <table class="w-full border-collapse">
-            <thead>
-              <tr>
-                <th class="border p-2">Lv</th>
-                <th class="border p-2">スピード</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td class="border p-2">1</td>
-                <td class="border p-2">13km/h</td>
-              </tr>
-              <tr>
-                <td class="border p-2">2</td>
-                <td class="border p-2">20km/h</td>
-              </tr>
-              <tr>
-                <td class="border p-2">3</td>
-                <td class="border p-2">27km/h</td>
-              </tr>
-              <tr>
-                <td class="border p-2">4</td>
-                <td class="border p-2">31km/h</td>
-              </tr>
-              <tr>
-                <td class="border p-2">5</td>
-                <td class="border p-2">34km/h</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+        <ParameterTable headers={speedTable.headers} rows={speedTable.rows} />
       </div>
 
       <div class="mb-8">
@@ -65,130 +79,19 @@
         <p class="text-secondary mb-4">
           パラメータLvが上がるごとに発射弾のサイズが大きくなります。
         </p>
-        <div class="overflow-x-auto">
-          <table class="w-full border-collapse">
-            <thead>
-              <tr>
-                <th class="border p-2">Lv</th>
-                <th class="border p-2">大きさ</th>
-                <th class="border p-2">ライフと大きさ比較</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td class="border p-2">1</td>
-                <td class="border p-2">16cm</td>
-                <td class="border p-2">ライフ0.8枚分</td>
-              </tr>
-              <tr>
-                <td class="border p-2">2</td>
-                <td class="border p-2">22cm</td>
-                <td class="border p-2">ライフ1.1枚分</td>
-              </tr>
-              <tr>
-                <td class="border p-2">3</td>
-                <td class="border p-2">30cm</td>
-                <td class="border p-2">ライフ1.5枚分</td>
-              </tr>
-              <tr>
-                <td class="border p-2">4</td>
-                <td class="border p-2">45cm</td>
-                <td class="border p-2">ライフ2.25枚分</td>
-              </tr>
-              <tr>
-                <td class="border p-2">5</td>
-                <td class="border p-2">60cm</td>
-                <td class="border p-2">ライフ3枚分</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+        <ParameterTable headers={scaleTable.headers} rows={scaleTable.rows} />
       </div>
 
       <div class="mb-8">
         <h2 class="text-primary mb-4 text-2xl font-bold">チャージ</h2>
         <p class="text-secondary mb-4">5発分のチャージにかかる時間が短縮されます。</p>
-        <div class="overflow-x-auto">
-          <table class="w-full border-collapse">
-            <thead>
-              <tr>
-                <th class="border p-2">Lv</th>
-                <th class="border p-2">5発分のチャージ時間</th>
-                <th class="border p-2">1試合の球数目安</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td class="border p-2">1</td>
-                <td class="border p-2">16秒</td>
-                <td class="border p-2">20〜24発</td>
-              </tr>
-              <tr>
-                <td class="border p-2">2</td>
-                <td class="border p-2">11秒</td>
-                <td class="border p-2">30〜34発</td>
-              </tr>
-              <tr>
-                <td class="border p-2">3</td>
-                <td class="border p-2">7.5秒</td>
-                <td class="border p-2">40〜44発</td>
-              </tr>
-              <tr>
-                <td class="border p-2">4</td>
-                <td class="border p-2">4.5秒</td>
-                <td class="border p-2">50〜60発</td>
-              </tr>
-              <tr>
-                <td class="border p-2">5</td>
-                <td class="border p-2">3秒</td>
-                <td class="border p-2">70〜80発</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+        <ParameterTable headers={chargeTable.headers} rows={chargeTable.rows} />
       </div>
 
       <div class="mb-8">
         <h2 class="text-primary mb-4 text-2xl font-bold">シールド</h2>
         <p class="text-secondary mb-4">シールドの耐久力と持続時間が向上します。</p>
-        <div class="overflow-x-auto">
-          <table class="w-full border-collapse">
-            <thead>
-              <tr>
-                <th class="border p-2">Lv</th>
-                <th class="border p-2">耐久力</th>
-                <th class="border p-2">持続時間</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td class="border p-2">1</td>
-                <td class="border p-2">4発</td>
-                <td class="border p-2">13秒</td>
-              </tr>
-              <tr>
-                <td class="border p-2">2</td>
-                <td class="border p-2">5発</td>
-                <td class="border p-2">17秒</td>
-              </tr>
-              <tr>
-                <td class="border p-2">3</td>
-                <td class="border p-2">6発</td>
-                <td class="border p-2">21秒</td>
-              </tr>
-              <tr>
-                <td class="border p-2">4</td>
-                <td class="border p-2">7発</td>
-                <td class="border p-2">25秒</td>
-              </tr>
-              <tr>
-                <td class="border p-2">5</td>
-                <td class="border p-2">8発</td>
-                <td class="border p-2">26秒</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+        <ParameterTable headers={shieldTable.headers} rows={shieldTable.rows} />
       </div>
     </div>
 
