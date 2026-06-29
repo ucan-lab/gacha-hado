@@ -27,5 +27,8 @@
   "dropRate": "Drop rate",
   "dropRateTable": "Drop rate table",
   "parameter": "Parameter",
-  "weight": "Weight"
+  "weight": "Weight",
+  "theme": "Theme",
+  "breadcrumb": "Breadcrumb",
+  "releaseNote": "Release Note"
 }

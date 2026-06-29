@@ -1,10 +1,11 @@
 <script lang="ts">
   import { IconChevronRight } from '@tabler/icons-svelte';
+  import * as m from '$lib/paraglide/messages';
 
   export let items: { label: string; href: string }[];
 </script>
 
-<nav class="mb-4" aria-label="パンくずリスト">
+<nav class="mb-4" aria-label={m.breadcrumb()}>
   <ol class="flex items-center space-x-2">
     {#each items as item, i (item.href)}
       <li class="flex items-center">

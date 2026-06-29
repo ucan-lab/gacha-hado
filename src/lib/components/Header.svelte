@@ -93,7 +93,7 @@
     {/if}
     <div class="theme-menu relative">
       <button
-        aria-label="Theme"
+        aria-label={m.theme()}
         class="flex cursor-pointer items-center gap-1 p-0 hover:underline"
         on:click={() => changeTheme($theme === 'dark' ? 'light' : 'dark')}
       >
