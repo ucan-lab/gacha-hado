@@ -1,15 +1,16 @@
 import type { Handle } from '@sveltejs/kit';
 import { paraglideMiddleware } from '$lib/paraglide/server';
 import { getLocale, getTextDirection } from '$lib/paraglide/runtime';
+import { normalizeTheme } from '$lib/constants/theme';
 
 export const handle: Handle = async ({ event, resolve }) => {
   return paraglideMiddleware(event.request, async ({ request }) => {
     event.request = request;
 
     // Flash of Unstyled Content 対策でクッキーからテーマを取得する。
-    // data-theme へ注入する前に許可リストで検証し、auto は light に正規化、
+    // data-theme へ注入する前に共有の許可リスト(normalizeTheme)で検証し、
     // 許可リスト外の任意値・クォート細工は light に落として属性ブレイクアウトを封じる。
-    const theme = event.cookies.get('theme') === 'dark' ? 'dark' : 'light';
+    const theme = normalizeTheme(event.cookies.get('theme'));
 
     // %THEME% も transformPageChunk 内で置換し、HTML ページのみを対象にする。
     // resolve() の戻り値をそのまま返すことで、ストリーミングを保ち、
