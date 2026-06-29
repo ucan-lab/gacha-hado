@@ -9,9 +9,9 @@ const getStoredTheme = (): Theme => {
   return normalizeTheme(localStorage.getItem('theme'));
 };
 
-// テーマの適用（許可リスト外の値は light に正規化してから DOM/cookie へ反映する）
-const applyTheme = (value: string): Theme => {
-  const theme = normalizeTheme(value);
+// テーマの適用。ストアは Theme 型で、値は境界(getStoredTheme)で正規化済みのため
+// ここでは Theme を受け取り、ストアと DOM/cookie の状態を一致させる。
+const applyTheme = (theme: Theme): Theme => {
   if (!isDocument) return theme;
 
   localStorage.setItem('theme', theme);
