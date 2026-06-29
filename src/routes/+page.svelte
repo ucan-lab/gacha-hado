@@ -1,7 +1,10 @@
 <script lang="ts">
   import { IconUser, IconUsers, IconUsersGroup, IconFlame, IconBolt } from '@tabler/icons-svelte';
   import * as m from '$lib/paraglide/messages';
+  import Seo from '$lib/components/Seo.svelte';
 </script>
+
+<Seo />
 
 <div class="bg-secondary flex min-h-screen flex-col">
   <section class="bg-primary flex flex-col items-center justify-center py-6">
