@@ -26,5 +26,8 @@
   "dropRate": "排出率",
   "dropRateTable": "排出率テーブル",
   "parameter": "パラメーター",
-  "weight": "重み"
+  "weight": "重み",
+  "theme": "テーマ",
+  "breadcrumb": "パンくずリスト",
+  "releaseNote": "リリースノート {version}"
 }

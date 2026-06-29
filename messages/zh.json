@@ -26,5 +26,8 @@
   "dropRate": "掉落率",
   "dropRateTable": "掉落率表",
   "parameter": "参数",
-  "weight": "权重"
+  "weight": "权重",
+  "theme": "主题",
+  "breadcrumb": "面包屑导航",
+  "releaseNote": "发布说明 {version}"
 }
