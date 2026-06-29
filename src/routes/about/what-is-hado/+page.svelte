@@ -3,6 +3,7 @@
   import Breadcrumb from '$lib/components/Breadcrumb.svelte';
   import { buildBreadcrumb } from '$lib/breadcrumb';
   import { page } from '$app/state';
+  import * as m from '$lib/paraglide/messages';
 </script>
 
 <div class="bg-primary flex min-h-screen flex-col">
@@ -11,31 +12,31 @@
 
     <UnderConstruction />
 
-    <h1 class="text-primary mb-8 text-center text-3xl font-bold">HADOとは</h1>
+    <h1 class="text-primary mb-8 text-center text-3xl font-bold">{m.navWhatIsHado()}</h1>
 
     <div class="prose mx-auto max-w-3xl">
       <p class="text-secondary mb-4">
-        HADOは、AR（拡張現実）技術を活用した新しいスポーツです。プレイヤーはヘッドマウントディスプレイとアームバンドを装着し、現実世界に仮想のエネルギー弾を発射して対戦します。
+        {m.whatIsHadoIntro()}
       </p>
 
-      <h2 class="text-primary mb-4 text-2xl font-bold">HADOの特徴</h2>
+      <h2 class="text-primary mb-4 text-2xl font-bold">{m.whatIsHadoFeaturesTitle()}</h2>
       <ul class="text-secondary mb-6 list-disc pl-6">
-        <li>AR技術による没入感のある体験</li>
-        <li>体力や年齢に関係なく楽しめる</li>
-        <li>チーム戦略性の高いゲーム性</li>
-        <li>リアルタイムでの対戦が可能</li>
+        <li>{m.whatIsHadoFeature1()}</li>
+        <li>{m.whatIsHadoFeature2()}</li>
+        <li>{m.whatIsHadoFeature3()}</li>
+        <li>{m.whatIsHadoFeature4()}</li>
       </ul>
 
-      <h2 class="text-primary mb-4 text-2xl font-bold">必要な装備</h2>
+      <h2 class="text-primary mb-4 text-2xl font-bold">{m.whatIsHadoEquipmentTitle()}</h2>
       <ul class="text-secondary mb-6 list-disc pl-6">
-        <li>ヘッドマウントディスプレイ（HMD）</li>
-        <li>アームバンド</li>
-        <li>スマートフォン（専用アプリ）</li>
+        <li>{m.whatIsHadoEquipment1()}</li>
+        <li>{m.whatIsHadoEquipment2()}</li>
+        <li>{m.whatIsHadoEquipment3()}</li>
       </ul>
 
-      <h2 class="text-primary mb-4 text-2xl font-bold">HADOの魅力</h2>
+      <h2 class="text-primary mb-4 text-2xl font-bold">{m.whatIsHadoAppealTitle()}</h2>
       <p class="text-secondary mb-4">
-        HADOは、テクノロジーとスポーツを融合させた新しいエンターテインメントです。チーム戦略や個人のスキルが重要で、初心者から上級者まで楽しめる奥深さがあります。
+        {m.whatIsHadoAppealDesc()}
       </p>
     </div>
   </div>
