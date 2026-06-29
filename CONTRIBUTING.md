@@ -58,6 +58,8 @@ git worktree add .worktrees/<名前> <ブランチ>
 <type>: <description>
 ```
 
+コミットメッセージは Conventional Commits 形式で書き、`type` は英語、`description` は日本語で記述してください。
+
 | type       | 用途                         |
 | ---------- | ---------------------------- |
 | `feat`     | 新機能の追加                 |
