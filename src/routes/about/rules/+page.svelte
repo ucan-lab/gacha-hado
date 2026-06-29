@@ -9,7 +9,7 @@
       items={[
         { label: 'ホーム', href: '/' },
         { label: 'HADOについて', href: '/about' },
-        { label: 'HADOとは', href: '/about/what-is-hado' }
+        { label: 'HADO ルール', href: '/about/rules' }
       ]}
     />
 
