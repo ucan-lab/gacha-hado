@@ -8,7 +8,7 @@
   const fullTitle = $derived(title ? `${title} | ${m.appName()}` : m.appName());
   // OGP/canonical は固定の本番 origin(SHARE_URL)を基準にし、preview/custom host や
   // クエリ付きアクセスでも正規 URL が出力されるようにする（重複インデックス・シェア数分散を防ぐ）
-  const ogImage = `${SHARE_URL}/favicon.svg`;
+  const ogImage = `${SHARE_URL}/og-image.png`;
   const cleanUrl = $derived(`${SHARE_URL}${page.url.pathname}`);
 </script>
 
@@ -21,7 +21,7 @@
   <meta property="og:url" content={cleanUrl} />
   <meta property="og:image" content={ogImage} />
   <meta property="og:site_name" content={m.appName()} />
-  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content={fullTitle} />
   <meta name="twitter:description" content={description} />
   <meta name="twitter:image" content={ogImage} />
