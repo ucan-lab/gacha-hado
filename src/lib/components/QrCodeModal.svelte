@@ -75,7 +75,7 @@
     <button
       type="button"
       class="absolute inset-0 -z-10 cursor-default bg-black"
-      aria-label={m.close()}
+      aria-hidden="true"
       tabindex="-1"
       onclick={onClose}
     ></button>
