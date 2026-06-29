@@ -29,12 +29,12 @@ test('共有URL表示: モーダル内 input の value が SHARE_URL と一致�
   await expect(page.locator('input[readonly]')).toHaveValue('https://gacha-hado.vercel.app');
 });
 
-test('コピーアイコン切替: コピーボタンクリック後に緑チェックアイコンが表示される', async ({
+test('コピー操作: 共有URLがクリップボードにコピーされ緑チェックアイコンが表示される', async ({
   context,
   page,
   baseURL
 }) => {
-  await context.grantPermissions(['clipboard-write']);
+  await context.grantPermissions(['clipboard-read', 'clipboard-write']);
   await context.addCookies([{ name: 'PARAGLIDE_LOCALE', value: 'ja', url: baseURL }]);
 
   await page.goto('/');
@@ -42,7 +42,11 @@ test('コピーアイコン切替: コピーボタンクリック後に緑チェ
   await page.getByRole('button', { name: 'QRコード' }).click();
   const copyButton = page.getByRole('button', { name: 'リンクコピー' });
   await copyButton.click();
+
+  // アイコン切替に加え、実際にクリップボードへ共有URLが書き込まれたことも検証する
   await expect(copyButton.locator('.text-green-600')).toBeVisible();
+  const clipboardText = await page.evaluate(() => navigator.clipboard.readText());
+  expect(clipboardText).toBe('https://gacha-hado.vercel.app');
 });
 
 test('言語メニュー開閉: Language ボタンで開き、再クリックで閉じる', async ({ page }) => {
