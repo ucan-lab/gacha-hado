@@ -38,7 +38,7 @@ describe('buildBreadcrumb', () => {
   it('未定義パスはセグメントをラベルにフォールバックする', () => {
     expect(buildBreadcrumb('/unknown')).toEqual([
       { label: 'ホーム', href: '/' },
-      { label: '/unknown', href: '/unknown' }
+      { label: 'unknown', href: '/unknown' }
     ]);
   });
 });

@@ -20,7 +20,7 @@ export const buildBreadcrumb = (pathname: string): BreadcrumbItem[] => {
   let href = '';
   for (const segment of pathname.split('/').filter(Boolean)) {
     href += `/${segment}`;
-    items.push({ label: ROUTE_LABELS[href] ?? href, href });
+    items.push({ label: ROUTE_LABELS[href] ?? segment, href });
   }
   return items;
 };
