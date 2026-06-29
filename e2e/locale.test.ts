@@ -58,7 +58,7 @@ test('切替→フルリロード: UI でロケールを切替えると cookie �
 
   // 言語メニューを開いて English を選択 (changeLocale が setLocale 既定の reload を伴う)
   await page.getByRole('button', { name: 'Language' }).click();
-  await page.getByRole('menuitemradio', { name: 'English' }).click();
+  await page.getByRole('button', { name: 'English' }).click();
 
   // フルリロードの完了を明示的に待ってから検証する（リロード前の旧 document を見ないため）
   await page.waitForLoadState('load');
