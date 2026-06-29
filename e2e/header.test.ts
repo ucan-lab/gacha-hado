@@ -2,11 +2,10 @@ import { expect, test } from '@playwright/test';
 
 test('QRモーダル開閉: QRボタンクリックでモーダル表示、クローズボタンで非表示', async ({
   context,
-  page
+  page,
+  baseURL
 }) => {
-  await context.addCookies([
-    { name: 'PARAGLIDE_LOCALE', value: 'ja', url: 'http://localhost:4173' }
-  ]);
+  await context.addCookies([{ name: 'PARAGLIDE_LOCALE', value: 'ja', url: baseURL }]);
 
   await page.goto('/');
 
@@ -19,11 +18,10 @@ test('QRモーダル開閉: QRボタンクリックでモーダル表示、ク�
 
 test('共有URL表示: モーダル内 input の value が SHARE_URL と一致する', async ({
   context,
-  page
+  page,
+  baseURL
 }) => {
-  await context.addCookies([
-    { name: 'PARAGLIDE_LOCALE', value: 'ja', url: 'http://localhost:4173' }
-  ]);
+  await context.addCookies([{ name: 'PARAGLIDE_LOCALE', value: 'ja', url: baseURL }]);
 
   await page.goto('/');
 
@@ -32,11 +30,12 @@ test('共有URL表示: モーダル内 input の value が SHARE_URL と一致�
 });
 
 test('コピーアイコン切替: コピーボタンクリック後に緑チェックアイコンが表示される', async ({
-  browser
+  context,
+  page,
+  baseURL
 }) => {
-  const ctx = await browser.newContext({ permissions: ['clipboard-write'] });
-  const page = await ctx.newPage();
-  await ctx.addCookies([{ name: 'PARAGLIDE_LOCALE', value: 'ja', url: 'http://localhost:4173' }]);
+  await context.grantPermissions(['clipboard-write']);
+  await context.addCookies([{ name: 'PARAGLIDE_LOCALE', value: 'ja', url: baseURL }]);
 
   await page.goto('/');
 
@@ -44,8 +43,6 @@ test('コピーアイコン切替: コピーボタンクリック後に緑チェ
   const copyButton = page.getByRole('button', { name: 'リンクコピー' });
   await copyButton.click();
   await expect(copyButton.locator('.text-green-600')).toBeVisible();
-
-  await ctx.close();
 });
 
 test('言語メニュー開閉: Language ボタンで開き、再クリックで閉じる', async ({ page }) => {
@@ -60,11 +57,10 @@ test('言語メニュー開閉: Language ボタンで開き、再クリックで
 
 test('現在ロケールのチェックマーク: en 固定時に English 項目のみチェックアイコンが表示される', async ({
   context,
-  page
+  page,
+  baseURL
 }) => {
-  await context.addCookies([
-    { name: 'PARAGLIDE_LOCALE', value: 'en', url: 'http://localhost:4173' }
-  ]);
+  await context.addCookies([{ name: 'PARAGLIDE_LOCALE', value: 'en', url: baseURL }]);
 
   await page.goto('/');
   await page.getByRole('button', { name: 'Language' }).click();
@@ -80,10 +76,11 @@ test('現在ロケールのチェックマーク: en 固定時に English 項目
 });
 
 test('ロケール選択でメニューが閉じ言語切替が反映される: ja 起点で English 選択後にリロードで lang=en', async ({
-  browser
+  context,
+  page,
+  baseURL
 }) => {
-  const ctx = await browser.newContext({ locale: 'ja-JP' });
-  const page = await ctx.newPage();
+  await context.addCookies([{ name: 'PARAGLIDE_LOCALE', value: 'ja', url: baseURL }]);
 
   await page.goto('/');
   await expect(page.locator('html')).toHaveAttribute('lang', 'ja');
@@ -96,19 +93,16 @@ test('ロケール選択でメニューが閉じ言語切替が反映される: 
   await expect(page.locator('html')).toHaveAttribute('lang', 'en');
   await expect(page.getByRole('button', { name: '日本語' })).not.toBeVisible();
 
-  const cookies = await ctx.cookies();
+  const cookies = await context.cookies();
   expect(cookies.find((c) => c.name === 'PARAGLIDE_LOCALE')?.value).toBe('en');
-
-  await ctx.close();
 });
 
 test('ハンバーガー遷移後リセット: ページ遷移後にハンバーガーメニューが閉じている', async ({
   context,
-  page
+  page,
+  baseURL
 }) => {
-  await context.addCookies([
-    { name: 'PARAGLIDE_LOCALE', value: 'ja', url: 'http://localhost:4173' }
-  ]);
+  await context.addCookies([{ name: 'PARAGLIDE_LOCALE', value: 'ja', url: baseURL }]);
 
   await page.goto('/');
 
