@@ -23,6 +23,8 @@
 <div class="language-menu relative">
   <button
     aria-label="Language"
+    aria-haspopup="menu"
+    aria-expanded={open}
     class="flex cursor-pointer items-center gap-1 p-0 hover:underline"
     onclick={onToggle}
   >
