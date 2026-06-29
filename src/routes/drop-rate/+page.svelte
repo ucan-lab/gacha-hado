@@ -19,6 +19,11 @@
 
     dropRateTable = sortDropRateRows(dropRateTable, key, sortDirection);
   }
+
+  function ariaSort(key: SortKey): 'ascending' | 'descending' | 'none' {
+    if (sortKey !== key) return 'none';
+    return sortDirection === 'asc' ? 'ascending' : 'descending';
+  }
 </script>
 
 <div class="container mx-auto p-4 text-center">
@@ -28,23 +33,41 @@
     <table class="mx-auto w-full max-w-md table-auto text-sm">
       <thead>
         <tr>
-          <th class="sticky top-0 z-10 px-4 py-2" on:click={() => sortTable('parameter')}>
-            {m.parameter()}
-            {#if sortKey === 'parameter'}
-              {sortDirection === 'asc' ? ' ↑' : ' ↓'}
-            {/if}
+          <th class="sticky top-0 z-10" aria-sort={ariaSort('parameter')}>
+            <button
+              type="button"
+              class="flex w-full cursor-pointer items-center justify-center gap-1 px-4 py-2 font-bold"
+              on:click={() => sortTable('parameter')}
+            >
+              {m.parameter()}
+              {#if sortKey === 'parameter'}
+                <span aria-hidden="true">{sortDirection === 'asc' ? '↑' : '↓'}</span>
+              {/if}
+            </button>
           </th>
-          <th class="sticky top-0 z-10 px-4 py-2" on:click={() => sortTable('weight')}>
-            {m.weight()}
-            {#if sortKey === 'weight'}
-              {sortDirection === 'asc' ? ' ↑' : ' ↓'}
-            {/if}
+          <th class="sticky top-0 z-10" aria-sort={ariaSort('weight')}>
+            <button
+              type="button"
+              class="flex w-full cursor-pointer items-center justify-center gap-1 px-4 py-2 font-bold"
+              on:click={() => sortTable('weight')}
+            >
+              {m.weight()}
+              {#if sortKey === 'weight'}
+                <span aria-hidden="true">{sortDirection === 'asc' ? '↑' : '↓'}</span>
+              {/if}
+            </button>
           </th>
-          <th class="sticky top-0 z-10 px-4 py-2" on:click={() => sortTable('dropRate')}>
-            {m.dropRate()}
-            {#if sortKey === 'dropRate'}
-              {sortDirection === 'asc' ? ' ↑' : ' ↓'}
-            {/if}
+          <th class="sticky top-0 z-10" aria-sort={ariaSort('dropRate')}>
+            <button
+              type="button"
+              class="flex w-full cursor-pointer items-center justify-center gap-1 px-4 py-2 font-bold"
+              on:click={() => sortTable('dropRate')}
+            >
+              {m.dropRate()}
+              {#if sortKey === 'dropRate'}
+                <span aria-hidden="true">{sortDirection === 'asc' ? '↑' : '↓'}</span>
+              {/if}
+            </button>
           </th>
         </tr>
       </thead>
