@@ -19,11 +19,11 @@ describe('Breadcrumb', () => {
     const links = within(navigation).getAllByRole('link');
 
     expect(links).toHaveLength(2);
-    expect(links[0].textContent).toBe('ホーム');
+    expect(links[0].textContent?.trim()).toBe('ホーム');
     expect(links[0].getAttribute('href')).toBe('/');
     expect(links[1].textContent?.trim()).toBe('HADOについて');
     expect(links[1].getAttribute('href')).toBe('/about');
-    expect(within(navigation).getByText('HADO ルール').textContent).toBe('HADO ルール');
+    expect(within(navigation).getByText('HADO ルール').textContent?.trim()).toBe('HADO ルール');
     expect(within(navigation).queryByRole('link', { name: 'HADO ルール' })).toBeNull();
   });
 });

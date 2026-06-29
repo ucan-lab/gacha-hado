@@ -1,12 +1,19 @@
-import { fireEvent, render, screen } from '@testing-library/svelte';
+import { fireEvent, render, screen, waitFor } from '@testing-library/svelte';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import * as m from '$lib/paraglide/messages';
 import { SHARE_URL } from '$lib/config';
 import QrCodeModal from './QrCodeModal.svelte';
 
 describe('QrCodeModal', () => {
+  const originalClipboard = window.navigator.clipboard;
+
   afterEach(() => {
     vi.useRealTimers();
+    Object.defineProperty(window.navigator, 'clipboard', {
+      value: originalClipboard,
+      configurable: true,
+      writable: true
+    });
   });
 
   it('does not render the dialog when show is false', () => {
@@ -32,10 +39,11 @@ describe('QrCodeModal', () => {
 
     const dialog = screen.getByRole('dialog', { name: m.QrCode() });
     const closeButton = screen.getByRole('button', { name: m.close() });
-    await new Promise<void>((resolve) => queueMicrotask(resolve));
 
     expect(dialog.getAttribute('aria-modal')).toBe('true');
-    expect(document.activeElement).toBe(closeButton);
+    await waitFor(() => {
+      expect(document.activeElement).toBe(closeButton);
+    });
 
     await fireEvent.keyDown(window, { key: 'Escape' });
     await fireEvent.click(closeButton);
@@ -51,7 +59,8 @@ describe('QrCodeModal', () => {
     const writeText = vi.fn().mockResolvedValue(undefined);
     Object.defineProperty(window.navigator, 'clipboard', {
       value: { writeText },
-      configurable: true
+      configurable: true,
+      writable: true
     });
 
     render(QrCodeModal, {
@@ -75,7 +84,8 @@ describe('QrCodeModal', () => {
     vi.useFakeTimers();
     Object.defineProperty(window.navigator, 'clipboard', {
       value: { writeText: vi.fn().mockRejectedValue(new Error('denied')) },
-      configurable: true
+      configurable: true,
+      writable: true
     });
 
     render(QrCodeModal, {

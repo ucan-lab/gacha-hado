@@ -1,5 +1,5 @@
-import { cleanup, setup } from '@testing-library/svelte';
-import { afterEach, beforeEach } from 'vitest';
+import { cleanup } from '@testing-library/svelte';
+import { afterEach } from 'vitest';
 
 Object.defineProperty(window.navigator, 'language', {
   value: 'ja-JP',
@@ -9,10 +9,6 @@ Object.defineProperty(window.navigator, 'language', {
 Object.defineProperty(window.navigator, 'languages', {
   value: ['ja-JP', 'ja'],
   configurable: true
-});
-
-beforeEach(async () => {
-  await setup();
 });
 
 afterEach(() => {
