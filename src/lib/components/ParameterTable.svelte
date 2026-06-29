@@ -10,7 +10,7 @@
     <thead>
       <tr>
         {#each headers as header, i (i)}
-          <th class="border p-2">{header}</th>
+          <th class="border p-2" scope="col">{header}</th>
         {/each}
       </tr>
     </thead>
