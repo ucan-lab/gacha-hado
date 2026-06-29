@@ -130,4 +130,114 @@ describe('sortDropRateRows', () => {
       expect(result.map((r) => r.weight)).toEqual([3, 1, 2]);
     });
   });
+
+  describe('NaN handling (weight key)', () => {
+    const rowsWithNaNWeight = [
+      { parameter: 'a', weight: NaN, dropRate: 10 },
+      { parameter: 'b', weight: 1, dropRate: 20 },
+      { parameter: 'c', weight: NaN, dropRate: 30 },
+      { parameter: 'd', weight: 3, dropRate: 40 }
+    ];
+
+    it('both NaN rows preserve relative input order in asc (NaN same = 0)', () => {
+      const result = sortDropRateRows(rowsWithNaNWeight, 'weight', 'asc');
+      const nanRows = result.filter((r) => Number.isNaN(r.weight));
+      expect(nanRows.map((r) => r.parameter)).toEqual(['a', 'c']);
+    });
+
+    it('single NaN row goes to end in asc', () => {
+      const input = [
+        { parameter: 'nan', weight: NaN, dropRate: 10 },
+        { parameter: 'one', weight: 1, dropRate: 20 },
+        { parameter: 'two', weight: 2, dropRate: 30 }
+      ];
+      const result = sortDropRateRows(input, 'weight', 'asc');
+      expect(result[result.length - 1].parameter).toBe('nan');
+    });
+
+    it('single NaN row goes to end in desc', () => {
+      const input = [
+        { parameter: 'nan', weight: NaN, dropRate: 10 },
+        { parameter: 'one', weight: 1, dropRate: 20 },
+        { parameter: 'two', weight: 2, dropRate: 30 }
+      ];
+      const result = sortDropRateRows(input, 'weight', 'desc');
+      expect(result[result.length - 1].parameter).toBe('nan');
+    });
+
+    it('finite values are in correct asc order alongside NaN rows', () => {
+      const result = sortDropRateRows(rowsWithNaNWeight, 'weight', 'asc');
+      const finiteRows = result.filter((r) => !Number.isNaN(r.weight));
+      expect(finiteRows.map((r) => r.weight)).toEqual([1, 3]);
+    });
+
+    it('finite values are in correct desc order alongside NaN rows', () => {
+      const result = sortDropRateRows(rowsWithNaNWeight, 'weight', 'desc');
+      const finiteRows = result.filter((r) => !Number.isNaN(r.weight));
+      expect(finiteRows.map((r) => r.weight)).toEqual([3, 1]);
+    });
+  });
+
+  describe('NaN handling (dropRate key)', () => {
+    const rowsWithNaNDropRate = [
+      { parameter: 'a', weight: 1, dropRate: NaN },
+      { parameter: 'b', weight: 2, dropRate: 20 },
+      { parameter: 'c', weight: 3, dropRate: NaN },
+      { parameter: 'd', weight: 4, dropRate: 40 }
+    ];
+
+    it('both NaN rows preserve relative input order in asc (NaN same = 0)', () => {
+      const result = sortDropRateRows(rowsWithNaNDropRate, 'dropRate', 'asc');
+      const nanRows = result.filter((r) => Number.isNaN(r.dropRate));
+      expect(nanRows.map((r) => r.parameter)).toEqual(['a', 'c']);
+    });
+
+    it('single NaN row goes to end in asc', () => {
+      const input = [
+        { parameter: 'nan', weight: 1, dropRate: NaN },
+        { parameter: 'one', weight: 2, dropRate: 20 },
+        { parameter: 'two', weight: 3, dropRate: 30 }
+      ];
+      const result = sortDropRateRows(input, 'dropRate', 'asc');
+      expect(result[result.length - 1].parameter).toBe('nan');
+    });
+
+    it('single NaN row goes to end in desc', () => {
+      const input = [
+        { parameter: 'nan', weight: 1, dropRate: NaN },
+        { parameter: 'one', weight: 2, dropRate: 20 },
+        { parameter: 'two', weight: 3, dropRate: 30 }
+      ];
+      const result = sortDropRateRows(input, 'dropRate', 'desc');
+      expect(result[result.length - 1].parameter).toBe('nan');
+    });
+
+    it('finite values are in correct asc order alongside NaN rows', () => {
+      const result = sortDropRateRows(rowsWithNaNDropRate, 'dropRate', 'asc');
+      const finiteRows = result.filter((r) => !Number.isNaN(r.dropRate));
+      expect(finiteRows.map((r) => r.dropRate)).toEqual([20, 40]);
+    });
+
+    it('finite values are in correct desc order alongside NaN rows', () => {
+      const result = sortDropRateRows(rowsWithNaNDropRate, 'dropRate', 'desc');
+      const finiteRows = result.filter((r) => !Number.isNaN(r.dropRate));
+      expect(finiteRows.map((r) => r.dropRate)).toEqual([40, 20]);
+    });
+  });
+});
+
+describe('buildDropRateTable edge cases', () => {
+  it('returns empty array for empty input', () => {
+    expect(buildDropRateTable([])).toEqual([]);
+  });
+
+  it('all weight 0 returns all dropRate 0', () => {
+    const input = [
+      { parameter: 'a', weight: 0 },
+      { parameter: 'b', weight: 0 }
+    ];
+    const result = buildDropRateTable(input);
+    expect(result[0].dropRate).toBe(0);
+    expect(result[1].dropRate).toBe(0);
+  });
 });
