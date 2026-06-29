@@ -25,8 +25,8 @@ export function sortDropRateRows(
   return [...rows].sort((a, b) => {
     const av = a[key];
     const bv = b[key];
-    const aNaN = typeof av === 'number' && Number.isNaN(av);
-    const bNaN = typeof bv === 'number' && Number.isNaN(bv);
+    const aNaN = Number.isNaN(av);
+    const bNaN = Number.isNaN(bv);
     if (aNaN && bNaN) return 0;
     if (aNaN) return 1;
     if (bNaN) return -1;
