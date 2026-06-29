@@ -3,6 +3,7 @@
   import { onMount, onDestroy } from 'svelte';
   import { writable } from 'svelte/store';
   import { theme } from '$lib/stores/theme';
+  import type { Theme } from '$lib/constants/theme';
   import { page } from '$app/state';
   import { browser } from '$app/environment';
   import {
@@ -35,7 +36,7 @@
     closeAllMenus();
   };
 
-  const changeTheme = (themeName: string) => {
+  const changeTheme = (themeName: Theme) => {
     theme.set(themeName);
   };
 
