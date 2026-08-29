@@ -88,5 +88,19 @@ jobs:
           #
           # 【地雷】`Write` / `Edit` をここに明示すると acceptEdits のワークスペース外制限が
           # 外れ、runner 全体（`~/.bashrc` 等）へ書けるようになる。追加しないこと。
+          #
+          # 【Issue / コメントの作成について】
+          # `gh issue create` / `gh issue comment` は App トークンが GH_TOKEN として
+          # 環境変数に載るため、プロンプトインジェクションで `--body "$GH_TOKEN"` を
+          # 誘発されるとトークンが公開される経路になりうる。このワークフローの入力を
+          # 書けるのは write 権限保持者だけ（上の if）なので許容している。起動条件を
+          # 第三者に広げる場合は、この許可を先に見直すこと。
+          #
+          # 【調べ物について】
+          # `gh search` は全サブコマンド（prs / issues / code / commits / repos）が
+          # 読み取り専用のためワイルドカードで許可する。`gh api` は PR merge や
+          # ブランチ削除といった書き込みまで通るので許可しない。
+          # checkout が fetch-depth: 1 で `git log` / `git blame` は使えないため、
+          # 履歴を辿るときは `gh search commits` と `gh pr list` を使わせる。
           claude_args: |
-            --allowedTools "mcp__github_inline_comment__create_inline_comment,Bash(gh pr create:*),Bash(gh pr diff:*),Bash(gh pr view:*)"
+            --allowedTools "mcp__github_inline_comment__create_inline_comment,Bash(gh search:*),Bash(gh pr create:*),Bash(gh pr diff:*),Bash(gh pr list:*),Bash(gh pr view:*),Bash(gh issue create:*),Bash(gh issue comment:*),Bash(gh issue list:*),Bash(gh issue view:*)"
