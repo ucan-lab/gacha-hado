@@ -1,0 +1,92 @@
+name: Claude
+# `@claude` メンションに応答する対話用ワークフロー。
+# Issue 上でのレビュー依頼や「@claude この Issue を実装して」→ PR 作成までを担当する。
+# PR open 時の自動コードレビューは claude-review.yml が担当。
+#
+# 【このファイルを編集する人へ】
+# claude-code-action は起動時に「実行中のワークフローファイルがデフォルトブランチ
+# （develop）上の内容と一致するか」を検証する。PR でこのファイルを書き換えると
+# 一致しなくなり、ジョブは success のままメンションに無反応になる。
+# 動作確認はマージ後に行うこと。
+on:
+  issue_comment:
+    types: [created]
+  pull_request_review_comment:
+    types: [created]
+  pull_request_review:
+    types: [submitted]
+  issues:
+    types: [opened]
+
+# 同一 Issue / PR に対して Claude を直列化する。並行実行すると同じブランチに
+# 同時にコミットしうるため cancel-in-progress は false。
+# 【制限】GitHub は 1 グループにつき pending を 1 本しか保持せず、新しい run が queue
+# されると古い pending を無言でキャンセルする。待てるのは 1 本だけで、キューではない。
+# 連続で 3 回メンションすると 2 回目は実行されずエラーも出ずに消える。
+concurrency:
+  group: claude-${{ github.event.pull_request.number || github.event.issue.number }}
+  cancel-in-progress: false
+
+# 「@claude この Issue を実装して」のようにコミット・push を伴う依頼に応えるため write。
+# 【注意】この permissions が制限するのは自動発行の GITHUB_TOKEN だけで、
+# claude-code-action が OIDC で交換する GitHub App トークンのスコープは制限しない。
+permissions:
+  contents: write
+  pull-requests: write
+  issues: write
+  # OIDC で GitHub App トークンを交換するために必須（省略すると action が起動できない）。
+  id-token: write
+  # github_ci MCP サーバー（CI ステータス参照）を有効化するために必要。
+  actions: read
+
+jobs:
+  claude:
+    # 公開リポジトリのため、起動できるのは write 権限相当（OWNER / MEMBER / COLLABORATOR）の
+    # 発言者に限定する。第三者の Issue・コメントでは起動しない。
+    #
+    # contains は「明らかにメンションが無いイベントを弾く」粗いフィルタで、
+    # 最終判定は action 側が単語境界 `(^|\s)@claude([\s.,!?;:]|$)` で行う。
+    # 「@claude、レビューして」のように直後が全角文字だとジョブは起動するのに
+    # action 側が No trigger で終わり無反応に見える。@claude の前後は半角スペースで区切ること。
+    #
+    # issue 本文の判定を `github.event_name == 'issues'` に限定しているのは、
+    # issue_comment イベントにも github.event.issue が含まれるため。限定しないと
+    # 本文に一度 @claude を書いた Issue で以降の全コメントが起動条件を満たしてしまう。
+    if: |
+      (github.event_name == 'issues' &&
+        contains(fromJSON('["OWNER", "MEMBER", "COLLABORATOR"]'), github.event.issue.author_association) &&
+        (contains(github.event.issue.body, '@claude') ||
+         contains(github.event.issue.title, '@claude'))) ||
+      ((github.event_name == 'issue_comment' || github.event_name == 'pull_request_review_comment') &&
+        contains(fromJSON('["OWNER", "MEMBER", "COLLABORATOR"]'), github.event.comment.author_association) &&
+        contains(github.event.comment.body, '@claude')) ||
+      (github.event_name == 'pull_request_review' &&
+        contains(fromJSON('["OWNER", "MEMBER", "COLLABORATOR"]'), github.event.review.author_association) &&
+        contains(github.event.review.body, '@claude'))
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 1
+      # SHA 固定。`@v1` は可変タグで、上流の更新で actor 権限チェックや git-push ラッパーの
+      # 挙動が予告なく変わりうるため、レビュー済みのリリースに固定する。
+      - uses: anthropics/claude-code-action@a874e9ecd7bb36efdad65429c6b35815f5a08f10 # v1.0.210
+        with:
+          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          # tag モードで動き、ここで指定したツールは action 既定のツール
+          # （Read/Grep/Glob/LS/git add/commit/push 系）とマージされる。
+          #
+          # 【前提となる脅威モデル】
+          # tag モードは action 側が `--permission-mode acceptEdits` を必ず付けるため、
+          # $GITHUB_WORKSPACE 内のファイル編集は --allowedTools の内容に関わらず自動許可され、
+          # git add / commit / push も既定で有効。つまり「読ませたテキストに仕込まれた
+          # プロンプトインジェクション → 任意コード改変 → push」の経路は元から通っている。
+          # ツールの絞り込みではこれを塞げない。塞いでいるのは起動者を write 権限相当に
+          # 限定する上の if だけなので、第三者が書けるテキスト（fork PR の差分など）を
+          # @claude に読ませないこと。
+          #
+          # 【地雷】`Write` / `Edit` をここに明示すると acceptEdits のワークスペース外制限が
+          # 外れ、runner 全体（`~/.bashrc` 等）へ書けるようになる。追加しないこと。
+          claude_args: |
+            --allowedTools "mcp__github_inline_comment__create_inline_comment,Bash(gh pr create:*),Bash(gh pr diff:*),Bash(gh pr view:*)"

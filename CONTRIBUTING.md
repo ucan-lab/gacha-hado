@@ -78,6 +78,14 @@ git worktree add .worktrees/<名前> <ブランチ>
 3. CI（lint / check / test:unit / build-storybook）がすべて通ることを確認する。
 4. レビューを受けてマージする。
 
+## Claude によるレビュー・実装支援
+
+GitHub Actions 上で Claude Code が動きます（`.github/workflows/claude.yml` / `claude-review.yml`）。
+
+- `develop` 宛ての PR には自動でコードレビューが付きます。再レビューは PR に `claude-review` ラベルを貼ると 1 回走ります（ラベルは自動で外れます）。再レビューでは前回の指摘とそれへの返信を読んだうえで、解消済みの指摘は再掲しません（すべて解消していれば「前回指摘は解消済み。新規指摘なし。」とだけ投稿します）。fork からの PR は自動レビュー対象外です（`@claude` でのレビュー依頼も行わず、人間がレビューします）。
+- Issue や PR のコメントで `@claude` にメンションすると、レビュー依頼や実装依頼（例: `@claude この Issue を実装して`）ができます。起動できるのはリポジトリの write 権限保持者のみです。
+- `@claude` の前後は半角スペースで区切ってください。`@claude、レビューして` のように直後が全角文字だと検出されず、無反応になります。
+
 ## i18n ルール
 
 翻訳ファイルは `messages/` ディレクトリで管理しています。
