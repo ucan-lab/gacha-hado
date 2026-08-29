@@ -71,7 +71,7 @@ jobs:
           fetch-depth: 1
       # SHA 固定。`@v1` は可変タグで、上流の更新で actor 権限チェックや git-push ラッパーの
       # 挙動が予告なく変わりうるため、レビュー済みのリリースに固定する。
-      - uses: anthropics/claude-code-action@c81e3bc69d1b18badbb63ba39581218f02421678 # v1.0.201
+      - uses: anthropics/claude-code-action@a874e9ecd7bb36efdad65429c6b35815f5a08f10 # v1.0.210
         with:
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
           # tag モードで動き、ここで指定したツールは action 既定のツール
