@@ -94,8 +94,6 @@
           {/each}
         </div>
 
-        <slot name="settings" />
-
         <!-- トリオでも主ボタンが常に画面内に見えるよう、下端に貼り付ける -->
         <div
           class="action-bar sticky -bottom-px flex w-full max-w-lg gap-3 px-4 pt-4 pb-4"
@@ -126,8 +124,6 @@
             <Player {parameters} />
           {/each}
         </div>
-
-        <slot name="settings" />
 
         <div class="grid w-full max-w-lg grid-cols-2 gap-4 px-4">
           <button
