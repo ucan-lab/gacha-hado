@@ -20,15 +20,15 @@ export function createParameterStore(patternList: PatternItem[], storeName = 'de
   const parameters = writable<ParameterObject>(initial);
 
   // ウェイト抽選ロジック
-  function getWeightedRandomSelectionParameter() {
-    if (patternList.length === 0) {
+  function pickWeightedParameter(candidates: PatternItem[]) {
+    if (candidates.length === 0) {
       throw new Error(`No valid patterns available in store: ${storeName}`);
     }
 
-    const totalWeight = patternList.reduce((sum, item) => sum + item.weight, 0);
+    const totalWeight = candidates.reduce((sum, item) => sum + item.weight, 0);
     let randomWeight = Math.random() * totalWeight;
 
-    for (const item of patternList) {
+    for (const item of candidates) {
       randomWeight -= item.weight;
       if (randomWeight <= 0) {
         return item.parameter;
@@ -41,13 +41,37 @@ export function createParameterStore(patternList: PatternItem[], storeName = 'de
 
   // ランダムパラメータ生成関数
   function generateRandomParameters() {
-    const randomParameter = getWeightedRandomSelectionParameter();
+    const randomParameter = pickWeightedParameter(patternList);
 
     const parameterObj = parseParameterString(randomParameter);
 
     parameters.set(parameterObj);
 
     return parameterObj;
+  }
+
+  /**
+   * チーム全員分をまとめて抽選する
+   * @param count 抽選するプレイヤー数
+   * @param unique true ならチーム内で同じパラメータが出ないようにする
+   */
+  function generateTeamParameters(count: number, unique = false): ParameterObject[] {
+    const used = new Set<string>();
+
+    return Array.from({ length: count }, () => {
+      const remaining = unique
+        ? patternList.filter((item) => !used.has(item.parameter))
+        : patternList;
+
+      // 候補を使い切ったときは抽選を止めずに重複を許す
+      const parameter = pickWeightedParameter(remaining.length > 0 ? remaining : patternList);
+      used.add(parameter);
+
+      const parameterObj = parseParameterString(parameter);
+      parameters.set(parameterObj);
+
+      return parameterObj;
+    });
   }
 
   // リセット関数
@@ -59,6 +83,7 @@ export function createParameterStore(patternList: PatternItem[], storeName = 'de
   return {
     parameters,
     generateRandomParameters,
+    generateTeamParameters,
     resetParameters
   };
 }

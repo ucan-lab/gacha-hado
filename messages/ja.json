@@ -23,6 +23,7 @@
   "home": "ホーム",
   "roll": "ガチャを回す",
   "reset": "リセット",
+  "uniqueParameters": "パラメータを被らせない",
   "dropRate": "排出率",
   "dropRateTable": "排出率テーブル",
   "parameter": "パラメーター",
