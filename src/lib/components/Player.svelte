@@ -1,13 +1,10 @@
 <script lang="ts">
   import Parameter from './Parameter.svelte';
-  export let parameters;
+  import type { Writable } from 'svelte/store';
+  import type { ParameterObject } from '$lib/types';
+  import { colors } from '$lib/utils/colors';
 
-  const colors = {
-    bulletSpeed: '#ED9E38',
-    bulletScale: '#74F74B',
-    chargeSpeed: '#DD32F6',
-    shieldStrength: '#6FEEF9'
-  };
+  export let parameters: Writable<ParameterObject>;
 </script>
 
 <div class="mb-2 flex w-full max-w-lg flex-wrap justify-center gap-2 sm:gap-4">

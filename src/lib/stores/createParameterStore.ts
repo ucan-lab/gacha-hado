@@ -1,17 +1,6 @@
 import { writable } from 'svelte/store';
-
-// パターン項目の型定義例（必要に応じて修正）
-type PatternItem = {
-  parameter: string; // "1234" のような4桁のパラメータ文字列
-  weight: number;
-};
-
-interface ParameterObject {
-  bulletSpeed: number;
-  bulletScale: number;
-  chargeSpeed: number;
-  shieldStrength: number;
-}
+import type { ParameterObject, PatternItem } from '$lib/types';
+import { parseParameterString } from '$lib/utils/parseParameterString';
 
 /**
  * パラメータストア + パラメータ生成関数 + リセット関数を作るファクトリ
@@ -54,12 +43,7 @@ export function createParameterStore(patternList: PatternItem[], storeName = 'de
   function generateRandomParameters() {
     const randomParameter = getWeightedRandomSelectionParameter();
 
-    const parameterObj: ParameterObject = {
-      bulletSpeed: parseInt(randomParameter[0], 10),
-      bulletScale: parseInt(randomParameter[1], 10),
-      chargeSpeed: parseInt(randomParameter[2], 10),
-      shieldStrength: parseInt(randomParameter[3], 10)
-    };
+    const parameterObj = parseParameterString(randomParameter);
 
     parameters.set(parameterObj);
 

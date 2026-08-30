@@ -1,20 +1,6 @@
 import { teamPatterns } from '$lib/utils/teamPatterns';
-
-interface ParameterObject {
-  bulletSpeed: number;
-  bulletScale: number;
-  chargeSpeed: number;
-  shieldStrength: number;
-}
-
-function parseParameterString(param: string): ParameterObject {
-  return {
-    bulletSpeed: parseInt(param[0], 10),
-    bulletScale: parseInt(param[1], 10),
-    chargeSpeed: parseInt(param[2], 10),
-    shieldStrength: parseInt(param[3], 10)
-  };
-}
+import type { ParameterObject } from '$lib/types';
+import { parseParameterString } from '$lib/utils/parseParameterString';
 
 // プレイヤー1～3のパラメータを返す
 export function generateGachiMatchParameters(): ParameterObject[] {

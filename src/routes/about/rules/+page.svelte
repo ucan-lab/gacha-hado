@@ -1,63 +1,56 @@
 <script lang="ts">
-  import Header from '$lib/components/Header.svelte';
-  import Footer from '$lib/components/Footer.svelte';
-  import * as m from '$lib/paraglide/messages';
   import UnderConstruction from '$lib/components/UnderConstruction.svelte';
   import Breadcrumb from '$lib/components/Breadcrumb.svelte';
+  import Seo from '$lib/components/Seo.svelte';
+  import { buildBreadcrumb } from '$lib/breadcrumb';
+  import { page } from '$app/state';
+  import * as m from '$lib/paraglide/messages';
 </script>
 
-<Header />
+<Seo title={m.rulesTitle()} description={m.rulesDescription()} />
 
 <div class="bg-primary flex min-h-screen flex-col">
   <div class="container mx-auto p-4">
-    <Breadcrumb
-      items={[
-        { label: 'ホーム', href: '/' },
-        { label: 'HADOについて', href: '/about' },
-        { label: 'HADOとは', href: '/about/what-is-hado' }
-      ]}
-    />
+    <Breadcrumb items={buildBreadcrumb(page.url.pathname)} />
 
     <UnderConstruction />
 
-    <h1 class="mb-8 text-center text-3xl font-bold">HADO ルール</h1>
+    <h1 class="mb-8 text-center text-3xl font-bold">{m.navRules()}</h1>
 
     <div class="prose mx-auto max-w-3xl">
-      <h2 class="mb-4 text-2xl font-bold">基本ルール</h2>
+      <h2 class="mb-4 text-2xl font-bold">{m.rulesBasicTitle()}</h2>
       <ul class="mb-6 list-disc pl-6">
-        <li>3対3のチーム戦で行われます</li>
-        <li>1ゲーム80秒、引き分けの場合は1点選手の延長戦となります</li>
-        <li>相手のライフを0にすると1ポイント獲得です</li>
+        <li>{m.rulesBasic1()}</li>
+        <li>{m.rulesBasic2()}</li>
+        <li>{m.rulesBasic3()}</li>
         <li>
-          ライフが0なると
+          {m.rulesBasic4()}
           <ul>
-            <li>3秒後に復活します</li>
-            <li>復活するまでチャージが行えません</li>
+            <li>{m.rulesBasic4Item1()}</li>
+            <li>{m.rulesBasic4Item2()}</li>
           </ul>
         </li>
       </ul>
 
-      <h2 class="mb-4 text-2xl font-bold">攻撃方法</h2>
+      <h2 class="mb-4 text-2xl font-bold">{m.rulesAttackTitle()}</h2>
       <ul class="mb-6 list-disc pl-6">
-        <li>腕を90度上げるとチャージできます</li>
-        <li>チャージは5発分まで溜められます</li>
-        <li>腕を突き出すように振るとエネルギー弾が発射されます</li>
-        <li>エネルギー弾はヘッドデバイスが向いてる方向へ飛んでいきます</li>
-        <li>エネルギー弾の速さ、大きさはステータスによって決まります</li>
+        <li>{m.rulesAttack1()}</li>
+        <li>{m.rulesAttack2()}</li>
+        <li>{m.rulesAttack3()}</li>
+        <li>{m.rulesAttack4()}</li>
+        <li>{m.rulesAttack5()}</li>
       </ul>
 
-      <h2 class="mb-4 text-2xl font-bold">防御方法</h2>
+      <h2 class="mb-4 text-2xl font-bold">{m.rulesDefenseTitle()}</h2>
       <ul class="mb-6 list-disc pl-6">
-        <li>腕を下げるとシールドチャージできます</li>
-        <li>シールドチャージが溜まった状態で腕を振り上げるとシールドを展開できます</li>
-        <li>シールドの向きはヘッドデバイスの向きによって決まります</li>
-        <li>シールドチャージは3秒間かかります。※チャージパラメータは影響しません</li>
-        <li>シールドは味方のエネルギー弾はすり抜け、敵のエネルギー弾は防ぐことができます</li>
-        <li>シールドは相手のエネルギー弾、または時間経過によって消滅します</li>
-        <li>シールドの枚数、耐久度はシールドパラメータによって決まります</li>
+        <li>{m.rulesDefense1()}</li>
+        <li>{m.rulesDefense2()}</li>
+        <li>{m.rulesDefense3()}</li>
+        <li>{m.rulesDefense4()}</li>
+        <li>{m.rulesDefense5()}</li>
+        <li>{m.rulesDefense6()}</li>
+        <li>{m.rulesDefense7()}</li>
       </ul>
     </div>
   </div>
 </div>
-
-<Footer />

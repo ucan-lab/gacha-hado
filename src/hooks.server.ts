@@ -1,28 +1,26 @@
 import type { Handle } from '@sveltejs/kit';
-import { i18n } from '$lib/i18n';
-
-const handleParaglide: Handle = i18n.handle();
+import { paraglideMiddleware } from '$lib/paraglide/server';
+import { getLocale, getTextDirection } from '$lib/paraglide/runtime';
+import { normalizeTheme } from '$lib/constants/theme';
 
 export const handle: Handle = async ({ event, resolve }) => {
-  const response = await handleParaglide({ event, resolve });
+  return paraglideMiddleware(event.request, async ({ request }) => {
+    event.request = request;
 
-  // Flash of Unstyled Content 対策でクッキーからテーマを取得
-  let theme = event.cookies.get('theme') || 'light';
-  if (theme === 'auto') {
-    theme = 'light';
-  }
+    // Flash of Unstyled Content 対策でクッキーからテーマを取得する。
+    // data-theme へ注入する前に共有の許可リスト(normalizeTheme)で検証し、
+    // 許可リスト外の任意値・クォート細工は light に落として属性ブレイクアウトを封じる。
+    const theme = normalizeTheme(event.cookies.get('theme'));
 
-  const responseText = await response.text();
-  const modifiedResponseText = responseText.replace('%THEME%', theme);
-
-  // Content-Length を再計算しないと ERR_CONTENT_LENGTH_MISMATCH エラーが発生するため
-  const contentLength = new TextEncoder().encode(modifiedResponseText).length;
-  const headers = new Headers(response.headers);
-  headers.delete('Content-Length');
-  headers.set('Content-Length', contentLength.toString());
-
-  return new Response(modifiedResponseText, {
-    status: response.status,
-    headers
+    // %THEME% も transformPageChunk 内で置換し、HTML ページのみを対象にする。
+    // resolve() の戻り値をそのまま返すことで、ストリーミングを保ち、
+    // 非HTML/静的/204/304 などのレスポンスを再構築しない（Content-Length 手動計算も不要）。
+    return resolve(event, {
+      transformPageChunk: ({ html }) =>
+        html
+          .replace('%paraglide.lang%', getLocale())
+          .replace('%paraglide.textDirection%', getTextDirection())
+          .replace('%THEME%', theme)
+    });
   });
 };

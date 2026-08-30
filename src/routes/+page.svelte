@@ -1,11 +1,10 @@
 <script lang="ts">
-  import Header from '$lib/components/Header.svelte';
-  import Footer from '$lib/components/Footer.svelte';
   import { IconUser, IconUsers, IconUsersGroup, IconFlame, IconBolt } from '@tabler/icons-svelte';
   import * as m from '$lib/paraglide/messages';
+  import Seo from '$lib/components/Seo.svelte';
 </script>
 
-<Header />
+<Seo />
 
 <div class="bg-secondary flex min-h-screen flex-col">
   <section class="bg-primary flex flex-col items-center justify-center py-6">
@@ -41,12 +40,12 @@
   <section class="bg-secondary mt-6 mb-6">
     <div class="flex flex-wrap justify-center gap-4">
       <a
-        aria-label={m.fullAtacker()}
-        href="/full-atacker"
+        aria-label={m.fullAttacker()}
+        href="/full-attacker"
         class="menu-btn bg-sky-600 text-white hover:bg-sky-700"
       >
         <IconFlame />
-        <span>{m.fullAtacker()}</span>
+        <span>{m.fullAttacker()}</span>
       </a>
     </div>
   </section>
@@ -64,8 +63,6 @@
     </div>
   </section>
 </div>
-
-<Footer />
 
 <style>
   .menu-btn {

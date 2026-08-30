@@ -2,3 +2,8 @@
 package-lock.json
 pnpm-lock.yaml
 yarn.lock
+
+# Paraglide (generated) — settings.json 以外は生成物のため除外
+src/lib/paraglide
+project.inlang/*
+!project.inlang/settings.json

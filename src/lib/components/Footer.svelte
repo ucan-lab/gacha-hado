@@ -2,12 +2,15 @@
   const appVersion = __APP_VERSION__;
   const appDeployDate = __APP_DEPLOY_DATE__;
   import { IconBrandX, IconBrandGithub, IconNote } from '@tabler/icons-svelte';
+  import * as m from '$lib/paraglide/messages';
 </script>
 
 <footer class="bg-secondary mt-auto py-4 text-center">
   <p class="flex items-center justify-center space-x-2">
-    <a aria-label="Release Note" href="/release-note" class="hover:underline"
-      >{appVersion} - {appDeployDate}</a
+    <a
+      aria-label={m.releaseNote({ version: appVersion })}
+      href="/release-note"
+      class="hover:underline">{appVersion} - {appDeployDate}</a
     >
     <span>Created by ucan.</span>
     <a aria-label="X" href="https://x.com/ucan_lab" target="_blank" class="inline-flex">

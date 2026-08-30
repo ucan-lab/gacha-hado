@@ -1,207 +1,105 @@
 <script lang="ts">
-  import Header from '$lib/components/Header.svelte';
-  import Footer from '$lib/components/Footer.svelte';
-  import { IconExternalLink, IconTools } from '@tabler/icons-svelte';
-  import * as m from '$lib/paraglide/messages';
+  import { IconExternalLink } from '@tabler/icons-svelte';
   import UnderConstruction from '$lib/components/UnderConstruction.svelte';
   import Breadcrumb from '$lib/components/Breadcrumb.svelte';
+  import ParameterTable from '$lib/components/ParameterTable.svelte';
+  import Seo from '$lib/components/Seo.svelte';
+  import { buildBreadcrumb } from '$lib/breadcrumb';
+  import { page } from '$app/state';
+  import * as m from '$lib/paraglide/messages';
+
+  const speedTable = {
+    headers: ['Lv', m.parametersSpeedTitle()],
+    rows: [
+      ['1', '13km/h'],
+      ['2', '20km/h'],
+      ['3', '27km/h'],
+      ['4', '31km/h'],
+      ['5', '34km/h']
+    ]
+  };
+
+  const scaleTable = {
+    headers: ['Lv', m.parametersSizeCol(), m.parametersLifeSizeCol()],
+    rows: [
+      ['1', '16cm', m.parametersLifeFraction({ n: '0.8' })],
+      ['2', '22cm', m.parametersLifeFraction({ n: '1.1' })],
+      ['3', '30cm', m.parametersLifeFraction({ n: '1.5' })],
+      ['4', '45cm', m.parametersLifeFraction({ n: '2.25' })],
+      ['5', '60cm', m.parametersLifeFraction({ n: '3' })]
+    ]
+  };
+
+  const chargeTable = {
+    headers: ['Lv', m.parametersChargeTimeCol(), m.parametersMatchShotsCol()],
+    rows: [
+      ['1', m.parametersSeconds({ n: '16' }), m.parametersShotsRange({ min: '20', max: '24' })],
+      ['2', m.parametersSeconds({ n: '11' }), m.parametersShotsRange({ min: '30', max: '34' })],
+      ['3', m.parametersSeconds({ n: '7.5' }), m.parametersShotsRange({ min: '40', max: '44' })],
+      ['4', m.parametersSeconds({ n: '4.5' }), m.parametersShotsRange({ min: '50', max: '60' })],
+      ['5', m.parametersSeconds({ n: '3' }), m.parametersShotsRange({ min: '70', max: '80' })]
+    ]
+  };
+
+  const shieldTable = {
+    headers: ['Lv', m.parametersShieldDurabilityCol(), m.parametersShieldDurationCol()],
+    rows: [
+      ['1', m.parametersShots({ n: '4' }), m.parametersSeconds({ n: '13' })],
+      ['2', m.parametersShots({ n: '5' }), m.parametersSeconds({ n: '17' })],
+      ['3', m.parametersShots({ n: '6' }), m.parametersSeconds({ n: '21' })],
+      ['4', m.parametersShots({ n: '7' }), m.parametersSeconds({ n: '25' })],
+      ['5', m.parametersShots({ n: '8' }), m.parametersSeconds({ n: '26' })]
+    ]
+  };
 </script>
 
-<Header />
+<Seo title={m.parametersTitle()} description={m.parametersDescription()} />
 
 <div class="bg-primary flex min-h-screen flex-col">
   <div class="container mx-auto p-4">
-    <Breadcrumb
-      items={[
-        { label: 'ホーム', href: '/' },
-        { label: 'HADOについて', href: '/about' },
-        { label: 'パラメータ解説', href: '/about/parameters' }
-      ]}
-    />
+    <Breadcrumb items={buildBreadcrumb(page.url.pathname)} />
 
     <UnderConstruction />
 
-    <h1 class="text-primary mb-8 text-center text-3xl font-bold">パラメータ解説</h1>
+    <h1 class="text-primary mb-8 text-center text-3xl font-bold">{m.navParameters()}</h1>
 
     <div class="prose mx-auto max-w-3xl">
       <div class="bg-secondary mb-8 rounded-lg p-6">
-        <h2 class="text-primary mb-4 text-xl font-bold">パラメータの基本ルール</h2>
+        <h2 class="text-primary mb-4 text-xl font-bold">{m.parametersBasicTitle()}</h2>
         <ul class="text-secondary list-disc pl-6">
-          <li>各パラメータは1〜5ポイント割り振りできます</li>
-          <li>パラメータは合計10ポイントです</li>
+          <li>{m.parametersBasic1()}</li>
+          <li>{m.parametersBasic2()}</li>
         </ul>
       </div>
 
       <div class="mb-8">
-        <h2 class="text-primary mb-4 text-2xl font-bold">スピード</h2>
-        <p class="text-secondary mb-4">パラメータLvが上がるごとに移動速度が上昇します。</p>
-        <div class="overflow-x-auto">
-          <table class="w-full border-collapse">
-            <thead>
-              <tr>
-                <th class="border p-2">Lv</th>
-                <th class="border p-2">スピード</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td class="border p-2">1</td>
-                <td class="border p-2">13km/h</td>
-              </tr>
-              <tr>
-                <td class="border p-2">2</td>
-                <td class="border p-2">20km/h</td>
-              </tr>
-              <tr>
-                <td class="border p-2">3</td>
-                <td class="border p-2">27km/h</td>
-              </tr>
-              <tr>
-                <td class="border p-2">4</td>
-                <td class="border p-2">31km/h</td>
-              </tr>
-              <tr>
-                <td class="border p-2">5</td>
-                <td class="border p-2">34km/h</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+        <h2 class="text-primary mb-4 text-2xl font-bold">{m.parametersSpeedTitle()}</h2>
+        <p class="text-secondary mb-4">{m.parametersSpeedDesc()}</p>
+        <ParameterTable headers={speedTable.headers} rows={speedTable.rows} />
       </div>
 
       <div class="mb-8">
-        <h2 class="text-primary mb-4 text-2xl font-bold">スケール</h2>
+        <h2 class="text-primary mb-4 text-2xl font-bold">{m.parametersScaleTitle()}</h2>
         <p class="text-secondary mb-4">
-          パラメータLvが上がるごとに発射弾のサイズが大きくなります。
+          {m.parametersScaleDesc()}
         </p>
-        <div class="overflow-x-auto">
-          <table class="w-full border-collapse">
-            <thead>
-              <tr>
-                <th class="border p-2">Lv</th>
-                <th class="border p-2">大きさ</th>
-                <th class="border p-2">ライフと大きさ比較</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td class="border p-2">1</td>
-                <td class="border p-2">16cm</td>
-                <td class="border p-2">ライフ0.8枚分</td>
-              </tr>
-              <tr>
-                <td class="border p-2">2</td>
-                <td class="border p-2">22cm</td>
-                <td class="border p-2">ライフ1.1枚分</td>
-              </tr>
-              <tr>
-                <td class="border p-2">3</td>
-                <td class="border p-2">30cm</td>
-                <td class="border p-2">ライフ1.5枚分</td>
-              </tr>
-              <tr>
-                <td class="border p-2">4</td>
-                <td class="border p-2">45cm</td>
-                <td class="border p-2">ライフ2.25枚分</td>
-              </tr>
-              <tr>
-                <td class="border p-2">5</td>
-                <td class="border p-2">60cm</td>
-                <td class="border p-2">ライフ3枚分</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+        <ParameterTable headers={scaleTable.headers} rows={scaleTable.rows} />
       </div>
 
       <div class="mb-8">
-        <h2 class="text-primary mb-4 text-2xl font-bold">チャージ</h2>
-        <p class="text-secondary mb-4">5発分のチャージにかかる時間が短縮されます。</p>
-        <div class="overflow-x-auto">
-          <table class="w-full border-collapse">
-            <thead>
-              <tr>
-                <th class="border p-2">Lv</th>
-                <th class="border p-2">5発分のチャージ時間</th>
-                <th class="border p-2">1試合の球数目安</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td class="border p-2">1</td>
-                <td class="border p-2">16秒</td>
-                <td class="border p-2">20〜24発</td>
-              </tr>
-              <tr>
-                <td class="border p-2">2</td>
-                <td class="border p-2">11秒</td>
-                <td class="border p-2">30〜34発</td>
-              </tr>
-              <tr>
-                <td class="border p-2">3</td>
-                <td class="border p-2">7.5秒</td>
-                <td class="border p-2">40〜44発</td>
-              </tr>
-              <tr>
-                <td class="border p-2">4</td>
-                <td class="border p-2">4.5秒</td>
-                <td class="border p-2">50〜60発</td>
-              </tr>
-              <tr>
-                <td class="border p-2">5</td>
-                <td class="border p-2">3秒</td>
-                <td class="border p-2">70〜80発</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+        <h2 class="text-primary mb-4 text-2xl font-bold">{m.parametersChargeTitle()}</h2>
+        <p class="text-secondary mb-4">{m.parametersChargeDesc()}</p>
+        <ParameterTable headers={chargeTable.headers} rows={chargeTable.rows} />
       </div>
 
       <div class="mb-8">
-        <h2 class="text-primary mb-4 text-2xl font-bold">シールド</h2>
-        <p class="text-secondary mb-4">シールドの耐久力と持続時間が向上します。</p>
-        <div class="overflow-x-auto">
-          <table class="w-full border-collapse">
-            <thead>
-              <tr>
-                <th class="border p-2">Lv</th>
-                <th class="border p-2">耐久力</th>
-                <th class="border p-2">持続時間</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td class="border p-2">1</td>
-                <td class="border p-2">4発</td>
-                <td class="border p-2">13秒</td>
-              </tr>
-              <tr>
-                <td class="border p-2">2</td>
-                <td class="border p-2">5発</td>
-                <td class="border p-2">17秒</td>
-              </tr>
-              <tr>
-                <td class="border p-2">3</td>
-                <td class="border p-2">6発</td>
-                <td class="border p-2">21秒</td>
-              </tr>
-              <tr>
-                <td class="border p-2">4</td>
-                <td class="border p-2">7発</td>
-                <td class="border p-2">25秒</td>
-              </tr>
-              <tr>
-                <td class="border p-2">5</td>
-                <td class="border p-2">8発</td>
-                <td class="border p-2">26秒</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+        <h2 class="text-primary mb-4 text-2xl font-bold">{m.parametersShieldTitle()}</h2>
+        <p class="text-secondary mb-4">{m.parametersShieldDesc()}</p>
+        <ParameterTable headers={shieldTable.headers} rows={shieldTable.rows} />
       </div>
     </div>
 
-    <h4 class="text-primary mb-4 text-xl font-bold">情報元</h4>
+    <h4 class="text-primary mb-4 text-xl font-bold">{m.parametersSourceTitle()}</h4>
     <ul class="text-secondary list-disc pl-6">
       <li>
         <a
@@ -209,7 +107,7 @@
           target="_blank"
           class="inline-flex items-center text-blue-600 hover:text-blue-800 hover:underline"
         >
-          HADO バージョンアップデートとパラメーター調整のお知らせ|HADO公式
+          {m.parametersSource1()}
           <IconExternalLink class="ml-1 h-4 w-4" />
         </a>
       </li>
@@ -219,11 +117,10 @@
           target="_blank"
           class="inline-flex items-center text-blue-600 hover:text-blue-800 hover:underline"
         >
-          【スポーツ】HADOステータス仕様【アプデ】|すっすー
+          {m.parametersSource2()}
           <IconExternalLink class="ml-1 h-4 w-4" />
         </a>
       </li>
     </ul>
   </div>
 </div>
-<Footer />

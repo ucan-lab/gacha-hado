@@ -1,7 +1,7 @@
 <script lang="ts">
-  export let name;
-  export let value;
-  export let color;
+  export let name: string;
+  export let value: number;
+  export let color: string;
 </script>
 
 <div
@@ -9,7 +9,7 @@
 >
   <div class="relative mb-1 flex w-full flex-col-reverse gap-1">
     <!-- eslint-disable-next-line @typescript-eslint/no-unused-vars -->
-    {#each Array(5).fill(0) as _, index}
+    {#each Array(5).fill(0) as _, index (index)}
       <div class="h-7 rounded" style="background-color: {index < value ? color : '#2D2D2D'}"></div>
     {/each}
     <div
