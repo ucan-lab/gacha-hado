@@ -83,6 +83,8 @@
         {/each}
       </div>
 
+      <slot name="settings" />
+
       <div class="grid w-full max-w-lg grid-cols-2 gap-4 px-4">
         <button
           aria-label={m.roll()}
