@@ -14,6 +14,7 @@
     IconMoonFilled
   } from '@tabler/icons-svelte';
   import * as m from '$lib/paraglide/messages';
+  import { uniqueParameters } from '$lib/stores/settings';
   import QrCodeModal from '$lib/components/QrCodeModal.svelte';
   import LanguageMenu from '$lib/components/LanguageMenu.svelte';
 
@@ -130,7 +131,7 @@
       </button>
       {#if $menuOpen}
         <div
-          class="hamburger-menu-container bg-secondary absolute right-0 z-60 mt-3 w-60 rounded p-2 shadow-lg"
+          class="hamburger-menu-container bg-secondary absolute right-0 z-60 mt-3 w-72 rounded p-2 shadow-lg"
         >
           {#each navGroups as group, i (i)}
             {#if i > 0}
@@ -147,6 +148,19 @@
               </a>
             {/each}
           {/each}
+
+          <hr class="my-2" />
+
+          <label
+            class="bg-secondary-hover flex cursor-pointer items-center justify-between gap-2 rounded px-4 py-2"
+          >
+            {m.uniqueParameters()}
+            <input
+              type="checkbox"
+              class="h-4 w-4 cursor-pointer"
+              bind:checked={$uniqueParameters}
+            />
+          </label>
         </div>
       {/if}
     </div>
