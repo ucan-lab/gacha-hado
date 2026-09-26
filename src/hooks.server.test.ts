@@ -68,7 +68,7 @@ describe('handle hook (#139 レスポンス非破壊)', () => {
     const original = new Response(stream, { headers: { 'content-type': 'application/json' } });
     const resolve = vi.fn(async () => original);
 
-    const res = await run(makeEvent('dark'), resolve);
+    const res = await run(makeEvent('classic-dark'), resolve);
 
     expect(res).toBe(original); // 再構築していない（同一インスタンス）
     expect(original.bodyUsed).toBe(false); // hook がボディを消費していない（ストリーム保持）
@@ -86,15 +86,15 @@ describe('handle hook (#139 レスポンス非破壊)', () => {
       return new Response(html, { headers: { 'content-type': 'text/html' } });
     });
 
-    const res = await run(makeEvent('dark'), resolve);
+    const res = await run(makeEvent('classic-dark'), resolve);
     const text = await res.text();
 
-    expect(text).toContain('data-theme="dark"');
+    expect(text).toContain('data-theme="classic-dark"');
     expect(text).toContain('lang="ja"');
     expect(text).toContain('dir="ltr"');
   });
 
-  it('theme=auto は light に正規化される', async () => {
+  it('theme=auto は neon に正規化される', async () => {
     const resolve = vi.fn(
       async (_event: unknown, opts: ResolveOpts) =>
         new Response(opts.transformPageChunk({ html: 'data-theme="%THEME%"', done: true }))
@@ -102,53 +102,58 @@ describe('handle hook (#139 レスポンス非破壊)', () => {
 
     const res = await run(makeEvent('auto'), resolve);
 
-    expect(await res.text()).toContain('data-theme="light"');
+    expect(await res.text()).toContain('data-theme="neon"');
   });
 });
 
 describe('handle hook (#140 theme 許可リスト検証)', () => {
-  it('theme=dark は dark を注入する', async () => {
-    expect(await themeOf('dark')).toBe('dark');
+  it('theme=classic-dark は classic-dark を注入する', async () => {
+    expect(await themeOf('classic-dark')).toBe('classic-dark');
   });
 
   it('theme=neon は neon を注入する', async () => {
     expect(await themeOf('neon')).toBe('neon');
   });
 
-  it('theme=light は light を注入する', async () => {
-    expect(await themeOf('light')).toBe('light');
+  it('theme=classic-light は classic-light を注入する', async () => {
+    expect(await themeOf('classic-light')).toBe('classic-light');
   });
 
-  it('theme=auto は light に正規化される', async () => {
-    expect(await themeOf('auto')).toBe('light');
+  it('改名前の theme=light / theme=dark は neon に移行する', async () => {
+    expect(await themeOf('light')).toBe('neon');
+    expect(await themeOf('dark')).toBe('neon');
   });
 
-  it('cookie 未設定は light にフォールバックする', async () => {
-    expect(await themeOf(undefined)).toBe('light');
+  it('theme=auto は neon に正規化される', async () => {
+    expect(await themeOf('auto')).toBe('neon');
   });
 
-  it('クォートを含む細工値は light に落ち、data-theme 属性をブレイクアウトしない', async () => {
+  it('cookie 未設定は neon にフォールバックする', async () => {
+    expect(await themeOf(undefined)).toBe('neon');
+  });
+
+  it('クォートを含む細工値は neon に落ち、data-theme 属性をブレイクアウトしない', async () => {
     const malicious = '" onerror="alert(1)';
     const res = await run(makeEvent(malicious), htmlResolve);
     const html = await res.text();
 
-    expect(html).toContain('data-theme="light"');
+    expect(html).toContain('data-theme="neon"');
     expect(html).not.toContain('onerror');
   });
 });
 
 describe('handle hook (locals.theme)', () => {
   it('正規化したテーマを locals.theme に入れ、data-theme と同じ値にする', async () => {
-    const event = makeEvent('neon');
+    const event = makeEvent('classic-dark');
     await run(event, htmlResolve);
 
-    expect(event.locals.theme).toBe('neon');
+    expect(event.locals.theme).toBe('classic-dark');
   });
 
   it('許可リスト外の値は locals.theme でも既定値に正規化する', async () => {
     const event = makeEvent('" onerror="alert(1)');
     await run(event, htmlResolve);
 
-    expect(event.locals.theme).toBe('light');
+    expect(event.locals.theme).toBe('neon');
   });
 });

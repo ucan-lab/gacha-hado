@@ -1,13 +1,13 @@
-export const THEMES = ['neon', 'light', 'dark'] as const;
+export const THEMES = ['neon', 'classic-light', 'classic-dark'] as const;
 
 export type Theme = (typeof THEMES)[number];
 
-export const DEFAULT_THEME: Theme = 'light';
+export const DEFAULT_THEME: Theme = 'neon';
 
 export const isTheme = (value: unknown): value is Theme =>
   typeof value === 'string' && (THEMES as readonly string[]).includes(value);
 
-/** 許可リスト外・不正値（null/undefined/任意文字列）はデフォルト(light)へ正規化する。 */
+/** 許可リスト外・不正値（null/undefined/任意文字列）はデフォルト(neon)へ正規化する。 */
 export const normalizeTheme = (value: unknown): Theme => (isTheme(value) ? value : DEFAULT_THEME);
 
 /**

@@ -9,7 +9,7 @@ export const handle: Handle = async ({ event, resolve }) => {
 
     // Flash of Unstyled Content 対策でクッキーからテーマを取得する。
     // data-theme へ注入する前に共有の許可リスト(normalizeTheme)で検証し、
-    // 許可リスト外の任意値・クォート細工は light に落として属性ブレイクアウトを封じる。
+    // 許可リスト外の任意値・クォート細工は既定テーマに落として属性ブレイクアウトを封じる。
     const theme = normalizeTheme(event.cookies.get('theme'));
     // テーマで DOM を出し分けるコンポーネントが SSR 時にも同じ値を使えるよう、レイアウトの load に渡す
     event.locals.theme = theme;

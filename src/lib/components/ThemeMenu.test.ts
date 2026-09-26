@@ -25,7 +25,7 @@ describe('ThemeMenu', () => {
     const onSelect = vi.fn();
 
     render(ThemeMenu, {
-      props: { open: true, currentTheme: 'dark', onToggle: vi.fn(), onSelect }
+      props: { open: true, currentTheme: 'classic-dark', onToggle: vi.fn(), onSelect }
     });
 
     expect(screen.getByRole('button', { name: m.theme() }).getAttribute('aria-expanded')).toBe(
@@ -42,6 +42,6 @@ describe('ThemeMenu', () => {
     expect(onSelect).toHaveBeenCalledWith('neon');
 
     await fireEvent.click(screen.getByRole('button', { name: m.themeClassicLight() }));
-    expect(onSelect).toHaveBeenCalledWith('light');
+    expect(onSelect).toHaveBeenCalledWith('classic-light');
   });
 });
