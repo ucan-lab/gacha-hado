@@ -36,14 +36,18 @@
     <CurrentIcon />
   </button>
   {#if open}
-    <div class="bg-secondary absolute right-0 z-60 mt-2 w-48 rounded p-2 shadow-lg">
+    <div class="bg-secondary absolute right-0 z-60 mt-2 w-max rounded p-2 shadow-lg">
       {#each themes as theme (theme.value)}
         <button
           aria-current={currentTheme === theme.value ? 'true' : undefined}
-          class="bg-secondary-hover flex w-full cursor-pointer items-center gap-1 px-4 py-2 text-left"
+          class="bg-secondary-hover flex w-full cursor-pointer items-center gap-1 px-4 py-2 text-left whitespace-nowrap"
           onclick={() => onSelect(theme.value)}
         >
-          {#if currentTheme === theme.value}<IconCheck class="text-green-500" />{/if}
+          <!-- 選択中以外も場所を確保し、選択中のテーマでメニュー幅と文字位置が変わらないようにする -->
+          <IconCheck
+            class="text-green-500 {currentTheme === theme.value ? '' : 'invisible'}"
+            aria-hidden="true"
+          />
           {theme.label()}
         </button>
       {/each}
@@ -52,7 +56,7 @@
 </div>
 
 <style>
-  .theme-menu button {
+  .theme-menu > button {
     display: flex;
     align-items: center;
     justify-content: center;
