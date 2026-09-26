@@ -2,7 +2,7 @@
 @plugin '@tailwindcss/typography';
 @plugin '@tailwindcss/forms';
 @plugin '@tailwindcss/container-queries';
-@custom-variant dark (&:where(.dark, .dark *));
+@custom-variant neon (&:where([data-theme='neon'], [data-theme='neon'] *));
 
 @font-face {
   font-family: 'Noto Sans JP';
@@ -50,13 +50,34 @@
   --table-text-color: #eaeaea;
 }
 
+[data-theme='neon']:root {
+  --accent-color: #0a84ff;
+  --bg-primary-color: #121212;
+  --bg-secondary-color: #232323;
+  --bg-secondary-hover-color: #343434;
+  --text-primary-color: #eaeaea;
+  --text-secondary-color: #a1a1a1;
+  --border-color: #333333;
+  --table-header-bg: #454545;
+  --table-even-bg: #232323;
+  --table-odd-bg: #121212;
+  --table-border-color: #666666;
+  --table-text-color: #eaeaea;
+}
+
+[data-theme='neon'],
+[data-theme='dark'] {
+  color-scheme: dark;
+}
+
 body {
   margin: 0;
   font-family: 'Noto Sans JP', sans-serif;
   background-color: var(--bg-primary-color);
   color: var(--text-primary-color);
   border-color: var(--border-color);
-  transition: 1.2s;
+  transition-property: background-color, color, border-color;
+  transition-duration: 1.2s;
 }
 
 .bg-accent {

@@ -2,8 +2,8 @@ import { describe, it, expect } from 'vitest';
 import { normalizeTheme, isTheme, THEMES, DEFAULT_THEME } from './theme';
 
 describe('theme constants', () => {
-  it('THEMES は dark / light のみ', () => {
-    expect(THEMES).toEqual(['dark', 'light']);
+  it('THEMES は neon / light / dark のみ', () => {
+    expect(THEMES).toEqual(['neon', 'light', 'dark']);
   });
 
   it('DEFAULT_THEME は light', () => {
@@ -13,6 +13,7 @@ describe('theme constants', () => {
 
 describe('isTheme', () => {
   it('許可リストの値で true', () => {
+    expect(isTheme('neon')).toBe(true);
     expect(isTheme('dark')).toBe(true);
     expect(isTheme('light')).toBe(true);
   });
@@ -28,6 +29,7 @@ describe('isTheme', () => {
 
 describe('normalizeTheme', () => {
   it('許可リストの値はそのまま返す', () => {
+    expect(normalizeTheme('neon')).toBe('neon');
     expect(normalizeTheme('dark')).toBe('dark');
     expect(normalizeTheme('light')).toBe('light');
   });

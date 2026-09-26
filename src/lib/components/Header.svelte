@@ -3,19 +3,14 @@
   import { onMount, onDestroy } from 'svelte';
   import { writable } from 'svelte/store';
   import { theme } from '$lib/stores/theme';
-  import type { Theme } from '$lib/constants/theme';
+  import { normalizeTheme, type Theme } from '$lib/constants/theme';
   import { page } from '$app/state';
   import { browser } from '$app/environment';
-  import {
-    IconHome,
-    IconMenu2,
-    IconQrcode,
-    IconSunFilled,
-    IconMoonFilled
-  } from '@tabler/icons-svelte';
+  import { IconHome, IconMenu2, IconQrcode } from '@tabler/icons-svelte';
   import * as m from '$lib/paraglide/messages';
   import QrCodeModal from '$lib/components/QrCodeModal.svelte';
   import LanguageMenu from '$lib/components/LanguageMenu.svelte';
+  import ThemeMenu from '$lib/components/ThemeMenu.svelte';
 
   let showModal = false;
 
@@ -25,10 +20,15 @@
 
   const menuOpen = writable(false);
   const languageMenuOpen = writable(false);
+  const themeMenuOpen = writable(false);
+
+  // theme ストアはサーバでリクエスト間に共有され常に既定値のため、SSR では cookie 由来の page.data.theme を使う
+  $: currentTheme = browser ? $theme : normalizeTheme(page.data.theme);
 
   const toggleMenuState = (menu: string) => {
     menuOpen.set(menu === 'menu' ? !$menuOpen : false);
     languageMenuOpen.set(menu === 'language' ? !$languageMenuOpen : false);
+    themeMenuOpen.set(menu === 'theme' ? !$themeMenuOpen : false);
   };
 
   const changeLocaleWithMenuToggle = (locale: string) => {
@@ -36,13 +36,15 @@
     closeAllMenus();
   };
 
-  const changeTheme = (themeName: Theme) => {
+  const changeThemeWithMenuToggle = (themeName: Theme) => {
     theme.set(themeName);
+    closeAllMenus();
   };
 
   const closeAllMenus = () => {
     menuOpen.set(false);
     languageMenuOpen.set(false);
+    themeMenuOpen.set(false);
   };
 
   const closeMenuOnOutsideClick = (event: MouseEvent) => {
@@ -91,19 +93,12 @@
         <IconHome />
       </a>
     {/if}
-    <div class="theme-menu relative">
-      <button
-        aria-label={m.theme()}
-        class="flex cursor-pointer items-center gap-1 p-0 hover:underline"
-        on:click={() => changeTheme($theme === 'dark' ? 'light' : 'dark')}
-      >
-        {#if $theme === 'dark'}
-          <IconSunFilled />
-        {:else if $theme === 'light'}
-          <IconMoonFilled />
-        {/if}
-      </button>
-    </div>
+    <ThemeMenu
+      open={$themeMenuOpen}
+      {currentTheme}
+      onToggle={() => toggleMenuState('theme')}
+      onSelect={changeThemeWithMenuToggle}
+    />
     <div class="qrcode-menu relative">
       <button
         aria-label={m.QrCode()}
@@ -154,7 +149,6 @@
 </nav>
 
 <style>
-  .theme-menu button,
   .hamburger-menu button {
     display: flex;
     align-items: center;
