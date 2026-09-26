@@ -53,18 +53,19 @@ bun run dev -- --open
 
 ## 開発コマンド
 
-| コマンド            | 説明                                      |
-| ------------------- | ----------------------------------------- |
-| `bun run dev`       | 開発サーバーを起動                        |
-| `bun run build`     | 本番ビルドを生成                          |
-| `bun run preview`   | 本番ビルドをローカルでプレビュー          |
-| `bun run check`     | `svelte-check` による型チェック           |
-| `bun run format`    | Prettier でフォーマット                   |
-| `bun run lint`      | Prettier チェック + ESLint                |
-| `bun run test`      | ユニット + E2E テストを実行               |
-| `bun run test:unit` | Vitest（ユニットテスト）                  |
-| `bun run test:e2e`  | Playwright（E2Eテスト）                   |
-| `bun run storybook` | Storybook を起動（http://localhost:6006） |
+| コマンド            | 説明                                                               |
+| ------------------- | ------------------------------------------------------------------ |
+| `bun run dev`       | 開発サーバーを起動                                                 |
+| `bun run dev:host`  | 開発サーバーを外部公開で起動（Tailscale の `*.ts.net` から接続可） |
+| `bun run build`     | 本番ビルドを生成                                                   |
+| `bun run preview`   | 本番ビルドをローカルでプレビュー                                   |
+| `bun run check`     | `svelte-check` による型チェック                                    |
+| `bun run format`    | Prettier でフォーマット                                            |
+| `bun run lint`      | Prettier チェック + ESLint                                         |
+| `bun run test`      | ユニット + E2E テストを実行                                        |
+| `bun run test:unit` | Vitest（ユニットテスト）                                           |
+| `bun run test:e2e`  | Playwright（E2Eテスト）                                            |
+| `bun run storybook` | Storybook を起動（http://localhost:6006）                          |
 
 ## ディレクトリ構成
 
