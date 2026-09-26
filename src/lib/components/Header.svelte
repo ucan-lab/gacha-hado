@@ -3,7 +3,7 @@
   import { onMount, onDestroy } from 'svelte';
   import { writable } from 'svelte/store';
   import { theme } from '$lib/stores/theme';
-  import { normalizeTheme, type Theme } from '$lib/constants/theme';
+  import { resolveCurrentTheme, type Theme } from '$lib/constants/theme';
   import { page } from '$app/state';
   import { browser } from '$app/environment';
   import { IconHome, IconMenu2, IconQrcode } from '@tabler/icons-svelte';
@@ -22,8 +22,7 @@
   const languageMenuOpen = writable(false);
   const themeMenuOpen = writable(false);
 
-  // theme ストアはサーバでリクエスト間に共有され常に既定値のため、SSR では cookie 由来の page.data.theme を使う
-  $: currentTheme = browser ? $theme : normalizeTheme(page.data.theme);
+  $: currentTheme = resolveCurrentTheme(browser, $theme, page.data.theme);
 
   const toggleMenuState = (menu: string) => {
     menuOpen.set(menu === 'menu' ? !$menuOpen : false);

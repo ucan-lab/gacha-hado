@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { normalizeTheme, isTheme, THEMES, DEFAULT_THEME } from './theme';
+import { normalizeTheme, isTheme, resolveCurrentTheme, THEMES, DEFAULT_THEME } from './theme';
 
 describe('theme constants', () => {
   it('THEMES は neon / light / dark のみ', () => {
@@ -47,5 +47,21 @@ describe('normalizeTheme', () => {
   it('null / undefined は light にフォールバックする', () => {
     expect(normalizeTheme(null)).toBe('light');
     expect(normalizeTheme(undefined)).toBe('light');
+  });
+});
+
+describe('resolveCurrentTheme', () => {
+  it('SSR ではストアが既定値のままでも cookie 由来のテーマを使う', () => {
+    expect(resolveCurrentTheme(false, 'light', 'neon')).toBe('neon');
+    expect(resolveCurrentTheme(false, 'light', 'dark')).toBe('dark');
+  });
+
+  it('SSR で許可リスト外の値は既定値に正規化する', () => {
+    expect(resolveCurrentTheme(false, 'neon', '" onerror="alert(1)')).toBe('light');
+    expect(resolveCurrentTheme(false, 'neon', undefined)).toBe('light');
+  });
+
+  it('クライアントではストアの値を使う', () => {
+    expect(resolveCurrentTheme(true, 'dark', 'neon')).toBe('dark');
   });
 });
