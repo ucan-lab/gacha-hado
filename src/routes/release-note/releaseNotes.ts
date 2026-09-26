@@ -6,6 +6,14 @@ export interface ReleaseNote {
 
 export const releaseNotes: ReleaseNote[] = [
   {
+    version: 'v1.4.0',
+    date: '2026-09-27',
+    notes: [
+      '🚀 新しいネオンテーマを追加し、既定のテーマにしました。',
+      '🛠️ これまでのデザインは「クラシック ライト」「クラシック ダーク」として残しています。ヘッダーのテーマメニューから切り替えられます。'
+    ]
+  },
+  {
     version: 'v1.3.4',
     date: '2025-04-20',
     notes: ['🛠️ ガチマッチの抽選テーブルを変更しました。']
