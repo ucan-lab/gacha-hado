@@ -6,7 +6,7 @@ import type { PluginOption } from 'vite';
 const svelteComponentPattern = /\.svelte(?:[?#]|$)/;
 const svelteModulePattern = /\.svelte\.[jt]s(?:[?#]|$)/;
 const svelteStylePattern = /[?&]svelte&type=style&lang\.css$/;
-const jpgPattern = /\.jpg(?:[?#]|$)/;
+const imageAssetPattern = /\.(?:jpg|webp)(?:[?#]|$)/;
 
 const shouldTransform = (pluginName: string | undefined, id: string) => {
   if (pluginName === 'vite-plugin-svelte:compile-module') {
@@ -83,17 +83,17 @@ const assetStubPlugin = (): PluginOption => ({
   name: 'test-asset-stub',
   enforce: 'pre',
   transform(_code, id) {
-    if (!jpgPattern.test(id)) return;
+    if (!imageAssetPattern.test(id)) return;
     return `export default ${JSON.stringify(id.split('?')[0])};`;
   },
   load(id) {
-    if (!jpgPattern.test(id)) return;
+    if (!imageAssetPattern.test(id)) return;
     return `export default ${JSON.stringify(id.split('?')[0])};`;
   }
 });
 
 export default defineConfig({
-  assetsInclude: ['**/*.jpg'],
+  assetsInclude: ['**/*.jpg', '**/*.webp'],
   plugins: [assetStubPlugin(), ...sveltePlugins()],
   resolve: {
     conditions: ['browser', 'svelte'],
