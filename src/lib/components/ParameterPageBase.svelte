@@ -4,6 +4,7 @@
   import PlayerNeon from '$lib/components/PlayerNeon.svelte';
   import Spinner from '$lib/components/Spinner.svelte';
   import { DEFAULT_THEME, type Theme } from '$lib/constants/theme';
+  import { stuckAtBottom } from '$lib/utils/stuckAtBottom';
   import { writable } from 'svelte/store';
   import type { Writable } from 'svelte/store';
   import * as m from '$lib/paraglide/messages';
@@ -33,6 +34,7 @@
   export let theme: Theme = DEFAULT_THEME;
 
   let isDrawing = false;
+  let isActionBarStuck = false;
   let isBlackout = writable(false);
 
   // 各プレイヤーのパラメータ管理
@@ -93,7 +95,11 @@
         </div>
 
         <!-- トリオでも主ボタンが常に画面内に見えるよう、下端に貼り付ける -->
-        <div class="sticky bottom-0 flex w-full max-w-lg gap-3 px-4 pt-4 pb-4">
+        <div
+          class="action-bar sticky -bottom-px flex w-full max-w-lg gap-3 px-4 pt-4 pb-4"
+          class:stuck={isActionBarStuck}
+          use:stuckAtBottom={(stuck) => (isActionBarStuck = stuck)}
+        >
           <button
             aria-label={m.roll()}
             class="roll-neon cursor-pointer bg-cta text-cta-text hover:bg-cta-hover grow rounded-full px-6 py-3 text-lg font-bold tracking-wider"
@@ -143,6 +149,12 @@
 </div>
 
 <style>
+  /* 貼り付いている間だけ地を敷き、裏に入り込んだカードを隠す。カードの直後に収まるときは地を出さない */
+  .action-bar.stuck {
+    background-color: var(--action-bar-bg);
+    backdrop-filter: blur(6px);
+  }
+
   .roll-neon {
     border: 1px solid var(--cta-hover);
     box-shadow:
