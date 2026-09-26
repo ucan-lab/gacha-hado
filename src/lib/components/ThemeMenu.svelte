@@ -17,8 +17,8 @@
 
   const themes: { value: Theme; label: () => string; icon: typeof IconSparkles }[] = [
     { value: 'neon', label: m.themeNeon, icon: IconSparkles },
-    { value: 'light', label: m.themeClassicLight, icon: IconSunFilled },
-    { value: 'dark', label: m.themeClassicDark, icon: IconMoonFilled }
+    { value: 'classic-light', label: m.themeClassicLight, icon: IconSunFilled },
+    { value: 'classic-dark', label: m.themeClassicDark, icon: IconMoonFilled }
   ];
 
   const CurrentIcon = $derived(

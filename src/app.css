@@ -22,7 +22,7 @@
 
 /*
  * コンポーネントは色を直書きせず、ここで定義したトークンだけを使う。
- * クラシック（light / dark）は Tailwind のパレットを参照し、導入前の見た目を保つ。
+ * クラシック（classic-light / classic-dark）は Tailwind のパレットを参照し、導入前の見た目を保つ。
  */
 :root {
   --accent-color: #007aff;
@@ -95,7 +95,7 @@
   --glow-border: transparent;
 }
 
-[data-theme='dark']:root {
+[data-theme='classic-dark']:root {
   --accent-color: #0a84ff;
   --bg-primary-color: #121212;
   --bg-secondary-color: #232323;
@@ -193,7 +193,7 @@
 }
 
 [data-theme='neon'],
-[data-theme='dark'] {
+[data-theme='classic-dark'] {
   color-scheme: dark;
 }
 
