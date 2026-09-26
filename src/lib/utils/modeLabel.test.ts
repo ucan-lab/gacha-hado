@@ -1,7 +1,19 @@
 import { describe, expect, it } from 'vitest';
+import * as m from '$lib/paraglide/messages';
+import { locales } from '$lib/paraglide/runtime';
 import { withoutBetaMark } from './modeLabel';
 
 describe('withoutBetaMark', () => {
+  // 翻訳の書き方が変わって β が外れなくなると、Neon のトップでラベルとバッジに β が二重に出る
+  it.each(locales)('removes the beta mark from the actual %s translations', (locale) => {
+    for (const label of [m.fullAttacker({}, { locale }), m.gachiMatch({}, { locale })]) {
+      const stripped = withoutBetaMark(label);
+
+      expect(stripped).not.toContain('β');
+      expect(stripped.trim()).not.toBe('');
+    }
+  });
+
   it.each([
     ['フルアタッカーセット(β)', 'フルアタッカーセット'],
     ['Serious Match(β)', 'Serious Match'],
