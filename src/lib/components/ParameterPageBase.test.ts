@@ -74,4 +74,47 @@ describe('ParameterPageBase', () => {
     expect(screen.getAllByText('1')).toHaveLength(4);
     expect(resetParams).toHaveBeenCalledTimes(1);
   });
+
+  it('renders neon player cards and keeps the roll/reset behavior', async () => {
+    vi.useFakeTimers();
+    const resetParams = vi.fn();
+
+    render(ParameterPageBase, {
+      props: {
+        playerCount: 3,
+        generateParams: () => [generatedParameters, generatedParameters, generatedParameters],
+        resetParams,
+        theme: 'neon'
+      }
+    });
+
+    expect(screen.getAllByRole('heading').map((h) => h.textContent?.trim())).toEqual([
+      'P1',
+      'P2',
+      'P3'
+    ]);
+
+    const rollButton = screen.getByRole('button', { name: m.roll() }) as HTMLButtonElement;
+    const resetButton = screen.getByRole('button', { name: m.reset() }) as HTMLButtonElement;
+    expect(resetButton.textContent?.trim()).toBe('');
+
+    await fireEvent.click(rollButton);
+    await tick();
+
+    expect(rollButton.disabled).toBe(true);
+    expect(resetButton.disabled).toBe(true);
+
+    await vi.advanceTimersByTimeAsync(1200);
+    await tick();
+
+    expect(screen.getAllByText('5')).toHaveLength(3);
+    expect(rollButton.disabled).toBe(false);
+    expect(resetButton.disabled).toBe(false);
+
+    await fireEvent.click(resetButton);
+    await tick();
+
+    expect(screen.getAllByText('1')).toHaveLength(12);
+    expect(resetParams).toHaveBeenCalledTimes(1);
+  });
 });
