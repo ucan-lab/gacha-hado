@@ -6,6 +6,7 @@
   "scripts": {
     "prepare": "paraglide-js compile --project ./project.inlang --outdir ./src/lib/paraglide --strategy cookie localStorage preferredLanguage baseLocale",
     "dev": "vite dev",
+    "dev:host": "vite dev --host 0.0.0.0",
     "build": "vite build",
     "preview": "vite preview",
     "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
