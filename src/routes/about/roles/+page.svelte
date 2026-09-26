@@ -18,7 +18,7 @@
     <h1 class="mb-8 text-center text-3xl font-bold">{m.rolesPageTitle()}</h1>
 
     <div class="prose mx-auto max-w-3xl">
-      <div class="mb-8 rounded-lg bg-gray-100 p-6">
+      <div class="mb-8 bg-callout neon:glass rounded-lg p-6">
         <h2 class="mb-4 text-xl font-bold">{m.rolesBasicTitle()}</h2>
         <p class="mb-4">
           {m.rolesBasicDesc()}
@@ -27,7 +27,7 @@
 
       <div class="mb-8">
         <h2 class="mb-4 text-2xl font-bold">{m.rolesAttackerTitle()}</h2>
-        <div class="rounded-lg border p-6">
+        <div class="neon:glass rounded-lg border p-6">
           <h3 class="mb-2 text-xl font-semibold">{m.rolesFeatureTitle()}</h3>
           <ul class="mb-4 list-disc pl-6">
             <li>{m.rolesAttackerFeature1()}</li>
@@ -58,7 +58,7 @@
 
       <div class="mb-8">
         <h2 class="mb-4 text-2xl font-bold">{m.rolesDefenderTitle()}</h2>
-        <div class="rounded-lg border p-6">
+        <div class="neon:glass rounded-lg border p-6">
           <h3 class="mb-2 text-xl font-semibold">{m.rolesFeatureTitle()}</h3>
           <ul class="mb-4 list-disc pl-6">
             <li>{m.rolesDefenderFeature1()}</li>
@@ -84,7 +84,7 @@
 
       <div class="mb-8">
         <h2 class="mb-4 text-2xl font-bold">{m.rolesChargerTitle()}</h2>
-        <div class="rounded-lg border p-6">
+        <div class="neon:glass rounded-lg border p-6">
           <h3 class="mb-2 text-xl font-semibold">{m.rolesFeatureTitle()}</h3>
           <ul class="mb-4 list-disc pl-6">
             <li>{m.rolesChargerFeature1()}</li>
@@ -111,7 +111,7 @@
 
       <div class="mb-8">
         <h2 class="mb-4 text-2xl font-bold">{m.rolesTechnicianTitle()}</h2>
-        <div class="rounded-lg border p-6">
+        <div class="neon:glass rounded-lg border p-6">
           <h3 class="mb-2 text-xl font-semibold">{m.rolesFeatureTitle()}</h3>
           <ul class="mb-4 list-disc pl-6">
             <li>{m.rolesTechnicianFeature1()}</li>

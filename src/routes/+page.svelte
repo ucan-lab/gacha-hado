@@ -17,7 +17,7 @@
       <a
         aria-label={m.solo()}
         href="/solo"
-        class="menu-btn bg-blue-500 text-white hover:bg-blue-600"
+        class="menu-btn bg-mode-solo text-mode-text hover:bg-mode-solo-hover neon:shadow-glow"
       >
         <IconUser />
         <span>{m.solo()}</span>
@@ -25,12 +25,16 @@
       <a
         aria-label={m.duo()}
         href="/duo"
-        class="menu-btn bg-green-500 text-white hover:bg-green-600"
+        class="menu-btn bg-mode-duo text-mode-text hover:bg-mode-duo-hover neon:shadow-glow"
       >
         <IconUsers />
         <span>{m.duo()}</span>
       </a>
-      <a aria-label={m.trio()} href="/trio" class="menu-btn bg-red-500 text-white hover:bg-red-600">
+      <a
+        aria-label={m.trio()}
+        href="/trio"
+        class="menu-btn bg-mode-trio text-mode-text hover:bg-mode-trio-hover neon:shadow-glow"
+      >
         <IconUsersGroup />
         <span>{m.trio()}</span>
       </a>
@@ -42,7 +46,7 @@
       <a
         aria-label={m.fullAttacker()}
         href="/full-attacker"
-        class="menu-btn bg-sky-600 text-white hover:bg-sky-700"
+        class="menu-btn bg-mode-full-attacker text-mode-text hover:bg-mode-full-attacker-hover neon:shadow-glow"
       >
         <IconFlame />
         <span>{m.fullAttacker()}</span>
@@ -55,7 +59,7 @@
       <a
         aria-label={m.gachiMatch()}
         href="/gachi"
-        class="menu-btn bg-yellow-600 text-white hover:bg-yellow-700"
+        class="menu-btn bg-mode-gachi text-mode-text hover:bg-mode-gachi-hover neon:shadow-glow"
       >
         <IconBolt />
         <span>{m.gachiMatch()}</span>

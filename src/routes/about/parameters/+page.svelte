@@ -64,7 +64,7 @@
     <h1 class="text-primary mb-8 text-center text-3xl font-bold">{m.navParameters()}</h1>
 
     <div class="prose mx-auto max-w-3xl">
-      <div class="bg-secondary mb-8 rounded-lg p-6">
+      <div class="bg-secondary neon:glass mb-8 rounded-lg p-6">
         <h2 class="text-primary mb-4 text-xl font-bold">{m.parametersBasicTitle()}</h2>
         <ul class="text-secondary list-disc pl-6">
           <li>{m.parametersBasic1()}</li>
@@ -105,7 +105,7 @@
         <a
           href="https://hado-official.com/news/7778/"
           target="_blank"
-          class="inline-flex items-center text-blue-600 hover:text-blue-800 hover:underline"
+          class="inline-flex items-center text-link hover:text-link-hover hover:underline"
         >
           {m.parametersSource1()}
           <IconExternalLink class="ml-1 h-4 w-4" />
@@ -115,7 +115,7 @@
         <a
           href="https://note.com/eieio81810/n/n044c72d8d306"
           target="_blank"
-          class="inline-flex items-center text-blue-600 hover:text-blue-800 hover:underline"
+          class="inline-flex items-center text-link hover:text-link-hover hover:underline"
         >
           {m.parametersSource2()}
           <IconExternalLink class="ml-1 h-4 w-4" />

@@ -36,7 +36,7 @@
     <CurrentIcon />
   </button>
   {#if open}
-    <div class="bg-secondary absolute right-0 z-60 mt-2 w-max rounded p-2 shadow-lg">
+    <div class="bg-secondary neon:glass absolute right-0 z-60 mt-2 w-max rounded p-2 shadow-lg">
       {#each themes as theme (theme.value)}
         <button
           aria-current={currentTheme === theme.value ? 'true' : undefined}
@@ -45,7 +45,7 @@
         >
           <!-- 選択中以外も場所を確保し、選択中のテーマでメニュー幅と文字位置が変わらないようにする -->
           <IconCheck
-            class="text-green-500 {currentTheme === theme.value ? '' : 'invisible'}"
+            class="text-check {currentTheme === theme.value ? '' : 'invisible'}"
             aria-hidden="true"
           />
           {theme.label()}

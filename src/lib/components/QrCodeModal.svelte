@@ -74,7 +74,7 @@
     <!-- 背景クリックで閉じる。インタラクティブな button にすることで a11y 要件を満たす -->
     <button
       type="button"
-      class="absolute inset-0 -z-10 cursor-default bg-black"
+      class="absolute inset-0 -z-10 bg-modal-backdrop cursor-default"
       aria-hidden="true"
       tabindex="-1"
       onclick={onClose}
@@ -87,13 +87,13 @@
       aria-labelledby="qrcode-modal-title"
     >
       <div class="flex items-center justify-between">
-        <h3 id="qrcode-modal-title" class="mb-4 text-xl font-bold text-white">{m.QrCode()}</h3>
+        <h3 id="qrcode-modal-title" class="text-modal-text mb-4 text-xl font-bold">{m.QrCode()}</h3>
         <div class="-mt-4">
           <button
             bind:this={closeButton}
             aria-label={m.close()}
             onclick={onClose}
-            class="cursor-pointer rounded-full bg-gray-800 p-2 text-white hover:bg-gray-700"
+            class="cursor-pointer bg-modal-button text-modal-text hover:bg-modal-button-hover rounded-full p-2"
           >
             <IconX />
           </button>
@@ -102,7 +102,9 @@
       <div class="mb-4">
         <img src={QrCode} alt={m.QrCode()} class="h-96 w-96" />
       </div>
-      <div class="flex max-w-md items-center space-x-2 rounded-lg border p-2 text-white">
+      <div
+        class="flex max-w-md items-center space-x-2 text-modal-text neon:border-glow rounded-lg border p-2"
+      >
         <input
           type="text"
           value={SHARE_URL}
@@ -115,7 +117,7 @@
           onclick={() => copyLink()}
         >
           {#if copied}
-            <IconClipboardCheck class="h-5 w-5 text-green-600" />
+            <IconClipboardCheck class="text-success-icon h-5 w-5" />
           {:else}
             <IconClipboardText class="h-5 w-5" />
           {/if}

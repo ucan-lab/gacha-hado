@@ -15,7 +15,7 @@
     left: 0;
     width: 100vw;
     height: 100vh;
-    background-color: rgba(0, 0, 0, 0.8);
+    background-color: var(--overlay);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -23,8 +23,8 @@
   }
 
   .spinner {
-    border: 6px solid rgba(255, 255, 255, 0.3);
-    border-top-color: #ffffff;
+    border: 6px solid var(--spinner-track);
+    border-top-color: var(--spinner-head);
     border-radius: 50%;
     width: 7rem;
     height: 7rem;
