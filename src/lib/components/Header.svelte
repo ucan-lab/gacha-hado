@@ -81,7 +81,9 @@
   ];
 </script>
 
-<nav class="bg-secondary flex items-center justify-between px-2 py-1">
+<nav
+  class="bg-secondary neon:border-glow neon:border-b flex items-center justify-between px-2 py-1"
+>
   <a aria-label={m.home()} href="/" class="text-xl font-bold hover:underline">
     {m.appName()}
   </a>
@@ -117,14 +119,14 @@
     <div class="hamburger-menu relative">
       <button
         aria-label={m.menu()}
-        class="flex cursor-pointer rounded border px-2 py-1"
+        class="neon:border-glow flex cursor-pointer rounded border px-2 py-1"
         on:click={() => toggleMenuState('menu')}
       >
         <IconMenu2 />
       </button>
       {#if $menuOpen}
         <div
-          class="hamburger-menu-container bg-secondary absolute right-0 z-60 mt-3 w-60 rounded p-2 shadow-lg"
+          class="hamburger-menu-container bg-secondary neon:glass absolute right-0 z-60 mt-3 w-60 rounded p-2 shadow-lg"
         >
           {#each navGroups as group, i (i)}
             {#if i > 0}

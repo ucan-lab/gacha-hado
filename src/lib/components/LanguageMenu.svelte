@@ -30,14 +30,14 @@
     <IconWorld />
   </button>
   {#if open}
-    <div class="bg-secondary absolute right-0 z-60 mt-2 w-32 rounded p-2 shadow-lg">
+    <div class="bg-secondary neon:glass absolute right-0 z-60 mt-2 w-32 rounded p-2 shadow-lg">
       {#each languages as lang (lang.code)}
         <button
           aria-current={currentLocale === lang.code ? 'true' : undefined}
           class="bg-secondary-hover flex w-full cursor-pointer items-center gap-1 px-4 py-2 text-left"
           onclick={() => onSelect(lang.code)}
         >
-          {#if currentLocale === lang.code}<IconCheck class="text-green-500" />{/if}
+          {#if currentLocale === lang.code}<IconCheck class="text-check" />{/if}
           {lang.label}
         </button>
       {/each}
