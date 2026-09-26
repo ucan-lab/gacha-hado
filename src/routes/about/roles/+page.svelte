@@ -9,7 +9,7 @@
 
 <Seo title={m.rolesTitle()} description={m.rolesDescription()} />
 
-<div class="bg-primary flex min-h-screen flex-col">
+<div class="bg-primary flex flex-1 flex-col">
   <div class="container mx-auto p-4">
     <Breadcrumb items={buildBreadcrumb(page.url.pathname)} />
 
