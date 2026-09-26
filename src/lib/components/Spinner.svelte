@@ -31,6 +31,15 @@
     animation: spin 1s linear infinite;
   }
 
+  :global([data-theme='neon']) .overlay {
+    backdrop-filter: blur(4px);
+  }
+
+  :global([data-theme='neon']) .spinner {
+    border-right-color: var(--player-2);
+    filter: drop-shadow(0 0 8px var(--spinner-head)) drop-shadow(0 0 20px var(--glow));
+  }
+
   @keyframes spin {
     from {
       transform: rotate(0deg);

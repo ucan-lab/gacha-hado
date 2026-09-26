@@ -183,6 +183,12 @@
   --energy-core: #eafdff;
   --energy: #22e5ff;
   --energy-deep: #1d4dff;
+  /* ガチャ画面のプレイヤーカード（P1〜P3）の枠と見出しの色 */
+  --player-1: #22e5ff;
+  --player-2: #b57bff;
+  --player-3: #3dfc9a;
+  /* ガチャ画面のボタン列が画面下端に貼り付いている間の地 */
+  --action-bar-bg: rgb(2 6 16 / 0.85);
   --hex-grid: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='27.713' height='48' viewBox='0 0 27.713 48'%3E%3Cpath d='M13.856 0 27.713 8v16l-13.857 8L0 24V8zm0 32v16' fill='none' stroke='%2322e5ff' stroke-opacity='.07'/%3E%3C/svg%3E");
 }
 
