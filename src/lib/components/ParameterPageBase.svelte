@@ -82,7 +82,7 @@
   }
 </script>
 
-<div class="flex min-h-screen flex-col">
+<div class="flex flex-1 flex-col">
   <main class="flex-grow">
     <div class="relative flex flex-col items-center py-2">
       <Spinner isVisible={$isBlackout} />

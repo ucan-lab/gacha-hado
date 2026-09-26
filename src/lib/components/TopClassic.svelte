@@ -3,7 +3,7 @@
   import * as m from '$lib/paraglide/messages';
 </script>
 
-<div class="bg-secondary flex min-h-screen flex-col">
+<div class="bg-secondary flex flex-1 flex-col">
   <section class="bg-primary flex flex-col items-center justify-center py-6">
     <h1 class="mb-6 text-center text-4xl font-bold sm:text-5xl">{m.appName()}</h1>
     <p class="text-md text-center">{m.welcome()}</p>
