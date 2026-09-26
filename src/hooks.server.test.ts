@@ -17,7 +17,8 @@ type ResolveOpts = { transformPageChunk: (input: { html: string; done: boolean }
 
 const makeEvent = (theme?: string) => ({
   request: new Request('http://localhost/'),
-  cookies: { get: (key: string) => (key === 'theme' ? theme : undefined) }
+  cookies: { get: (key: string) => (key === 'theme' ? theme : undefined) },
+  locals: {} as { theme?: string }
 });
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -110,6 +111,10 @@ describe('handle hook (#140 theme 許可リスト検証)', () => {
     expect(await themeOf('dark')).toBe('dark');
   });
 
+  it('theme=neon は neon を注入する', async () => {
+    expect(await themeOf('neon')).toBe('neon');
+  });
+
   it('theme=light は light を注入する', async () => {
     expect(await themeOf('light')).toBe('light');
   });
@@ -129,5 +134,21 @@ describe('handle hook (#140 theme 許可リスト検証)', () => {
 
     expect(html).toContain('data-theme="light"');
     expect(html).not.toContain('onerror');
+  });
+});
+
+describe('handle hook (locals.theme)', () => {
+  it('正規化したテーマを locals.theme に入れ、data-theme と同じ値にする', async () => {
+    const event = makeEvent('neon');
+    await run(event, htmlResolve);
+
+    expect(event.locals.theme).toBe('neon');
+  });
+
+  it('許可リスト外の値は locals.theme でも既定値に正規化する', async () => {
+    const event = makeEvent('" onerror="alert(1)');
+    await run(event, htmlResolve);
+
+    expect(event.locals.theme).toBe('light');
   });
 });

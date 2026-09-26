@@ -1,4 +1,6 @@
 // See https://svelte.dev/docs/kit/types#app.d.ts
+import type { Theme } from '$lib/constants/theme';
+
 // for information about these interfaces
 declare global {
   // Injected by Vite `define` in vite.config.ts
@@ -7,7 +9,9 @@ declare global {
 
   namespace App {
     // interface Error {}
-    // interface Locals {}
+    interface Locals {
+      theme: Theme;
+    }
     // interface PageData {}
     // interface PageState {}
     // interface Platform {}
