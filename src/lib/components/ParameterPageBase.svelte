@@ -4,6 +4,7 @@
   import PlayerNeon from '$lib/components/PlayerNeon.svelte';
   import Spinner from '$lib/components/Spinner.svelte';
   import { DEFAULT_THEME, type Theme } from '$lib/constants/theme';
+  import { isDrawing } from '$lib/stores/drawing';
   import { stuckAtBottom } from '$lib/utils/stuckAtBottom';
   import { writable } from 'svelte/store';
   import type { Writable } from 'svelte/store';
@@ -33,7 +34,6 @@
    */
   export let theme: Theme = DEFAULT_THEME;
 
-  let isDrawing = false;
   let isActionBarStuck = false;
   let isBlackout = writable(false);
 
@@ -48,7 +48,7 @@
   );
 
   async function roll() {
-    isDrawing = true;
+    isDrawing.set(true);
     isBlackout.set(true);
 
     const interval = setInterval(() => {
@@ -67,7 +67,7 @@
     });
 
     isBlackout.set(false);
-    isDrawing = false;
+    isDrawing.set(false);
   }
 
   function handleReset() {
@@ -104,7 +104,7 @@
             aria-label={m.roll()}
             class="roll-neon cursor-pointer bg-cta text-cta-text hover:bg-cta-hover grow rounded-full px-6 py-3 text-lg font-bold tracking-wider"
             on:click={roll}
-            disabled={isDrawing}
+            disabled={$isDrawing}
           >
             {m.roll()}
           </button>
@@ -113,7 +113,7 @@
             title={m.reset()}
             class="reset-neon glass cursor-pointer bg-secondary bg-secondary-hover flex w-14 shrink-0 items-center justify-center rounded-xl"
             on:click={handleReset}
-            disabled={isDrawing}
+            disabled={$isDrawing}
           >
             <IconRefresh size={26} stroke={2} />
           </button>
@@ -130,7 +130,7 @@
             aria-label={m.roll()}
             class="cursor-pointer bg-cta text-cta-text hover:bg-cta-hover rounded px-6 py-3 font-bold"
             on:click={roll}
-            disabled={isDrawing}
+            disabled={$isDrawing}
           >
             {m.roll()}
           </button>
@@ -138,7 +138,7 @@
             aria-label={m.reset()}
             class="cursor-pointer bg-danger text-danger-text hover:bg-danger-hover rounded px-6 py-3 font-bold"
             on:click={handleReset}
-            disabled={isDrawing}
+            disabled={$isDrawing}
           >
             {m.reset()}
           </button>

@@ -4,6 +4,7 @@ import { afterEach, describe, expect, it } from 'vitest';
 import * as m from '$lib/paraglide/messages';
 // vitest.config.ts で $app/state をこのスタブへ向けているので、Header が読む page と同じオブジェクトになる
 import { page } from '$lib/test/app-state';
+import { isDrawing } from '$lib/stores/drawing';
 import { uniqueParameters } from '$lib/stores/settings';
 import Header from './Header.svelte';
 
@@ -17,6 +18,7 @@ const openMenuAt = async (pathname: string) => {
 describe('Header - uniqueParameters switch', () => {
   afterEach(() => {
     uniqueParameters.set(false);
+    isDrawing.set(false);
     page.url = new URL('http://localhost/');
   });
 
@@ -35,6 +37,13 @@ describe('Header - uniqueParameters switch', () => {
     expect(toggle.disabled).toBe(true);
     expect(toggle.checked).toBe(false);
     expect(get(uniqueParameters)).toBe(true);
+  });
+
+  it('locks the switch while rolling so the draw keeps one setting', async () => {
+    isDrawing.set(true);
+    const toggle = await openMenuAt('/duo');
+
+    expect(toggle.disabled).toBe(true);
   });
 
   it('saves the switch state to the setting', async () => {

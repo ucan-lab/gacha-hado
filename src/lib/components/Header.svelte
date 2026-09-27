@@ -9,6 +9,7 @@
   import { IconHome, IconMenu2, IconQrcode } from '@tabler/icons-svelte';
   import * as m from '$lib/paraglide/messages';
   import { uniqueParameters, isUniqueParametersAvailable } from '$lib/stores/settings';
+  import { isDrawing } from '$lib/stores/drawing';
   import QrCodeModal from '$lib/components/QrCodeModal.svelte';
   import LanguageMenu from '$lib/components/LanguageMenu.svelte';
   import ThemeMenu from '$lib/components/ThemeMenu.svelte';
@@ -157,8 +158,8 @@
               () => uniqueParametersAvailable && $uniqueParameters,
               (value) => uniqueParameters.set(value)
             }
-            disabled={!uniqueParametersAvailable}
-            class="rounded px-4 py-2 {uniqueParametersAvailable
+            disabled={!uniqueParametersAvailable || $isDrawing}
+            class="rounded px-4 py-2 {uniqueParametersAvailable && !$isDrawing
               ? 'hover:bg-[var(--bg-secondary-hover-color)]'
               : ''}"
           />
