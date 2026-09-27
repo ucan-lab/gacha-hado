@@ -5,7 +5,7 @@
   import * as m from '$lib/paraglide/messages';
 </script>
 
-<footer class="bg-secondary mt-auto py-4 text-center">
+<footer class="bg-secondary neon:border-glow neon:border-t mt-auto py-4 text-center">
   <p class="flex items-center justify-center space-x-2">
     <a
       aria-label={m.releaseNote({ version: appVersion })}

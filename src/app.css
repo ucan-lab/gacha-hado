@@ -2,7 +2,7 @@
 @plugin '@tailwindcss/typography';
 @plugin '@tailwindcss/forms';
 @plugin '@tailwindcss/container-queries';
-@custom-variant dark (&:where(.dark, .dark *));
+@custom-variant neon (&:where([data-theme='neon'], [data-theme='neon'] *));
 
 @font-face {
   font-family: 'Noto Sans JP';
@@ -20,6 +20,10 @@
   src: url('/fonts/NotoSansJP-Bold.woff2') format('woff2');
 }
 
+/*
+ * コンポーネントは色を直書きせず、ここで定義したトークンだけを使う。
+ * クラシック（classic-light / classic-dark）は Tailwind のパレットを参照し、導入前の見た目を保つ。
+ */
 :root {
   --accent-color: #007aff;
   --bg-primary-color: #f9f9f9;
@@ -33,9 +37,66 @@
   --table-odd-bg: #ffffff;
   --table-border-color: #ababab;
   --table-text-color: #333333;
+
+  --text-muted: var(--color-gray-500);
+  --link: var(--color-blue-600);
+  --link-hover: var(--color-blue-800);
+  --nav-link: var(--color-blue-500);
+  --nav-link-hover: var(--color-blue-700);
+  --check: var(--color-green-500);
+  --switch-off: var(--color-gray-300);
+  --success-icon: var(--color-green-600);
+
+  --cta: var(--color-green-500);
+  --cta-hover: var(--color-green-600);
+  --cta-text: var(--color-white);
+  --danger: var(--color-red-500);
+  --danger-hover: var(--color-red-600);
+  --danger-text: var(--color-white);
+
+  --mode-solo: var(--color-blue-500);
+  --mode-solo-hover: var(--color-blue-600);
+  --mode-duo: var(--color-green-500);
+  --mode-duo-hover: var(--color-green-600);
+  --mode-trio: var(--color-red-500);
+  --mode-trio-hover: var(--color-red-600);
+  --mode-full-attacker: var(--color-sky-600);
+  --mode-full-attacker-hover: var(--color-sky-700);
+  --mode-gachi: var(--color-yellow-600);
+  --mode-gachi-hover: var(--color-yellow-700);
+  --mode-text: var(--color-white);
+
+  --topic-what-is-hado: var(--color-blue-500);
+  --topic-rules: var(--color-green-500);
+  --topic-parameters: var(--color-purple-500);
+  --topic-roles: var(--color-red-500);
+  --topic-formation: var(--color-yellow-500);
+
+  --callout-bg: var(--color-gray-100);
+  --notice-bg: var(--color-yellow-100);
+  --notice-icon: var(--color-yellow-600);
+  --notice-title: var(--color-yellow-800);
+  --notice-text: var(--color-yellow-700);
+
+  --gauge-bg: var(--color-zinc-900);
+  --gauge-empty: #2d2d2d;
+  --gauge-value-bg: rgb(0 0 0 / 0.3);
+  --gauge-text: var(--color-white);
+
+  --overlay: rgb(0 0 0 / 0.8);
+  --spinner-track: rgb(255 255 255 / 0.3);
+  --spinner-head: #ffffff;
+  --modal-backdrop: var(--color-black);
+  --modal-text: var(--color-white);
+  --modal-button: var(--color-gray-800);
+  --modal-button-hover: var(--color-gray-700);
+
+  /* Neon 専用の装飾（neon: バリアントと .glass）で使う。クラシックでは参照されない */
+  --glow: transparent;
+  --glow-border: transparent;
 }
 
-[data-theme='dark']:root {
+[data-theme='classic-dark']:root {
   --accent-color: #0a84ff;
   --bg-primary-color: #121212;
   --bg-secondary-color: #232323;
@@ -48,6 +109,152 @@
   --table-odd-bg: #121212;
   --table-border-color: #666666;
   --table-text-color: #eaeaea;
+
+  --switch-off: var(--color-neutral-600);
+}
+
+[data-theme='neon']:root {
+  --accent-color: #22e5ff;
+  /* ページの地は body のグラデーションを見せるため透明にし、面はガラス風に半透明にする */
+  --bg-primary-color: transparent;
+  --bg-secondary-color: rgb(14 32 62 / 0.62);
+  --bg-secondary-hover-color: rgb(34 229 255 / 0.14);
+  --text-primary-color: #e8f4ff;
+  --text-secondary-color: #a9c1dc;
+  --border-color: rgb(34 229 255 / 0.35);
+  --table-header-bg: #0f2a4d;
+  --table-even-bg: rgb(14 32 62 / 0.75);
+  --table-odd-bg: rgb(6 14 30 / 0.75);
+  --table-border-color: rgb(34 229 255 / 0.3);
+  --table-text-color: #e8f4ff;
+
+  --text-muted: #93abc7;
+  --link: #5eeaff;
+  --link-hover: #b4f6ff;
+  --nav-link: #5eeaff;
+  --nav-link-hover: #b4f6ff;
+  --check: #3dfc9a;
+  --switch-off: rgb(147 171 199 / 0.35);
+  --success-icon: #3dfc9a;
+
+  --cta: #22e5ff;
+  --cta-hover: #7df0ff;
+  --cta-text: #031421;
+  --danger: #ff4f7b;
+  --danger-hover: #ff7f9f;
+  --danger-text: #1d0510;
+
+  --mode-solo: #4cc3ff;
+  --mode-solo-hover: #8ad8ff;
+  --mode-duo: #3dfc9a;
+  --mode-duo-hover: #8dfdc2;
+  --mode-trio: #ff5c8a;
+  --mode-trio-hover: #ff8fae;
+  --mode-full-attacker: #ffa53d;
+  --mode-full-attacker-hover: #ffc27d;
+  --mode-gachi: #ffe14d;
+  --mode-gachi-hover: #ffec8f;
+  --mode-text: #04111d;
+
+  --topic-what-is-hado: #4cc3ff;
+  --topic-rules: #3dfc9a;
+  --topic-parameters: #c98bff;
+  --topic-roles: #ff5c8a;
+  --topic-formation: #ffe14d;
+
+  --callout-bg: rgb(34 229 255 / 0.08);
+  --notice-bg: rgb(255 214 64 / 0.1);
+  --notice-icon: #ffd84d;
+  --notice-title: #ffe27a;
+  --notice-text: #ffeaa8;
+
+  --gauge-bg: rgb(6 14 30 / 0.85);
+  --gauge-empty: #182a45;
+  --gauge-value-bg: rgb(2 6 16 / 0.45);
+  --gauge-text: #ffffff;
+
+  --overlay: rgb(2 6 16 / 0.82);
+  --spinner-track: rgb(34 229 255 / 0.2);
+  --spinner-head: #22e5ff;
+  --modal-backdrop: rgb(2 6 16 / 0.94);
+  --modal-text: #e8f4ff;
+  --modal-button: #0f2a4d;
+  --modal-button-hover: #16395f;
+
+  --glow: rgb(34 229 255 / 0.35);
+  --glow-border: rgb(34 229 255 / 0.45);
+  /* トップのエナジーボール（中心の白 → 発光色 → 外縁の深い青） */
+  --energy-core: #eafdff;
+  --energy: #22e5ff;
+  --energy-deep: #1d4dff;
+  /* ガチャ画面のプレイヤーカード（P1〜P3）の枠と見出しの色 */
+  --player-1: #22e5ff;
+  --player-2: #b57bff;
+  --player-3: #3dfc9a;
+  /* ガチャ画面のボタン列が画面下端に貼り付いている間の地 */
+  --action-bar-bg: rgb(2 6 16 / 0.85);
+  --hex-grid: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='27.713' height='48' viewBox='0 0 27.713 48'%3E%3Cpath d='M13.856 0 27.713 8v16l-13.857 8L0 24V8zm0 32v16' fill='none' stroke='%2322e5ff' stroke-opacity='.07'/%3E%3C/svg%3E");
+}
+
+[data-theme='neon'],
+[data-theme='classic-dark'] {
+  color-scheme: dark;
+}
+
+/* Tailwind のユーティリティ（bg-cta / text-danger など）からトークンを参照できるようにする */
+@theme inline {
+  --color-muted: var(--text-muted);
+  --color-link: var(--link);
+  --color-link-hover: var(--link-hover);
+  --color-nav-link: var(--nav-link);
+  --color-nav-link-hover: var(--nav-link-hover);
+  --color-check: var(--check);
+  --color-switch-off: var(--switch-off);
+  --color-success-icon: var(--success-icon);
+  --color-cta: var(--cta);
+  --color-cta-hover: var(--cta-hover);
+  --color-cta-text: var(--cta-text);
+  --color-danger: var(--danger);
+  --color-danger-hover: var(--danger-hover);
+  --color-danger-text: var(--danger-text);
+  --color-mode-solo: var(--mode-solo);
+  --color-mode-solo-hover: var(--mode-solo-hover);
+  --color-mode-duo: var(--mode-duo);
+  --color-mode-duo-hover: var(--mode-duo-hover);
+  --color-mode-trio: var(--mode-trio);
+  --color-mode-trio-hover: var(--mode-trio-hover);
+  --color-mode-full-attacker: var(--mode-full-attacker);
+  --color-mode-full-attacker-hover: var(--mode-full-attacker-hover);
+  --color-mode-gachi: var(--mode-gachi);
+  --color-mode-gachi-hover: var(--mode-gachi-hover);
+  --color-mode-text: var(--mode-text);
+  --color-topic-what-is-hado: var(--topic-what-is-hado);
+  --color-topic-rules: var(--topic-rules);
+  --color-topic-parameters: var(--topic-parameters);
+  --color-topic-roles: var(--topic-roles);
+  --color-topic-formation: var(--topic-formation);
+  --color-callout: var(--callout-bg);
+  --color-notice: var(--notice-bg);
+  --color-notice-icon: var(--notice-icon);
+  --color-notice-title: var(--notice-title);
+  --color-notice-text: var(--notice-text);
+  --color-gauge: var(--gauge-bg);
+  --color-gauge-text: var(--gauge-text);
+  --color-modal-backdrop: var(--modal-backdrop);
+  --color-modal-text: var(--modal-text);
+  --color-modal-button: var(--modal-button);
+  --color-modal-button-hover: var(--modal-button-hover);
+  --color-glow: var(--glow-border);
+  --shadow-glow: 0 0 14px var(--glow);
+}
+
+/* ガラス風の面と発光する枠線。背景色は各要素の bg-* に任せ、ここでは枠と光とぼかしだけを足す */
+@utility glass {
+  border: 1px solid var(--glow-border);
+  box-shadow:
+    0 0 14px var(--glow),
+    inset 0 0 18px rgb(34 229 255 / 0.06);
+  backdrop-filter: blur(10px);
 }
 
 body {
@@ -56,7 +263,44 @@ body {
   background-color: var(--bg-primary-color);
   color: var(--text-primary-color);
   border-color: var(--border-color);
-  transition: 1.2s;
+  transition-property: background-color, color, border-color;
+  transition-duration: 1.2s;
+}
+
+[data-theme='neon'] body {
+  background-color: #02040a;
+}
+
+/*
+ * 紺から黒へのグラデーションと六角グリッド。body の background-attachment: fixed は
+ * iOS Safari で効かないため、固定配置の疑似要素に描いてスクロールしても動かないようにする。
+ */
+[data-theme='neon'] body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-image:
+    var(--hex-grid),
+    radial-gradient(ellipse 120% 60% at 50% 0%, rgb(34 229 255 / 0.12), transparent 70%),
+    linear-gradient(180deg, #0b1d3d 0%, #060d1f 45%, #02040a 100%);
+  background-size:
+    27.713px 48px,
+    auto,
+    auto;
+}
+
+/* typography の既定色は明るい地向けなので、Neon では反転配色にする */
+[data-theme='neon'] .prose {
+  --tw-prose-body: var(--text-secondary-color);
+  --tw-prose-headings: var(--text-primary-color);
+  --tw-prose-bold: var(--text-primary-color);
+  --tw-prose-links: var(--link);
+  --tw-prose-bullets: var(--accent-color);
+  --tw-prose-counters: var(--text-secondary-color);
+  --tw-prose-th-borders: var(--table-border-color);
+  --tw-prose-td-borders: var(--table-border-color);
 }
 
 .bg-accent {

@@ -6,12 +6,17 @@
   let { children } = $props();
 </script>
 
-<!-- ページ遷移ごとに Header を再マウントし、メニュー等のローカル UI 状態をリセットする
-     （各ページが個別に Header を持っていた頃の挙動を維持するため） -->
-{#key page.url.pathname}
-  <Header />
-{/key}
+<!-- 内容が短いページでもフッターを画面下端に付けるため、ページ部分に残りの高さを割り当てる -->
+<div class="flex min-h-dvh flex-col">
+  <!-- ページ遷移ごとに Header を再マウントし、メニュー等のローカル UI 状態をリセットする
+       （各ページが個別に Header を持っていた頃の挙動を維持するため） -->
+  {#key page.url.pathname}
+    <Header />
+  {/key}
 
-{@render children()}
+  <div class="flex flex-1 flex-col">
+    {@render children()}
+  </div>
 
-<Footer />
+  <Footer />
+</div>

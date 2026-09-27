@@ -18,6 +18,9 @@ export default defineConfig({
       strategy: ['cookie', 'localStorage', 'preferredLanguage', 'baseLocale']
     })
   ],
+  server: {
+    allowedHosts: ['.ts.net']
+  },
   define: {
     __APP_VERSION__: JSON.stringify(appVersion),
     __APP_DEPLOY_DATE__: JSON.stringify(appDeployDate)

@@ -11,7 +11,7 @@
 
   <div class="space-y-6">
     {#each releaseNotes as release (release.version)}
-      <div class="bg-secondary text-seconday rounded-lg p-4 shadow-md">
+      <div class="bg-secondary text-seconday neon:glass rounded-lg p-4 shadow-md">
         <h2 class="text-xl font-semibold">
           {release.version} <span class="text-sm">({release.date})</span>
         </h2>

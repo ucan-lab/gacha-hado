@@ -3,19 +3,17 @@
   import { onMount, onDestroy } from 'svelte';
   import { writable } from 'svelte/store';
   import { theme } from '$lib/stores/theme';
-  import type { Theme } from '$lib/constants/theme';
+  import { resolveCurrentTheme, type Theme } from '$lib/constants/theme';
   import { page } from '$app/state';
   import { browser } from '$app/environment';
-  import {
-    IconHome,
-    IconMenu2,
-    IconQrcode,
-    IconSunFilled,
-    IconMoonFilled
-  } from '@tabler/icons-svelte';
+  import { IconHome, IconMenu2, IconQrcode } from '@tabler/icons-svelte';
   import * as m from '$lib/paraglide/messages';
+  import { uniqueParameters, isUniqueParametersAvailable } from '$lib/stores/settings';
+  import { isDrawing } from '$lib/stores/drawing';
   import QrCodeModal from '$lib/components/QrCodeModal.svelte';
   import LanguageMenu from '$lib/components/LanguageMenu.svelte';
+  import ThemeMenu from '$lib/components/ThemeMenu.svelte';
+  import ToggleSwitch from '$lib/components/ToggleSwitch.svelte';
 
   let showModal = false;
 
@@ -25,10 +23,14 @@
 
   const menuOpen = writable(false);
   const languageMenuOpen = writable(false);
+  const themeMenuOpen = writable(false);
+
+  $: currentTheme = resolveCurrentTheme(browser, $theme, page.data.theme);
 
   const toggleMenuState = (menu: string) => {
     menuOpen.set(menu === 'menu' ? !$menuOpen : false);
     languageMenuOpen.set(menu === 'language' ? !$languageMenuOpen : false);
+    themeMenuOpen.set(menu === 'theme' ? !$themeMenuOpen : false);
   };
 
   const changeLocaleWithMenuToggle = (locale: string) => {
@@ -36,13 +38,15 @@
     closeAllMenus();
   };
 
-  const changeTheme = (themeName: Theme) => {
+  const changeThemeWithMenuToggle = (themeName: Theme) => {
     theme.set(themeName);
+    closeAllMenus();
   };
 
   const closeAllMenus = () => {
     menuOpen.set(false);
     languageMenuOpen.set(false);
+    themeMenuOpen.set(false);
   };
 
   const closeMenuOnOutsideClick = (event: MouseEvent) => {
@@ -80,7 +84,9 @@
   ];
 </script>
 
-<nav class="bg-secondary flex items-center justify-between px-2 py-1">
+<nav
+  class="bg-secondary neon:border-glow neon:border-b flex items-center justify-between px-2 py-1"
+>
   <a aria-label={m.home()} href="/" class="text-xl font-bold hover:underline">
     {m.appName()}
   </a>
@@ -91,19 +97,12 @@
         <IconHome />
       </a>
     {/if}
-    <div class="theme-menu relative">
-      <button
-        aria-label={m.theme()}
-        class="flex cursor-pointer items-center gap-1 p-0 hover:underline"
-        on:click={() => changeTheme($theme === 'dark' ? 'light' : 'dark')}
-      >
-        {#if $theme === 'dark'}
-          <IconSunFilled />
-        {:else if $theme === 'light'}
-          <IconMoonFilled />
-        {/if}
-      </button>
-    </div>
+    <ThemeMenu
+      open={$themeMenuOpen}
+      {currentTheme}
+      onToggle={() => toggleMenuState('theme')}
+      onSelect={changeThemeWithMenuToggle}
+    />
     <div class="qrcode-menu relative">
       <button
         aria-label={m.QrCode()}
@@ -123,14 +122,15 @@
     <div class="hamburger-menu relative">
       <button
         aria-label={m.menu()}
-        class="flex cursor-pointer rounded border px-2 py-1"
+        class="neon:border-glow flex cursor-pointer rounded border px-2 py-1"
         on:click={() => toggleMenuState('menu')}
       >
         <IconMenu2 />
       </button>
       {#if $menuOpen}
+        {@const uniqueParametersAvailable = isUniqueParametersAvailable(page.url.pathname)}
         <div
-          class="hamburger-menu-container bg-secondary absolute right-0 z-60 mt-3 w-60 rounded p-2 shadow-lg"
+          class="hamburger-menu-container bg-secondary neon:glass absolute right-0 z-60 mt-3 w-72 rounded p-2 shadow-lg"
         >
           {#each navGroups as group, i (i)}
             {#if i > 0}
@@ -147,6 +147,22 @@
               </a>
             {/each}
           {/each}
+
+          <hr class="my-2" />
+
+          <!-- 効かないページでは保存値に関わらずオフに見せる。保存値は書き換えないので、デュオ/トリオに戻れば元の状態で表示される -->
+          <!-- タッチ端末でタップ後にホバー色が残らないよう、hover: バリアント（hover 可能な端末だけ）で色を付ける -->
+          <ToggleSwitch
+            label={m.uniqueParameters()}
+            bind:checked={
+              () => uniqueParametersAvailable && $uniqueParameters,
+              (value) => uniqueParameters.set(value)
+            }
+            disabled={!uniqueParametersAvailable || $isDrawing}
+            class="rounded px-4 py-2 {uniqueParametersAvailable && !$isDrawing
+              ? 'hover:bg-[var(--bg-secondary-hover-color)]'
+              : ''}"
+          />
         </div>
       {/if}
     </div>
@@ -154,7 +170,6 @@
 </nav>
 
 <style>
-  .theme-menu button,
   .hamburger-menu button {
     display: flex;
     align-items: center;

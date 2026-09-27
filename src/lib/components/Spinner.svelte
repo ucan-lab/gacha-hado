@@ -15,7 +15,7 @@
     left: 0;
     width: 100vw;
     height: 100vh;
-    background-color: rgba(0, 0, 0, 0.8);
+    background-color: var(--overlay);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -23,12 +23,21 @@
   }
 
   .spinner {
-    border: 6px solid rgba(255, 255, 255, 0.3);
-    border-top-color: #ffffff;
+    border: 6px solid var(--spinner-track);
+    border-top-color: var(--spinner-head);
     border-radius: 50%;
     width: 7rem;
     height: 7rem;
     animation: spin 1s linear infinite;
+  }
+
+  :global([data-theme='neon']) .overlay {
+    backdrop-filter: blur(4px);
+  }
+
+  :global([data-theme='neon']) .spinner {
+    border-right-color: var(--player-2);
+    filter: drop-shadow(0 0 8px var(--spinner-head)) drop-shadow(0 0 20px var(--glow));
   }
 
   @keyframes spin {

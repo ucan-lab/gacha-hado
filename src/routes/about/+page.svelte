@@ -16,7 +16,7 @@
 
 <Seo title={m.aboutTitle()} description={m.aboutDescription()} />
 
-<div class="bg-primary flex min-h-screen flex-col">
+<div class="bg-primary flex flex-1 flex-col">
   <div class="container mx-auto p-4">
     <Breadcrumb items={buildBreadcrumb(page.url.pathname)} />
 
@@ -27,45 +27,45 @@
     <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
       <a
         href="/about/what-is-hado"
-        class="bg-secondary flex flex-col items-center rounded-lg p-6 shadow-lg transition-transform hover:scale-105"
+        class="bg-secondary flex flex-col items-center neon:glass rounded-lg p-6 shadow-lg transition-transform hover:scale-105"
       >
-        <IconInfoCircle class="mb-4 h-12 w-12 text-blue-500" />
+        <IconInfoCircle class="mb-4 text-topic-what-is-hado h-12 w-12" />
         <h2 class="text-primary mb-2 text-xl font-bold">{m.navWhatIsHado()}</h2>
         <p class="text-secondary text-center">{m.aboutWhatIsHadoDesc()}</p>
       </a>
 
       <a
         href="/about/rules"
-        class="bg-secondary flex flex-col items-center rounded-lg p-6 shadow-lg transition-transform hover:scale-105"
+        class="bg-secondary flex flex-col items-center neon:glass rounded-lg p-6 shadow-lg transition-transform hover:scale-105"
       >
-        <IconNote class="mb-4 h-12 w-12 text-green-500" />
+        <IconNote class="mb-4 text-topic-rules h-12 w-12" />
         <h2 class="text-primary mb-2 text-xl font-bold">{m.navRules()}</h2>
         <p class="text-secondary text-center">{m.aboutRulesDesc()}</p>
       </a>
 
       <a
         href="/about/parameters"
-        class="bg-secondary flex flex-col items-center rounded-lg p-6 shadow-lg transition-transform hover:scale-105"
+        class="bg-secondary flex flex-col items-center neon:glass rounded-lg p-6 shadow-lg transition-transform hover:scale-105"
       >
-        <IconSettings class="mb-4 h-12 w-12 text-purple-500" />
+        <IconSettings class="mb-4 text-topic-parameters h-12 w-12" />
         <h2 class="text-primary mb-2 text-xl font-bold">{m.navParameters()}</h2>
         <p class="text-secondary text-center">{m.aboutParametersDesc()}</p>
       </a>
 
       <a
         href="/about/roles"
-        class="bg-secondary flex flex-col items-center rounded-lg p-6 shadow-lg transition-transform hover:scale-105"
+        class="bg-secondary flex flex-col items-center neon:glass rounded-lg p-6 shadow-lg transition-transform hover:scale-105"
       >
-        <IconUsers class="mb-4 h-12 w-12 text-red-500" />
+        <IconUsers class="mb-4 text-topic-roles h-12 w-12" />
         <h2 class="text-primary mb-2 text-xl font-bold">{m.navRoles()}</h2>
         <p class="text-secondary text-center">{m.aboutRolesDesc()}</p>
       </a>
 
       <a
         href="/about/formation"
-        class="bg-secondary flex flex-col items-center rounded-lg p-6 shadow-lg transition-transform hover:scale-105"
+        class="bg-secondary flex flex-col items-center neon:glass rounded-lg p-6 shadow-lg transition-transform hover:scale-105"
       >
-        <IconUsersGroup class="mb-4 h-12 w-12 text-yellow-500" />
+        <IconUsersGroup class="mb-4 text-topic-formation h-12 w-12" />
         <h2 class="text-primary mb-2 text-xl font-bold">{m.navFormation()}</h2>
         <p class="text-secondary text-center">{m.aboutFormationDesc()}</p>
       </a>

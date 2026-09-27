@@ -10,12 +10,12 @@
     {#each items as item, i (item.href)}
       <li class="flex items-center">
         {#if i > 0}
-          <IconChevronRight class="mx-2 h-4 w-4 text-gray-500" />
+          <IconChevronRight class="text-muted mx-2 h-4 w-4" />
         {/if}
         {#if i === items.length - 1}
-          <span class="text-gray-500">{item.label}</span>
+          <span class="text-muted">{item.label}</span>
         {:else}
-          <a href={item.href} class="text-blue-500 hover:text-blue-700 hover:underline">
+          <a href={item.href} class="text-nav-link hover:text-nav-link-hover hover:underline">
             {item.label}
           </a>
         {/if}
