@@ -34,3 +34,11 @@ uniqueParameters.subscribe((value) => {
     // 保存できなくてもセッション中は設定を有効にする
   }
 });
+
+// 別タブでの切り替えを反映する。storage イベントは変更したタブ自身には届かない
+if (isBrowser) {
+  window.addEventListener('storage', (event) => {
+    if (event.key !== STORAGE_KEY) return;
+    uniqueParameters.set(event.newValue === 'true');
+  });
+}

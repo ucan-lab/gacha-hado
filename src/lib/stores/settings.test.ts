@@ -32,6 +32,18 @@ describe('settings - uniqueParameters', () => {
     uniqueParameters.set(false);
     expect(localStorage.getItem('uniqueParameters')).toBe('false');
   });
+
+  it('follows changes made in another tab', async () => {
+    const { uniqueParameters } = await import('./settings');
+
+    window.dispatchEvent(
+      new StorageEvent('storage', { key: 'uniqueParameters', newValue: 'true' })
+    );
+    expect(get(uniqueParameters)).toBe(true);
+
+    window.dispatchEvent(new StorageEvent('storage', { key: 'theme', newValue: 'false' }));
+    expect(get(uniqueParameters)).toBe(true);
+  });
 });
 
 describe('settings - isUniqueParametersAvailable', () => {
