@@ -127,6 +127,7 @@
         <IconMenu2 />
       </button>
       {#if $menuOpen}
+        {@const uniqueParametersAvailable = isUniqueParametersAvailable(page.url.pathname)}
         <div
           class="hamburger-menu-container bg-secondary neon:glass absolute right-0 z-60 mt-3 w-72 rounded p-2 shadow-lg"
         >
@@ -148,12 +149,16 @@
 
           <hr class="my-2" />
 
+          <!-- 効かないページでは保存値に関わらずオフに見せる。保存値は書き換えないので、デュオ/トリオに戻れば元の状態で表示される -->
           <!-- タッチ端末でタップ後にホバー色が残らないよう、hover: バリアント（hover 可能な端末だけ）で色を付ける -->
           <ToggleSwitch
             label={m.uniqueParameters()}
-            bind:checked={$uniqueParameters}
-            disabled={!isUniqueParametersAvailable(page.url.pathname)}
-            class="rounded px-4 py-2 {isUniqueParametersAvailable(page.url.pathname)
+            bind:checked={
+              () => uniqueParametersAvailable && $uniqueParameters,
+              (value) => uniqueParameters.set(value)
+            }
+            disabled={!uniqueParametersAvailable}
+            class="rounded px-4 py-2 {uniqueParametersAvailable
               ? 'hover:bg-[var(--bg-secondary-hover-color)]'
               : ''}"
           />
