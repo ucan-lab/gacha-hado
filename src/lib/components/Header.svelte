@@ -8,9 +8,12 @@
   import { browser } from '$app/environment';
   import { IconHome, IconMenu2, IconQrcode } from '@tabler/icons-svelte';
   import * as m from '$lib/paraglide/messages';
+  import { uniqueParameters, isUniqueParametersAvailable } from '$lib/stores/settings';
+  import { isDrawing } from '$lib/stores/drawing';
   import QrCodeModal from '$lib/components/QrCodeModal.svelte';
   import LanguageMenu from '$lib/components/LanguageMenu.svelte';
   import ThemeMenu from '$lib/components/ThemeMenu.svelte';
+  import ToggleSwitch from '$lib/components/ToggleSwitch.svelte';
 
   let showModal = false;
 
@@ -125,8 +128,9 @@
         <IconMenu2 />
       </button>
       {#if $menuOpen}
+        {@const uniqueParametersAvailable = isUniqueParametersAvailable(page.url.pathname)}
         <div
-          class="hamburger-menu-container bg-secondary neon:glass absolute right-0 z-60 mt-3 w-60 rounded p-2 shadow-lg"
+          class="hamburger-menu-container bg-secondary neon:glass absolute right-0 z-60 mt-3 w-72 rounded p-2 shadow-lg"
         >
           {#each navGroups as group, i (i)}
             {#if i > 0}
@@ -143,6 +147,22 @@
               </a>
             {/each}
           {/each}
+
+          <hr class="my-2" />
+
+          <!-- 効かないページでは保存値に関わらずオフに見せる。保存値は書き換えないので、デュオ/トリオに戻れば元の状態で表示される -->
+          <!-- タッチ端末でタップ後にホバー色が残らないよう、hover: バリアント（hover 可能な端末だけ）で色を付ける -->
+          <ToggleSwitch
+            label={m.uniqueParameters()}
+            bind:checked={
+              () => uniqueParametersAvailable && $uniqueParameters,
+              (value) => uniqueParameters.set(value)
+            }
+            disabled={!uniqueParametersAvailable || $isDrawing}
+            class="rounded px-4 py-2 {uniqueParametersAvailable && !$isDrawing
+              ? 'hover:bg-[var(--bg-secondary-hover-color)]'
+              : ''}"
+          />
         </div>
       {/if}
     </div>

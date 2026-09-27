@@ -126,3 +126,47 @@ describe('createParameterStore - error handling', () => {
     });
   });
 });
+
+describe('createParameterStore - generateTeamParameters', () => {
+  it('returns distinct parameters for every player when unique is true', () => {
+    const { generateTeamParameters } = createParameterStore([
+      { parameter: '1111', weight: 1 },
+      { parameter: '2222', weight: 1 },
+      { parameter: '3333', weight: 1 }
+    ]);
+
+    const team = generateTeamParameters(3, true);
+
+    expect(team).toHaveLength(3);
+    expect(new Set(team.map((p) => p.bulletSpeed)).size).toBe(3);
+  });
+
+  it('allows duplicates when unique is false', () => {
+    vi.spyOn(Math, 'random').mockReturnValue(0);
+    const { generateTeamParameters } = createParameterStore(patternList);
+
+    const team = generateTeamParameters(3);
+
+    expect(team.map((p) => p.bulletSpeed)).toEqual([1, 1, 1]);
+  });
+
+  it('falls back to duplicates when unique candidates run out', () => {
+    const { generateTeamParameters } = createParameterStore([
+      { parameter: '1111', weight: 1 },
+      { parameter: '2222', weight: 1 }
+    ]);
+
+    const team = generateTeamParameters(3, true);
+
+    expect(team).toHaveLength(3);
+    expect(new Set(team.map((p) => p.bulletSpeed)).size).toBe(2);
+  });
+
+  it('updates the parameters store with the last drawn player', () => {
+    const { parameters, generateTeamParameters } = createParameterStore(patternList);
+
+    const team = generateTeamParameters(2);
+
+    expect(get(parameters)).toEqual(team[1]);
+  });
+});

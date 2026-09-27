@@ -44,6 +44,7 @@
   --nav-link: var(--color-blue-500);
   --nav-link-hover: var(--color-blue-700);
   --check: var(--color-green-500);
+  --switch-off: var(--color-gray-300);
   --success-icon: var(--color-green-600);
 
   --cta: var(--color-green-500);
@@ -108,6 +109,8 @@
   --table-odd-bg: #121212;
   --table-border-color: #666666;
   --table-text-color: #eaeaea;
+
+  --switch-off: var(--color-neutral-600);
 }
 
 [data-theme='neon']:root {
@@ -131,6 +134,7 @@
   --nav-link: #5eeaff;
   --nav-link-hover: #b4f6ff;
   --check: #3dfc9a;
+  --switch-off: rgb(147 171 199 / 0.35);
   --success-icon: #3dfc9a;
 
   --cta: #22e5ff;
@@ -205,6 +209,7 @@
   --color-nav-link: var(--nav-link);
   --color-nav-link-hover: var(--nav-link-hover);
   --color-check: var(--check);
+  --color-switch-off: var(--switch-off);
   --color-success-icon: var(--success-icon);
   --color-cta: var(--cta);
   --color-cta-hover: var(--cta-hover);

@@ -101,6 +101,15 @@ export default defineConfig({
       {
         find: '$lib',
         replacement: fileURLToPath(new URL('./src/lib', import.meta.url))
+      },
+      // SvelteKit プラグインを載せていないので、$app/* はテスト用のスタブで解決する
+      {
+        find: '$app/environment',
+        replacement: fileURLToPath(new URL('./src/lib/test/app-environment.ts', import.meta.url))
+      },
+      {
+        find: '$app/state',
+        replacement: fileURLToPath(new URL('./src/lib/test/app-state.ts', import.meta.url))
       }
     ]
   },

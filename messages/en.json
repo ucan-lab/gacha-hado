@@ -23,6 +23,7 @@
   "home": "Home",
   "roll": "Roll the gacha",
   "reset": "Reset",
+  "uniqueParameters": "No duplicate parameters",
   "dropRate": "Drop rate",
   "dropRateTable": "Drop rate table",
   "parameter": "Parameter",
