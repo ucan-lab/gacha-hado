@@ -2,7 +2,8 @@ import { writable } from 'svelte/store';
 
 const STORAGE_KEY = 'uniqueParameters';
 
-const isBrowser = typeof localStorage !== 'undefined';
+// Node 25 以降は SSR 側にも localStorage が生えるため、theme ストアと同じく window で判定する
+const isBrowser = typeof window !== 'undefined';
 
 const getStoredUniqueParameters = (): boolean => {
   if (!isBrowser) return false;
