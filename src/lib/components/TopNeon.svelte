@@ -2,6 +2,7 @@
   import { IconUser, IconUsers, IconUsersGroup, IconFlame, IconSwords } from '@tabler/icons-svelte';
   import * as m from '$lib/paraglide/messages';
   import { withoutBetaMark } from '$lib/utils/modeLabel';
+  import TopNeonHero from './TopNeonHero.svelte';
 
   const playerModes = [
     { href: '/solo', label: m.solo, icon: IconUser, color: 'var(--mode-solo)' },
@@ -18,62 +19,12 @@
     },
     { href: '/gachi', label: m.gachiMatch, icon: IconSwords, color: 'var(--mode-gachi)' }
   ];
-
-  const sparks = [
-    { cx: 38, cy: 48, r: 1.6, delay: 0 },
-    { cx: 206, cy: 38, r: 2, delay: 0.6 },
-    { cx: 214, cy: 118, r: 1.4, delay: 1.2 },
-    { cx: 26, cy: 128, r: 1.8, delay: 1.8 },
-    { cx: 70, cy: 18, r: 1.2, delay: 0.9 },
-    { cx: 176, cy: 160, r: 1.4, delay: 1.5 }
-  ];
 </script>
 
-<div class="mx-auto flex w-full max-w-md flex-col items-center px-4 pt-5 pb-8">
+<div class="top-neon mx-auto flex w-full max-w-md flex-col items-center px-4 pt-5 pb-8">
   <h1 class="logo">{m.appName()}</h1>
 
-  <svg class="hero" viewBox="0 0 240 190" aria-hidden="true" focusable="false">
-    <defs>
-      <radialGradient id="neon-top-ball" cx="42%" cy="38%" r="62%">
-        <stop offset="0%" class="stop-core" />
-        <stop offset="35%" class="stop-energy" />
-        <stop offset="80%" class="stop-deep" stop-opacity="0.85" />
-        <stop offset="100%" class="stop-deep" stop-opacity="0.2" />
-      </radialGradient>
-      <radialGradient id="neon-top-aura" cx="50%" cy="50%" r="50%">
-        <stop offset="55%" class="stop-energy" stop-opacity="0.35" />
-        <stop offset="100%" class="stop-energy" stop-opacity="0" />
-      </radialGradient>
-    </defs>
-
-    <g class="platform">
-      <ellipse cx="120" cy="172" rx="92" ry="11" />
-      <ellipse cx="120" cy="172" rx="64" ry="7" />
-      <ellipse cx="120" cy="172" rx="36" ry="4" />
-    </g>
-
-    <circle cx="120" cy="92" r="84" fill="url(#neon-top-aura)" />
-
-    <g class="ball">
-      <circle cx="120" cy="92" r="58" fill="url(#neon-top-ball)" />
-      <path
-        class="veins"
-        d="M88 62 L108 78 L100 104 L122 118 L150 104 M108 78 L136 70 L150 104 L146 128 M136 70 L146 50 M100 104 L80 112 M122 118 L118 146"
-      />
-    </g>
-
-    <ellipse class="orbit" cx="120" cy="92" rx="100" ry="24" transform="rotate(-16 120 92)" />
-
-    {#each sparks as spark (spark.cx)}
-      <circle
-        class="spark"
-        cx={spark.cx}
-        cy={spark.cy}
-        r={spark.r}
-        style:animation-delay="{spark.delay}s"
-      />
-    {/each}
-  </svg>
+  <TopNeonHero />
 
   <div class="flex w-full flex-col gap-3">
     {#each playerModes as mode (mode.href)}
@@ -108,7 +59,14 @@
 </div>
 
 <style>
+  /* ヒーローの演出の周期。ロゴ下のラインとエナジーボールの放出をこれで同期させる */
+  .top-neon {
+    --cycle: 3.2s;
+  }
+
   .logo {
+    position: relative;
+    padding-bottom: 0.625rem;
     font-size: 2.5rem;
     font-weight: 700;
     font-style: italic;
@@ -122,62 +80,22 @@
       0 0 32px var(--glow);
   }
 
-  .hero {
-    width: 100%;
-    max-width: 16rem;
-    height: auto;
-    margin: 0.25rem 0 1rem;
-    overflow: visible;
-  }
-
-  .stop-core {
-    stop-color: var(--energy-core);
-  }
-
-  .stop-energy {
-    stop-color: var(--energy);
-  }
-
-  .stop-deep {
-    stop-color: var(--energy-deep);
-  }
-
-  .platform ellipse {
-    fill: none;
-    stroke: var(--energy);
-    stroke-opacity: 0.5;
-    stroke-width: 1.5;
-  }
-
-  .ball {
-    transform-box: fill-box;
-    transform-origin: center;
-    filter: drop-shadow(0 0 10px var(--energy)) drop-shadow(0 0 24px var(--glow));
-    animation: pulse 2.8s ease-in-out infinite;
-  }
-
-  .veins {
-    fill: none;
-    stroke: var(--energy-core);
-    stroke-opacity: 0.55;
-    stroke-width: 1.2;
-    stroke-linejoin: round;
-  }
-
-  .orbit {
-    fill: none;
-    stroke: var(--energy);
-    stroke-width: 2;
-    stroke-linecap: round;
-    stroke-dasharray: 140 60 40 60;
+  .logo::after {
+    content: '';
+    position: absolute;
+    right: -8%;
+    bottom: 0;
+    left: -8%;
+    height: 2px;
+    background:
+      linear-gradient(90deg, transparent, var(--energy-core), transparent) -30% 0 / 20% 100%
+        no-repeat,
+      linear-gradient(var(--energy), var(--energy)) left / 18% 100% no-repeat,
+      linear-gradient(var(--energy), var(--energy)) right / 18% 100% no-repeat,
+      linear-gradient(90deg, transparent, rgb(34 229 255 / 0.5), transparent) center / 56% 50%
+        no-repeat;
     filter: drop-shadow(0 0 4px var(--energy));
-    animation: orbit 6s linear infinite;
-  }
-
-  .spark {
-    fill: var(--energy-core);
-    filter: drop-shadow(0 0 3px var(--energy));
-    animation: twinkle 2.4s ease-in-out infinite;
+    animation: hud-sweep var(--cycle) ease-in-out infinite;
   }
 
   .mode-card {
@@ -256,36 +174,28 @@
     line-height: 1.4;
   }
 
-  @keyframes pulse {
+  /* 放出の瞬間（周期の 60〜80%）にロゴ下の HUD ラインを光が走る */
+  @keyframes hud-sweep {
     0%,
+    60% {
+      background-position:
+        -30% 0,
+        left,
+        right,
+        center;
+    }
+    80%,
     100% {
-      transform: scale(1);
-    }
-    50% {
-      transform: scale(1.04);
-    }
-  }
-
-  @keyframes orbit {
-    to {
-      stroke-dashoffset: -300;
-    }
-  }
-
-  @keyframes twinkle {
-    0%,
-    100% {
-      opacity: 0.2;
-    }
-    50% {
-      opacity: 1;
+      background-position:
+        130% 0,
+        left,
+        right,
+        center;
     }
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .ball,
-    .orbit,
-    .spark {
+    .logo::after {
       animation: none;
     }
   }
