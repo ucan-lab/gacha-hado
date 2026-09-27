@@ -8,7 +8,7 @@
   import { browser } from '$app/environment';
   import { IconHome, IconMenu2, IconQrcode } from '@tabler/icons-svelte';
   import * as m from '$lib/paraglide/messages';
-  import { uniqueParameters } from '$lib/stores/settings';
+  import { uniqueParameters, isUniqueParametersAvailable } from '$lib/stores/settings';
   import QrCodeModal from '$lib/components/QrCodeModal.svelte';
   import LanguageMenu from '$lib/components/LanguageMenu.svelte';
   import ThemeMenu from '$lib/components/ThemeMenu.svelte';
@@ -148,13 +148,18 @@
           <hr class="my-2" />
 
           <label
-            class="bg-secondary-hover flex cursor-pointer items-center justify-between gap-2 rounded px-4 py-2"
+            class="flex items-center justify-between gap-2 rounded px-4 py-2 {isUniqueParametersAvailable(
+              page.url.pathname
+            )
+              ? 'bg-secondary-hover cursor-pointer'
+              : 'cursor-not-allowed opacity-50'}"
           >
             {m.uniqueParameters()}
             <input
               type="checkbox"
-              class="h-4 w-4 cursor-pointer"
+              class="h-4 w-4 cursor-pointer disabled:cursor-not-allowed"
               bind:checked={$uniqueParameters}
+              disabled={!isUniqueParametersAvailable(page.url.pathname)}
             />
           </label>
         </div>

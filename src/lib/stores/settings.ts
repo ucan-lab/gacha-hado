@@ -18,6 +18,12 @@ const getStoredUniqueParameters = (): boolean => {
 // チーム内でパラメータを被らせない設定（デュオ/トリオのみ効く）
 export const uniqueParameters = writable<boolean>(getStoredUniqueParameters());
 
+const UNIQUE_PARAMETERS_PATHS = ['/duo', '/trio'];
+
+// ガチマッチは専用の抽選を通るため、設定が効くのはデュオ/トリオのページだけ
+export const isUniqueParametersAvailable = (pathname: string): boolean =>
+  UNIQUE_PARAMETERS_PATHS.includes(pathname);
+
 uniqueParameters.subscribe((value) => {
   if (!isBrowser) return;
 

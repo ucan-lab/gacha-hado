@@ -33,3 +33,18 @@ describe('settings - uniqueParameters', () => {
     expect(localStorage.getItem('uniqueParameters')).toBe('false');
   });
 });
+
+describe('settings - isUniqueParametersAvailable', () => {
+  it.each(['/duo', '/trio'])('is available on %s', async (pathname) => {
+    const { isUniqueParametersAvailable } = await import('./settings');
+    expect(isUniqueParametersAvailable(pathname)).toBe(true);
+  });
+
+  it.each(['/', '/solo', '/full-attacker', '/gachi', '/drop-rate'])(
+    'is not available on %s',
+    async (pathname) => {
+      const { isUniqueParametersAvailable } = await import('./settings');
+      expect(isUniqueParametersAvailable(pathname)).toBe(false);
+    }
+  );
+});
