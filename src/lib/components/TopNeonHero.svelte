@@ -15,7 +15,7 @@
 
 <svelte:head>
   <!-- SVG の <image> はプリロードスキャナに拾われないので、LCP になる画像を先に取りにいく -->
-  <link rel="preload" as="image" href={girl} />
+  <link rel="preload" as="image" type="image/webp" href={girl} />
 </svelte:head>
 
 <svg class="hero" viewBox="-60 -20 1206 1500" aria-hidden="true" focusable="false">
