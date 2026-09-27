@@ -22,5 +22,6 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git switch -c renovate-pr
           git commit --allow-empty -m "Renovate Updates"
-          git push origin renovate-pr
+          # 前回のまとめ PR をマージしたあとも renovate-pr が残るので、main から作り直して上書きする
+          git push --force origin renovate-pr
           gh pr create -B main -H renovate-pr -t "Renovate Updates" -b ''
