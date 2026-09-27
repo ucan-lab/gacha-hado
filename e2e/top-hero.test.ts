@@ -47,4 +47,5 @@ test('トップのヒーロー: 動きを減らす設定ではアニメーショ
       .first()
       .evaluate((el) => Number(getComputedStyle(el).opacity));
   expect(await opacity('svg.hero .flash')).toBeLessThan(0.2);
+  expect(await opacity('svg.hero .aura')).toBeLessThan(0.6);
 });

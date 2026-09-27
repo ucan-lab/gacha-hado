@@ -117,6 +117,7 @@
   }
 
   .aura {
+    opacity: 0.5;
     animation: aura var(--cycle) ease-in infinite;
   }
 
