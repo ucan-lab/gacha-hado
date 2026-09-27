@@ -12,6 +12,7 @@
   import QrCodeModal from '$lib/components/QrCodeModal.svelte';
   import LanguageMenu from '$lib/components/LanguageMenu.svelte';
   import ThemeMenu from '$lib/components/ThemeMenu.svelte';
+  import ToggleSwitch from '$lib/components/ToggleSwitch.svelte';
 
   let showModal = false;
 
@@ -147,21 +148,15 @@
 
           <hr class="my-2" />
 
-          <label
-            class="flex items-center justify-between gap-2 rounded px-4 py-2 {isUniqueParametersAvailable(
-              page.url.pathname
-            )
-              ? 'bg-secondary-hover cursor-pointer'
-              : 'cursor-not-allowed opacity-50'}"
-          >
-            {m.uniqueParameters()}
-            <input
-              type="checkbox"
-              class="h-4 w-4 cursor-pointer disabled:cursor-not-allowed"
-              bind:checked={$uniqueParameters}
-              disabled={!isUniqueParametersAvailable(page.url.pathname)}
-            />
-          </label>
+          <!-- タッチ端末でタップ後にホバー色が残らないよう、hover: バリアント（hover 可能な端末だけ）で色を付ける -->
+          <ToggleSwitch
+            label={m.uniqueParameters()}
+            bind:checked={$uniqueParameters}
+            disabled={!isUniqueParametersAvailable(page.url.pathname)}
+            class="rounded px-4 py-2 {isUniqueParametersAvailable(page.url.pathname)
+              ? 'hover:bg-[var(--bg-secondary-hover-color)]'
+              : ''}"
+          />
         </div>
       {/if}
     </div>
