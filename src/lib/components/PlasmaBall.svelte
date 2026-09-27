@@ -253,6 +253,7 @@
   }
 
   .flash {
+    opacity: 0.05;
     animation: flash var(--cycle) ease-in infinite;
   }
 

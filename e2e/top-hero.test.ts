@@ -39,4 +39,12 @@ test('トップのヒーロー: 動きを減らす設定ではアニメーショ
   await page.reload();
   await expect(page.locator('svg.hero')).toBeVisible();
   expect(await page.evaluate(heroAnimations)).toEqual([]);
+
+  // 止めたときに不透明度 1 に戻ると、球の上の白い閃光が光り続ける
+  const opacity = (selector: string) =>
+    page
+      .locator(selector)
+      .first()
+      .evaluate((el) => Number(getComputedStyle(el).opacity));
+  expect(await opacity('svg.hero .flash')).toBeLessThan(0.2);
 });
