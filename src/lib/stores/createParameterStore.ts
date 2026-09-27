@@ -65,7 +65,7 @@ export function createParameterStore(patternList: PatternItem[], storeName = 'de
 
       // 候補を使い切ったときは抽選を止めずに重複を許す
       const parameter = pickWeightedParameter(remaining.length > 0 ? remaining : patternList);
-      used.add(parameter);
+      if (unique) used.add(parameter);
 
       const parameterObj = parseParameterString(parameter);
       parameters.set(parameterObj);
