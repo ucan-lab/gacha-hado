@@ -17,6 +17,7 @@ const config = {
       directives: {
         'script-src': ['self', 'https://vercel.live', 'ws://localhost:5173'],
         'connect-src': [
+          'self',
           'https://vercel.live',
           'https://*.vercel.app',
           'wss://ws-us3.pusher.com',
